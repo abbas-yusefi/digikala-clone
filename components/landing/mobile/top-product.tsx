@@ -1,0 +1,45 @@
+import {
+  getProductById,
+  type GetProductById,
+  type GetImageById,
+  getImageById,
+} from "@/lib/querys";
+import { calculateDiscountedPrice } from "@/lib/utils/discount";
+import Image from "next/image";
+
+const TopProduct = async ({ id }: { id: number }) => {
+  const singleProductData: GetProductById[] = await getProductById(id);
+  const product = singleProductData[0];
+  const { description, discount, price, product_id, title } = product;
+
+  const singleImageData: GetImageById[] = await getImageById(id);
+  const image = singleImageData[0];
+  const { image_url, product_image_id } = image;
+
+  const discountedPrice = calculateDiscountedPrice(price, discount);
+  return (
+    <div className="mt-40 w-full flex justify-center items-center flex-col">
+      <div className="">
+        <Image
+          src={image_url}
+          alt="عکس گوشی سامسونگ s24"
+          height={200}
+          width={200}
+        />
+      </div>
+      <div>
+        <span>{title}</span>
+        <div className="flex justify-between">
+          <span>{title}</span>
+          <span>{discountedPrice}</span>
+        </div>
+        <div>
+          <button>submit</button>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TopProduct;

@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --color-surface-primary: #ffffff;
+  --color-surface-secondary: #f2f3f5;
+  --color-brand-primary: #e04;
+  --color-brand-secondary: #f45;
+  --color-brand-discount: #e35;
+  --color-text-primary: #202220;
+  --color-text-secondary: #918e93;
+  --color-text-link: #19bfd3;
+  --color-status-discount: #d32f2f;
+}
+
+@theme inline {
+  --color-surface-primary: var(--color-surface-primary);
+  --color-surface-secondary: var(--color-surface-secondary);
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-secondary: var(--color-brand-secondary);
+  --color-brand-discount: var(--color-brand-discount);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-link: var(--color-text-link);
+  --color-status-discount: var(--color-status-discount);
+}
+
+@layer components {
+  .underline-animation {
+    @apply absolute bottom-0 left-0 bg-brand-primary h-0.5 w-0 group-hover:w-full transition-all duration-400 rounded-2xl;
+  }
+  .contact-button {
+    @apply py-2.5 text-xs font-bold px-4 rounded-4xl w-fit h-fit bg-surface-secondary cursor-pointer;
+  }
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* برای IE و Edge */
+  scrollbar-width: none; /* برای Firefox */
+}
