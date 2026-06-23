@@ -19,6 +19,7 @@ const ProductCircle = ({ data }: { data: circleDataProps }) => {
         <div className="w-15">
           <Image
             width={52}
+            height={52}
             alt={data.textFirstLine + data?.textSecondLine}
             src={data.image}
           />

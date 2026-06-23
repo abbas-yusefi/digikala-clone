@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Nav from "@/components/nav/nav";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
+import HomeHeader from "@/components/layout/header/home/home-header";
 
 export const metadata: Metadata = {
   title: "فروشگاه اینترنتی دیجی کالا",
@@ -14,6 +15,7 @@ export default function Layout({
   return (
     <>
       <SessionProvider>
+        <HomeHeader />
         {children}
         <Nav />
       </SessionProvider>

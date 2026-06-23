@@ -4,7 +4,6 @@ import { auth } from "@/auth";
 
 const page = async () => {
   const sessoin = await auth();
-  // console.log(sessoin);
 
   return (
     <div>

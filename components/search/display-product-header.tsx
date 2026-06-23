@@ -1,0 +1,86 @@
+"use client";
+
+import { IoShareSocialSharp } from "react-icons/io5";
+import { FiSearch } from "react-icons/fi";
+import BackButton from "../ui/back-button";
+import Image from "next/image";
+import HeaderImage from "@/public/header.png";
+import { useEffect, useState } from "react";
+import { FaXmark } from "react-icons/fa6";
+
+const DisplayProductHeader = ({
+  category,
+  query,
+}: {
+  category?: string;
+  query?: string;
+}) => {
+  const headings: Record<string, string> = {
+    mobile: "گوشی موبایل",
+    tablet: "تبلت",
+    laptop: "لپ تاپ",
+    headphone: "هدفون، هدست و هندزفری",
+    watch: "ساعت هوشمند",
+  };
+
+  const heading = headings[category as keyof typeof headings] || "";
+  const [handleInput, setHandleInput] = useState(query || "");
+
+  useEffect(() => {
+    const setQuery = () => {
+      if (!query) return;
+      setHandleInput(query);
+    };
+    setQuery();
+  }, [query]);
+
+  if (category)
+    return (
+      <>
+        <div className="flex items-center justify-between px-7 py-5">
+          <div className="flex gap-7">
+            <button
+              onClick={() =>
+                navigator.clipboard.writeText(window.location.href)
+              }
+            >
+              <IoShareSocialSharp className="scale-125 cursor-pointer" />
+            </button>
+            <button onClick={() => (window.location.hash = "search")}>
+              <FiSearch className="scale-125 cursor-pointer" />
+            </button>
+          </div>
+          <div className="flex gap-7 font-bold">
+            <h1>{heading && heading}</h1>
+            <BackButton />
+          </div>
+        </div>
+        <Image alt="header ad" src={HeaderImage} className="h-8 object-cover" />
+      </>
+    );
+  return (
+    <div>
+      <div className="flex items-center pl-4 pr-6">
+        <input
+          style={{ direction: "rtl" }}
+          type="search"
+          readOnly
+          value={handleInput}
+          onChange={(e) => setHandleInput(e.target.value)}
+          placeholder="جستجو"
+          className="w-full py-2.5 border px-5 mr-8 rounded-4xl border-black/15 focus:outline-none relative"
+          onClick={() => (window.location.hash = "search")}
+        />
+        <button
+          className="absolute ml-4 cursor-pointer"
+          onClick={() => (window.location.hash = "search")}
+        >
+          <FaXmark className="scale-125 text-black/40" />
+        </button>
+        <BackButton />
+      </div>
+    </div>
+  );
+};
+
+export default DisplayProductHeader;

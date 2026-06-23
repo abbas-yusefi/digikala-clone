@@ -1,43 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UseFormRegister } from "react-hook-form";
-
-type TailwindSpacing =
-  | "0"
-  | "0.5"
-  | "1"
-  | "1.5"
-  | "2"
-  | "2.5"
-  | "3"
-  | "3.5"
-  | "4"
-  | "5"
-  | "6"
-  | "7"
-  | "8"
-  | "9"
-  | "10"
-  | "11"
-  | "12"
-  | "14"
-  | "16"
-  | "20"
-  | "24"
-  | "28"
-  | "32"
-  | "36"
-  | "40"
-  | "44"
-  | "48"
-  | "52"
-  | "56"
-  | "60"
-  | "64"
-  | "72"
-  | "80"
-  | "96";
+import { FaXmark } from "react-icons/fa6";
 
 type SearchBar = {
   placeholder: string;
@@ -51,6 +15,8 @@ type SearchBar = {
   ariaLabel?: string;
   onChange?: any;
   onKeyDown?: any;
+  autoFocus?: boolean;
+  value?: string;
 };
 
 const SearchBar = ({
@@ -65,24 +31,34 @@ const SearchBar = ({
   ariaLabel,
   onChange,
   onKeyDown,
+  autoFocus,
+  value,
 }: SearchBar) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
     <div className={`${divClassName} w-full rounded-4xl flex items-center`}>
       <input
+        value={value}
         onClick={() => (window.location.hash = "search")}
         id="inputid"
-        className={`${inputClassName} w-full text-sm focus:outline-none px-3 pb-1 relative`}
+        className={`${inputClassName} w-full text-sm focus:outline-none px-3 pb-1 relative [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]`}
         type="search"
         aria-label={ariaLabel || placeholder}
         role="searchbox"
         onChange={(e) => onChange(e.target.value)}
         placeholder={isFocused ? "" : placeholder}
+        autoFocus={autoFocus ? true : false}
         onFocus={() => (hideOnFocuse ? setIsFocused(true) : null)}
         onBlur={() => (hideOnFocuse ? setIsFocused(false) : null)}
         onKeyDown={onKeyDown}
       />
+      <button
+        className="absolute ml-4 cursor-pointer"
+        onClick={() => onChange("")}
+      >
+        <FaXmark className="scale-125 text-black/40" />
+      </button>
       {searchIcon && (
         <label
           htmlFor="inputid"

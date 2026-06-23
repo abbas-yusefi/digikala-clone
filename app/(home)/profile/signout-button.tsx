@@ -10,7 +10,7 @@ const SignoutButton = () => {
     <button
       onClick={() => {
         signOut();
-        router.replace("profile");
+        router.replace("/");
       }}
     >
       logout

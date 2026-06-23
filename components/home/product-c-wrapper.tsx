@@ -1,15 +1,15 @@
 import React from "react";
-import HorizantalNav from "../shared/horizantal-nav";
+import HorizontalNav from "../shared/horizontal-nav";
 import circleData from "@/public/productcircle";
 import ProductCircle from "./product-circle";
 
 const ProductCWrapper = () => {
   return (
-    <HorizantalNav>
+    <HorizontalNav className="lg:justify-center pb-2">
       {circleData.map((data) => (
         <ProductCircle key={data} data={data} />
       ))}
-    </HorizantalNav>
+    </HorizontalNav>
   );
 };
 

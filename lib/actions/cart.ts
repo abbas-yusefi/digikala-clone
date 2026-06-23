@@ -14,7 +14,11 @@ async function deleteCartItem(cartId: number) {
   }
 }
 
-const addToCart = async (productId, userId, quantity) => {
+const addToCart = async (
+  productId: string,
+  userId: string,
+  quantity: string,
+) => {
   try {
     const result = await addProductToCart(productId, userId, quantity);
     console.log(result);

@@ -124,7 +124,7 @@ const FooterList = ({
       </div>
       <div className={`${isToggeled[sectionToggleName] ? "pt-5" : "hidden"}`}>
         <ul
-          className={`${partnersDropdown ? "flex flex-col justify-center items-center w-full px-10" : "flex flex-col justify-end items-end gap-5"} `}
+          className={`${partnersDropdown ? "flex flex-col justify-center items-center w-full px-[clamp(5px,10px,20px)]" : "flex flex-col justify-end items-end gap-5"} `}
         >
           {partnersDropdown ? (
             <>

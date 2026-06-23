@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { getAllCartProducts } from "../querys";
 
-export const getCartProducts = async () => {
+export const getCartProductsAction = async () => {
   try {
     const session = await auth();
     const email = session?.user?.email;

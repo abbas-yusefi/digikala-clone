@@ -1,24 +1,40 @@
 "use client";
 
-import { getCartProducts } from "@/lib/actions/get-cart-products";
+import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
+import { getCartProductsAction } from "@/lib/actions/get-cart-products";
+import { getProductByIdAction } from "@/lib/actions/product";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import DisplayCartItems from "../../../components/checkout/display-cart-items";
+import EmptyCart from "@/components/checkout/empty-cart";
+import ProductCard from "@/components/search/product-card";
+
+type parsedData = { id: number; quantity: number };
 
 const CheckoutPage = () => {
-  const [products, setProducts] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState<any>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
 
   useEffect(() => {
-    const setLocalStorageProducts = () => {
-      const data = localStorage.getItem("cart");
-      setProducts(data ? JSON.parse(data) : null);
+    const setLocalStorageProducts = async () => {
+      try {
+        const data = localStorage.getItem("cart");
+        const parsedData: parsedData[] = data ? JSON.parse(data) : null;
+        const products = await Promise.all(
+          parsedData.map((item) => getProductByIdAction(item.id)),
+        );
+
+        setProducts(products);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    setLocalStorageProducts();
     const getDatabaseCartProducts = async () => {
       try {
-        setIsLoading(true);
-        const products = await getCartProducts();
+        const products = await getCartProductsAction();
         if (typeof products === "undefined") {
           return;
         } else {
@@ -33,20 +49,29 @@ const CheckoutPage = () => {
 
     if (session?.user?.email) {
       getDatabaseCartProducts();
+    } else {
+      setLocalStorageProducts();
     }
   }, [session?.user?.email]);
 
-  return (
-    <div>
-      <h2>checkout</h2>
-      {products &&
-        products?.map((product) => (
-          <div key={product.id}>
-            product id: {product.id} - product quantity: {product.quantity}
-          </div>
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <PulsingDotLoader />
+      </div>
+    );
+  } else if (products) {
+    return (
+      <div className="min-[425px]:grid min-[425px]:grid-cols-2 min-[1280px]:grid-cols-3 min-[1440px]:grid-cols-4">
+        {products.map((product) => (
+          <ProductCard data={product} key={product.product_id} />
         ))}
-    </div>
-  );
+      </div>
+      // <DisplayCartItems products={products} />
+    );
+  } else {
+    return <EmptyCart />;
+  }
 };
 
 export default CheckoutPage;

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import DiscountPercentage from "../../ui/discount-percentage";
 
 type Product = {
   product_id: number;
@@ -11,7 +12,7 @@ type Product = {
   image_url: string;
 };
 
-const DiscountProductCard = async ({ product }: { product: Product }) => {
+const DiscountProductCard = ({ product }: { product: Product }) => {
   const discountedPrice =
     Math.round(
       (product.price - product.price * (product.discount / 100)) / 10000,
@@ -49,9 +50,7 @@ const DiscountProductCard = async ({ product }: { product: Product }) => {
                 <div className="block text-text-secondary line-through text-xs">
                   {product.price.toLocaleString()}
                 </div>
-                <span className="bg-brand-secondary text-white rounded-2xl w-10 flex justify-center h-5 ml-1">
-                  {product.discount.toLocaleString()}%
-                </span>
+                <DiscountPercentage discount={product.discount} />
               </div>
               <span className="flex font-semibold">
                 <span className="px-1">تومان</span>

@@ -1,4 +1,4 @@
-import HorizantalNav from "@/components/shared/horizantal-nav";
+import HorizantalNav from "@/components/shared/horizontal-nav";
 import ProCard from "./product-card";
 
 const DisplayProducts = async ({ sectionName, Data }) => {

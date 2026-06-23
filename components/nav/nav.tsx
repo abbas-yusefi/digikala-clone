@@ -1,22 +1,17 @@
-import { auth } from "@/auth";
-import { getAllCartProducts } from "@/lib/querys";
 import { IoCart, IoCartOutline } from "react-icons/io5";
 import {
   BiCategory,
   BiSolidCategory,
   BiHome,
   BiSolidHome,
-  BiUser,
-  BiSolidUser,
   BiSupport,
 } from "react-icons/bi";
-import NavSections from "./nav-sections";
+import { FaRegUser, FaUser } from "react-icons/fa6";
+
+import NavItem from "./nav-item";
 import CartItemsLength from "./cart-items-length";
 
 const Nav = async () => {
-  const session = await auth();
-  const email = session?.user?.email;
-  const numberOfProducts = email ? await getAllCartProducts(email) : [];
   const iconScale = 200;
 
   return (
@@ -26,40 +21,38 @@ const Nav = async () => {
           <BiSupport className="text-2xl" color="white" />
         </span>
         <div className="px-[clamp(16px,5vw,40px)] flex justify-between items-center h-full">
-          <NavSections
+          <NavItem
             href="/profile"
-            iconOutline={<BiUser className={`scale-${iconScale}`} />}
-            iconSolid={<BiSolidUser className={`scale-${iconScale}`} />}
+            iconOutline={<FaRegUser className={`scale-${iconScale}`} />}
+            iconSolid={<FaUser className={`scale-${iconScale}`} />}
           >
             دیجی کالای من
-          </NavSections>
+          </NavItem>
 
-          <NavSections
+          <NavItem
             href="/checkout"
             iconOutline={<IoCartOutline className={`scale-${iconScale}`} />}
             iconSolid={<IoCart className={`scale-${iconScale}`} />}
           >
-            <CartItemsLength isLoggedIn={session ? true : false}>
-              {numberOfProducts.length}
-            </CartItemsLength>
+            <CartItemsLength />
             سبد خرید
-          </NavSections>
+          </NavItem>
 
-          <NavSections
+          <NavItem
             href="/categories"
             iconOutline={<BiCategory className={`scale-${iconScale}`} />}
             iconSolid={<BiSolidCategory className={`scale-${iconScale}`} />}
           >
             دسته بندی
-          </NavSections>
+          </NavItem>
 
-          <NavSections
+          <NavItem
             href="/"
             iconOutline={<BiHome className={`scale-${iconScale}`} />}
             iconSolid={<BiSolidHome className={`scale-${iconScale}`} />}
           >
             خانه
-          </NavSections>
+          </NavItem>
         </div>
       </div>
     </nav>

@@ -1,4 +1,6 @@
-import HorizantalNav from "@/components/shared/horizantal-nav";
+"use client";
+
+import HorizontalNav from "@/components/shared/horizontal-nav";
 import { IoNotificationsOutline, IoLocationOutline } from "react-icons/io5";
 import SearchBar from "@/components/ui/search-bar";
 import { FiSearch } from "react-icons/fi";
@@ -6,18 +8,31 @@ import Image from "next/image";
 import useScrollThreshold from "@/lib/hooks/useScrollThreshold";
 import SuperwebTab from "./superweb-tab";
 import tabsData from "@/public/superweb";
-import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import SearchMdHeader from "@/components/search/search-md-header";
 
-const MdHeader = () => {
+const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
   const scrolled = useScrollThreshold({
     disableThreshold: 350,
     enableThreshold: 450,
   });
+
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category") || undefined;
+  const query = searchParams.get("query") || "";
+
+  const path = usePathname();
+
+  if (path == "/checkout") return null;
+
+  if (path == "/search")
+    return <SearchMdHeader category={category} query={query} />;
+
   return (
     <>
-      <header className="text-xs font-semibold sticky top-0 z-50 bg-surface-primary">
+      <header className="lg:hidden text-xs font-semibold sticky -my-5 top-0 z-50 bg-surface-primary">
         <nav>
-          <HorizantalNav className="gap-2 px-5">
+          <HorizontalNav className="gap-2 px-5">
             {tabsData.map((tab) => (
               <SuperwebTab
                 key={tab.href}
@@ -26,10 +41,10 @@ const MdHeader = () => {
                 image={tab.image}
                 href={tab.href}
                 bgColor={tab.bgColor}
-                scrolled={scrolled}
+                scrolled={shrinkNavs ? shrinkNavs : scrolled}
               />
             ))}
-          </HorizantalNav>
+          </HorizontalNav>
 
           <div
             className={`px-5 flex justify-center items-center mt-3 cursor-pointer pb-2 ${scrolled ? "border-b border-black/20" : ""}`}
@@ -51,11 +66,12 @@ const MdHeader = () => {
                 width={64}
                 height={64}
                 alt="digikala icon"
+                className="w-14 h-14"
               />
             </SearchBar>
           </div>
           <div
-            className={`${scrolled ? "opacity-0 h-0" : "h-10"} flex items-center justify-end mx-5 cursor-text transition duration-100`}
+            className={`${scrolled || path === "/categories" ? "opacity-0 h-0" : "h-10"} flex items-center justify-end mx-5 cursor-text transition duration-100`}
           >
             &lt;انتخواب استان و شهر
             <IoLocationOutline className="ml-1 text-[1.1rem]" />

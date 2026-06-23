@@ -11,7 +11,7 @@ type FooterSectionProps = {
   iconSolid?: React.ReactNode;
 };
 
-const NavSections = ({
+const NavItem = ({
   children,
   href,
   iconOutline,
@@ -21,7 +21,7 @@ const NavSections = ({
   return (
     <Link
       href={href}
-      className={`flex flex-col w-20 justify-center items-center  ${path === href ? "text-black" : "text-text-secondary"} text-xs gap-1 relative`}
+      className={`flex flex-col w-20 justify-center outline-none items-center  ${path === href ? "text-black" : "text-text-secondary"} text-xs gap-1 relative`}
     >
       {path === href ? iconSolid : iconOutline}
       {children}
@@ -29,4 +29,4 @@ const NavSections = ({
   );
 };
 
-export default NavSections;
+export default NavItem;

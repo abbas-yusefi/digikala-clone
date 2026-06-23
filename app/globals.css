@@ -53,3 +53,7 @@ body {
   -ms-overflow-style: none; /* برای IE و Edge */
   scrollbar-width: none; /* برای Firefox */
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}

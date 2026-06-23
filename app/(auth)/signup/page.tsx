@@ -10,6 +10,7 @@ import { signup } from "@/lib/actions/signup";
 import { SignupSchema, signupSchema } from "@/lib/schemas/signup-schema";
 import { useState } from "react";
 import BackButton from "@/components/ui/back-button";
+import logo from "@/public/other/brand.svg";
 
 const SignupPage = () => {
   const {
@@ -25,14 +26,10 @@ const SignupPage = () => {
   const [serverError, getServerError] = useState<any>(null);
 
   const submitHandler = async (data: SignupSchema) => {
-    const localCart = localStorage.getItem("cart");
-    const parsedLocalCart = localCart ? JSON.parse(localCart) : null;
-
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => formData.append(key, value));
 
-    console.log("iteams", parsedLocalCart);
-    const result = await signup(formData, parsedLocalCart);
+    const result = await signup(formData);
 
     if (result?.message) {
       getServerError(result);
@@ -48,8 +45,8 @@ const SignupPage = () => {
     >
       <BackButton className="fixed top-6 right-8" />
       <Image
-        alt="something"
-        src={"https://www.digikala.com/brand/full-horizontal.svg"}
+        alt="لگو دیجی کالا"
+        src={logo}
         width={175}
         height={175}
         className="mb-15"

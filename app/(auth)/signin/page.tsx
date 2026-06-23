@@ -2,7 +2,7 @@
 
 import Input from "@/components/form/input";
 import SubmitButton from "@/components/form/submit-button";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -11,9 +11,7 @@ import { SigninSchema, signinSchema } from "@/lib/schemas/signin-schema";
 import Link from "next/link";
 import { useState } from "react";
 import BackButton from "@/components/ui/back-button";
-import { addProductToCart } from "@/lib/querys";
-import { syncCartToServer } from "@/lib/actions/add-localitems-to-cart";
-import { revalidatePath } from "next/cache";
+import logo from "@/public/other/brand.svg";
 
 const SigninPage = () => {
   const {
@@ -25,7 +23,6 @@ const SigninPage = () => {
     mode: "onSubmit",
     shouldFocusError: false,
   });
-  // const { data: session } = useSession();
 
   const router = useRouter();
 
@@ -50,19 +47,6 @@ const SigninPage = () => {
         return;
       }
 
-      const session = await getSession();
-
-      if (session?.user?.id) {
-        const localCart = localStorage.getItem("cart");
-        const parsedLocalCart = localCart ? JSON.parse(localCart) : null;
-
-        if (parsedLocalCart && parsedLocalCart.length > 0) {
-          await syncCartToServer(session.user.id, parsedLocalCart);
-          // Clear local cart after syncing
-          localStorage.removeItem("cart");
-        }
-      }
-
       setServerError({});
       router.replace(callbackUrl);
       router.refresh();
@@ -80,12 +64,12 @@ const SigninPage = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex justify-center items-center flex-col min-h-screen px-6 lg:h-full lg:my-auto lg:w-100 lg:mx-auto lg:border lg:border-black/10 lg:rounded-md lg:p-7 lg:shadow-md"
+      className="flex justify-center items-center flex-col min-h-screen px-6 lg:min-h-auto lg:my-auto lg:w-100 lg:mx-auto lg:border lg:border-black/10 lg:rounded-md lg:p-7 lg:shadow-md"
     >
       <BackButton className="fixed top-6 right-8" />
       <Image
-        alt="something"
-        src={"https://www.digikala.com/brand/full-horizontal.svg"}
+        alt="لگو دیجی کالا"
+        src={logo}
         width={175}
         height={175}
         className="mb-15"

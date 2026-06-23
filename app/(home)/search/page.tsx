@@ -1,20 +1,65 @@
-import { getProductsByTitle } from "@/lib/querys";
-import React from "react";
+import { getFilteredProducts, getFilteredProductsLength } from "@/lib/querys";
+import React, { Suspense } from "react";
+
+import DisplayProducts from "@/components/search/display-products";
+import NavButtons from "./nav-buttons";
+import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
+import { Params } from "@/lib/types/params";
+
+const AwaitedDisplayProducts = async ({
+  params,
+  category,
+}: {
+  params: Params;
+  category: string;
+}) => {
+  const products = await getFilteredProducts(params);
+
+  const productsLength = await getFilteredProductsLength(params);
+
+  return (
+    <>
+      <DisplayProducts
+        productsLength={productsLength.length}
+        products={products}
+        category={category}
+      />
+      <NavButtons products={products} />
+    </>
+  );
+};
 
 const SearchResultPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) => {
-  const params = await searchParams;
-  const query = params.q || "";
+  const param = await searchParams;
+  const query = param.q || "";
+  const category = param.category || "";
+  const brand = param.brand || "";
+  const discount = param.discount !== undefined || "";
+  const cursor = param.cursor || "";
+  const dir = param.dir || "";
 
-  const products = await getProductsByTitle(query);
-  console.log(products);
+  const params: Params = {
+    q: query,
+    category: category,
+    brand: brand,
+    discount: discount,
+    cursor,
+    dir,
+  };
   return (
-    <div>
-      <h2>something</h2>
-    </div>
+    <>
+      <main className="min-[425px]:px-7">
+        <Suspense
+          fallback={<PulsingDotLoader className="min-h-screen w-full" />}
+        >
+          <AwaitedDisplayProducts category={category} params={params} />
+        </Suspense>
+      </main>
+    </>
   );
 };
 

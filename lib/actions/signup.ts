@@ -3,10 +3,9 @@
 import { redirect } from "next/navigation";
 import pool from "../db";
 import bcrypt from "bcrypt";
-import { auth, signIn } from "@/auth";
-import { addProductToCart } from "../querys";
+import { signIn } from "@/auth";
 
-const signup = async (formData: FormData, parsedLocalCart) => {
+const signup = async (formData: FormData) => {
   try {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -39,38 +38,11 @@ const signup = async (formData: FormData, parsedLocalCart) => {
       ],
     );
 
-    console.log("before login");
-
     const result = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
-
-    console.log(result);
-    console.log("after login");
-
-    if (result.ok) {
-      const session = await auth();
-      const userId = session?.user?.id;
-
-      console.log("Cart items to sync:", parsedLocalCart);
-      console.log("User ID:", userId);
-
-      if (parsedLocalCart && parsedLocalCart.length > 0 && userId) {
-        try {
-          await Promise.all(
-            parsedLocalCart.map((item) =>
-              addProductToCart(item.id, userId, item.quantity),
-            ),
-          );
-          console.log("Cart sync completed successfully");
-        } catch (cartError) {
-          console.error("Cart sync failed:", cartError);
-          return { message: "خطا در همگام‌سازی سبد خرید" };
-        }
-      }
-    }
 
     if (result?.error) {
       return { message: result.error };

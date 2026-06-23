@@ -9,19 +9,14 @@ import { HiMenu } from "react-icons/hi";
 import { CiPercent } from "react-icons/ci";
 import NavComponent from "@/components/ui/nav-component";
 import { useState } from "react";
-import useScrollThreshold from "@/lib/hooks/useScrollThreshold";
 
-const Toolbar = ({ className }) => {
+const Toolbar = ({ className }: { className: string }) => {
   const [locatoinHovered, setLocationHovered] = useState(false);
   const [categoriesHovered, setCategoriesHovered] = useState(false);
 
-  const scrolled = useScrollThreshold({
-    enableThreshold: 150,
-    disableThreshold: 450,
-  });
   return (
     <div
-      className={`${className} transition duration-100 relative bg-surface-primary z-50 h-10 flex justify-between items-center pl-4 border-b border-black/20 shadow-md text-[0.8rem] `}
+      className={`${className} max-lg:hidden transition duration-100 relative bg-surface-primary z-40 h-10 flex justify-between items-center pl-4 border-b border-black/20 shadow-md text-[0.8rem] `}
     >
       {/* chose locatoin */}
       <div
