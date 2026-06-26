@@ -1,4 +1,4 @@
-import { getFilteredProducts, getFilteredProductsLength } from "@/lib/querys";
+import { getFilteredProducts } from "@/lib/querys";
 import React, { Suspense } from "react";
 
 import DisplayProducts from "@/components/search/display-products";

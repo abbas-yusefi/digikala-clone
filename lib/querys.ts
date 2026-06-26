@@ -98,7 +98,7 @@ WHERE u.email = $1
   return rows;
 };
 
-const deleteProductFromCart = async (Id: number | string) => {
+const deleteProductFromCart = async (Id: number | string): Promise<void> => {
   await pool.query(
     `
     DELETE FROM cart
@@ -112,30 +112,20 @@ const addProductToCart = async (
   productId: string,
   userId: string,
   quantity: string,
-) => {
-  const { rows } = await pool.query(
+): Promise<void> => {
+  await pool.query(
     `
     INSERT INTO cart(product_id,user_id,quantity)
     VALUES($1,$2,$3)
     `,
     [productId, userId, quantity ? quantity : 1],
   );
-  return rows;
 };
 
-const getProductsByTitle = async (title: string) => {
-  const { rows } = await pool.query(
-    `SELECT * FROM product 
-     JOIN brand ON brand.brand_id = product.brand_id
-     WHERE to_tsvector(title || ' ' || brand.name || ' ' || brand.slug) @@ to_tsquery($1)
-
-     `,
-    [title.split(" ").join(" & ")],
-  );
-  return rows;
-};
-
-const addRecentlySearched = async (searchedTerm: string, userId: string) => {
+const addRecentlySearched = async (
+  searchedTerm: string,
+  userId: string,
+): Promise<void> => {
   await pool.query(
     `
     INSERT INTO recent_searches(search_term,user_id)
@@ -159,7 +149,7 @@ const getRecentlySearched = async (
   return rows;
 };
 
-const deleteOldSearches = async () => {
+const deleteOldSearches = async (): Promise<void> => {
   await pool.query(`
     DELETE FROM recent_searches 
 WHERE searched_at < NOW() - INTERVAL '30 days';
@@ -269,7 +259,6 @@ export {
   getAllCartProducts,
   deleteProductFromCart,
   addProductToCart,
-  getProductsByTitle,
   addRecentlySearched,
   getRecentlySearched,
   deleteOldSearches,
