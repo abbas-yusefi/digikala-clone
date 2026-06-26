@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/devtools": "^4.4.0",
     "@hookform/resolvers": "^5.2.2",
+    "@opennextjs/cloudflare": "0.6.6",
     "@types/jest": "^30.0.0",
     "@types/pg": "^8.20.0",
     "@vitest/ui": "^4.1.6",

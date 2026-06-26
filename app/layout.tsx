@@ -1,7 +1,10 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import "./globals.css";
 import SearchOverlay from "@/components/layout/header/search-overlay";
 import { SessionProvider } from "next-auth/react";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "فروشگاه اینترنتی دیجی کالا",
@@ -17,7 +20,9 @@ export default function RootLayout({
     <html lang="en" className={` h-full antialiased hide-scrollbar`}>
       <body className="min-h-full flex flex-col gap-y-4">
         <SessionProvider>
-          {children} <SearchOverlay />
+          <Suspense>
+            {children} <SearchOverlay />
+          </Suspense>
         </SessionProvider>
       </body>
     </html>

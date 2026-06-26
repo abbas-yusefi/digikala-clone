@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import DisplayIds from "@/components/create/display-ids";
 import {
   ProductInputs,
