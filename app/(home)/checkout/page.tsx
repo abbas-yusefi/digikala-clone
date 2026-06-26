@@ -2,7 +2,7 @@
 
 import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
 import { getCartProductsAction } from "@/lib/actions/get-cart-products";
-import { getProductByIdAction } from "@/lib/actions/product";
+import { getProductAction } from "@/lib/actions/product";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import DisplayCartItems from "../../../components/checkout/display-cart-items";
@@ -22,7 +22,7 @@ const CheckoutPage = () => {
         const data = localStorage.getItem("cart");
         const parsedData: parsedData[] = data ? JSON.parse(data) : null;
         const products = await Promise.all(
-          parsedData.map((item) => getProductByIdAction(item.id)),
+          parsedData.map((item) => getProductAction(item.id.toString())),
         );
 
         setProducts(products);

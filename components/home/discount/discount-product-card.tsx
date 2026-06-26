@@ -2,20 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import DiscountPercentage from "../../ui/discount-percentage";
+import { ProductCard, WithImage } from "@/lib/types/product";
 
-type Product = {
-  product_id: number;
-  title: string;
-  description: string;
-  price: number;
-  discount: number;
-  image_url: string;
-};
-
-const DiscountProductCard = ({ product }: { product: Product }) => {
+const DiscountProductCard = ({
+  product,
+}: {
+  product: WithImage<ProductCard>;
+}) => {
   const discountedPrice =
     Math.round(
-      (product.price - product.price * (product.discount / 100)) / 10000,
+      (product.price -
+        product.price * (product.discount ? product.discount : 0 / 100)) /
+        10000,
     ) * 10000;
 
   return (
@@ -50,7 +48,9 @@ const DiscountProductCard = ({ product }: { product: Product }) => {
                 <div className="block text-text-secondary line-through text-xs">
                   {product.price.toLocaleString()}
                 </div>
-                <DiscountPercentage discount={product.discount} />
+                {product.discount && (
+                  <DiscountPercentage discount={product.discount} />
+                )}
               </div>
               <span className="flex font-semibold">
                 <span className="px-1">تومان</span>

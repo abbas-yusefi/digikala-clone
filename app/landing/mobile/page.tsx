@@ -3,12 +3,22 @@ import Image from "next/image";
 import headerAd from "@/public/header.png";
 import TopProduct from "@/components/landing/mobile/top-product";
 import DisplayProducts from "@/components/landing/mobile/display-products";
-import { getDiscountedProductByCategory } from "@/lib/querys";
+import { getFilteredProducts } from "@/lib/querys";
+import { Params } from "@/lib/types/params";
 
 const page = async () => {
   const topProductId = 1;
 
-  const discountedProducts = await getDiscountedProductByCategory(1);
+  const params: Params = {
+    q: "",
+    category: "mobile",
+    brand: "",
+    discount: "",
+    cursor: "",
+    dir: "",
+  };
+
+  const discountedProducts = await getFilteredProducts(params);
 
   return (
     <>

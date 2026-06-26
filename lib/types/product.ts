@@ -14,6 +14,12 @@ export type Image = {
   image_url: string;
 };
 
+export type Brand = {
+  brand_id: number;
+  name: string;
+  slug: string;
+};
+
 export type Cart = {
   id: number;
   user_id: number;
@@ -21,6 +27,13 @@ export type Cart = {
   quantity: number;
   added_at: number;
   updated_at: number;
+};
+
+export type RecentSearches = {
+  id: number;
+  search_term: string;
+  searched_at: number;
+  user_id: number;
 };
 
 export type WithImage<T> = T & { image_url: string };

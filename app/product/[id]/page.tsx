@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ui/product-card";
 import Image from "next/image";
-import { getProduct, getImageById } from "@/lib/querys";
+import { getProduct, getImage } from "@/lib/querys";
 import AddToCart from "./add-to-cart";
 import { auth } from "@/auth";
 import { Metadata } from "next";
@@ -34,7 +34,7 @@ import { notFound } from "next/navigation";
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const productRow = await getProduct(id);
-  const imageRow = await getImageById(id);
+  const imageRow = await getImage(id);
 
   if (!productRow || productRow.length === 0) {
     notFound();

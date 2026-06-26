@@ -1,18 +1,18 @@
 "use server";
 
-import { getProductById } from "../querys";
+import { getProduct } from "../querys";
 
-const getProductByIdAction = async (id: number) => {
+const getProductAction = async (id: string) => {
   try {
     if (typeof id === "undefined" || id == null) {
       throw new Error("there was no id provided");
       return null;
     }
-    const result = await getProductById(id);
+    const result = await getProduct(id);
     return result[0];
   } catch (err) {
     console.log("there was an error: ", err);
   }
 };
 
-export { getProductByIdAction };
+export { getProductAction };

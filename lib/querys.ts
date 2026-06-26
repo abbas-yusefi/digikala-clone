@@ -1,75 +1,43 @@
 import pool from "./db";
 import { Params } from "./types/params";
+import {
+  Brand,
+  Cart,
+  Image,
+  Product,
+  ProductCard,
+  RecentSearches,
+  WithImage,
+} from "./types/product";
 
-export type GetProductById = {
-  product_id: string;
-  title: string;
-  description: string;
-  price: number;
-  discount: number;
-};
+const getHomeDiscountProducts = async (
+  changeSet?: boolean,
+): Promise<WithImage<ProductCard>[]> => {
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-export type GetImageById = {
-  product_image_id: number;
-  image_url: string;
-};
-export type GetProductByCategory = {
-  product_id: number;
-  title: string;
-  price: number;
-  discount: number;
-  image_url: string;
-};
+  const changeProductSet = changeSet
+    ? "ORDER BY p.product_id DESC LIMIT 14"
+    : "ORDER BY p.product_id LIMIT 15";
 
-const firstHomePageDiscount = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   const { rows } = await pool.query(`
-SELECT DISTINCT ON(product.product_id)
-product.product_id,
-title,
-description,
-price,
-discount,
-image_url
-FROM product
-INNER JOIN product_image
-ON product.product_id = product_image.product_id
-WHERE discount > 0
-ORDER BY product.product_id 
-LIMIT 15
-        `);
-  return rows;
-};
-const secondHomePageDiscount = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  const { rows } = await pool.query(`
-SELECT DISTINCT ON(product.product_id)
-product.product_id,
-title,
-description,
-price,
-discount,
-image_url
-FROM product
-INNER JOIN product_image
-ON product.product_id = product_image.product_id
-WHERE discount > 0
-ORDER BY product.product_id DESC
-LIMIT 14
+SELECT DISTINCT ON(p.product_id)
+p.product_id,
+p.title,
+p.price,
+p.discount,
+i.image_url
+FROM product p
+INNER JOIN product_image i
+ON p.product_id = i.product_id
+WHERE p.discount > 0
+${changeProductSet}
         `);
   return rows;
 };
 
-const getAllProductImages = async () => {
-  const { rows } = await pool.query(`
-        SELECT DISTINCT ON (product_id) product_id, image_url
-        FROM product_image
-        ORDER BY product_id, product_image_id
-      `);
-  return rows;
-};
-
-const getProductById = async (id: number) => {
+const getProduct = async (
+  id: string | number,
+): Promise<WithImage<Product>[]> => {
   const { rows } = await pool.query(
     `
           SELECT 
@@ -90,7 +58,9 @@ const getProductById = async (id: number) => {
   return rows;
 };
 
-const getImageById = async (id: number) => {
+const getImage = async (
+  id: string | number,
+): Promise<Omit<Image, "product_id">[]> => {
   const { rows } = await pool.query(
     `
  SELECT product_image_id,image_url FROM product_image WHERE product_id = $1`,
@@ -99,55 +69,20 @@ const getImageById = async (id: number) => {
   return rows;
 };
 
-const getProductByCategory = async (id: number) => {
-  const { rows } = await pool.query(
-    `
-        SELECT DISTINCT ON (p.product_id)
-      p.product_id,
-      p.title,
-      p.price,
-      p.discount,
-      i.image_url
-    FROM product p  
-    INNER JOIN product_image i ON p.product_id = i.product_id
-    WHERE p.category_id = $1
-    ORDER BY p.product_id, i.product_image_id
-    `,
-    [id],
-  );
-  return rows;
-};
-const getDiscountedProductByCategory = async (id: number) => {
-  const { rows } = await pool.query(
-    `
-        SELECT DISTINCT ON (p.product_id)
-      p.product_id,
-      p.title,
-      p.price,
-      p.discount,
-      i.image_url
-    FROM product p  
-    INNER JOIN product_image i ON p.product_id = i.product_id
-    WHERE p.category_id = $1 AND p.discount > 0
-    ORDER BY p.product_id, i.product_image_id
-    `,
-    [id],
-  );
-  return rows;
-};
-
-const getAllCartProducts = async (email: string) => {
+const getAllCartProducts = async (
+  email: string,
+): Promise<WithImage<Pick<Cart, "id" | "quantity"> & ProductCard>[]> => {
   const { rows } = await pool.query(
     `
 SELECT 
 DISTINCT ON(p.product_id)
 c.id,
+c.quantity,
 i.image_url,
 p.product_id,
 p.title,
 p.price,
-p.discount,
-c.quantity
+p.discount
 FROM cart c
 INNER JOIN product p
 ON p.product_id = c.product_id
@@ -163,15 +98,16 @@ WHERE u.email = $1
   return rows;
 };
 
-const deleteProductFromCart = async (cartId: number) => {
+const deleteProductFromCart = async (Id: number | string) => {
   await pool.query(
     `
     DELETE FROM cart
     WHERE id = $1
     `,
-    [cartId],
+    [Id],
   );
 };
+
 const addProductToCart = async (
   productId: string,
   userId: string,
@@ -184,11 +120,6 @@ const addProductToCart = async (
     `,
     [productId, userId, quantity ? quantity : 1],
   );
-  return rows;
-};
-
-const getProductsTitle = async () => {
-  const { rows } = await pool.query(`SELECT title FROM product`);
   return rows;
 };
 
@@ -214,7 +145,9 @@ const addRecentlySearched = async (searchedTerm: string, userId: string) => {
   );
 };
 
-const getRecentlySearched = async (userId: string) => {
+const getRecentlySearched = async (
+  userId: string,
+): Promise<Pick<RecentSearches, "id" | "search_term">[]> => {
   const { rows } = await pool.query(
     `
     SELECT search_term,id FROM recent_searches
@@ -233,7 +166,7 @@ WHERE searched_at < NOW() - INTERVAL '30 days';
     `);
 };
 
-const deleteAllRecentSearches = async (userId: string) => {
+const deleteAllRecentSearches = async (userId: string): Promise<void> => {
   await pool.query(
     `
     DELETE FROM recent_searches
@@ -243,18 +176,22 @@ const deleteAllRecentSearches = async (userId: string) => {
   );
 };
 
-const getBrandNames = async () => {
+const getBrandNames = async (): Promise<Brand[]> => {
   const { rows } = await pool.query(`
     SELECT brand_id,name,slug FROM brand
     `);
   return rows;
 };
 
-const getFilteredProducts = async (params: Params) => {
+const getFilteredProducts = async (
+  params: Params,
+  limit?: number,
+): Promise<WithImage<ProductCard>[]> => {
   const conditions: string[] = [];
   const values: any[] = [];
   let paramIndex = 1;
   let orderBy = "ORDER BY p.product_id ASC";
+  const productsLimit = limit && limit > 0 ? `LIMIT ${limit}` : "";
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   if (params.q) {
@@ -296,16 +233,23 @@ const getFilteredProducts = async (params: Params) => {
     conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
   const query = `
-    SELECT DISTINCT ON(p.product_id) p.*, m.image_url FROM product p
+    SELECT
+    DISTINCT ON(p.product_id)
+    p.title,
+    p.product_id,
+    p.price,
+    p.discount,
+    i.image_url
+    FROM product p
     LEFT JOIN category c ON p.category_id = c.category_id
     LEFT JOIN brand b ON p.brand_id = b.brand_id
-    INNER JOIN product_image m ON p.product_id = m.product_id
- AND m.ctid = (
+    INNER JOIN product_image i ON p.product_id = i.product_id
+ AND i.ctid = (
     SELECT MIN(ctid) FROM product_image WHERE product_id = p.product_id
   )
     ${whereClause}
     ${orderBy}
-    LIMIT 8
+    ${productsLimit}
   `;
 
   const { rows } = await pool.query(query, values);
@@ -318,64 +262,13 @@ const getFilteredProducts = async (params: Params) => {
   return products;
 };
 
-const getFilteredProductsLength = async (params: Params) => {
-  const conditions: string[] = [];
-  const values: any[] = [];
-  let paramIndex = 1;
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-
-  if (params.q) {
-    conditions.push(
-      `to_tsvector(p.title || ' ' || p.description || ' ' || b.name || ' ' || b.slug || c.slug ||' ' || c.name) @@ plainto_tsquery($${paramIndex})`,
-    );
-    values.push(params.q);
-    paramIndex++;
-  }
-
-  if (params.category) {
-    conditions.push(`c.slug = $${paramIndex}`);
-    values.push(params.category);
-    paramIndex++;
-  }
-
-  if (params.brand) {
-    conditions.push(`b.slug = $${paramIndex}`);
-    values.push(params.brand);
-    paramIndex++;
-  }
-
-  if (params.discount) {
-    conditions.push(`p.discount > 0`);
-  }
-
-  const whereClause =
-    conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
-
-  const query = `
-    SELECT DISTINCT ON(p.product_id) p.*, m.image_url FROM product p
-    LEFT JOIN category c ON p.category_id = c.category_id
-    LEFT JOIN brand b ON p.brand_id = b.brand_id
-    INNER JOIN product_image m ON p.product_id = m.product_id
-    ${whereClause}
-    ORDER BY p.product_id ASC
-  `;
-
-  const { rows } = await pool.query(query, values);
-  return rows;
-};
-
 export {
-  firstHomePageDiscount,
-  secondHomePageDiscount,
-  getAllProductImages,
-  getProductById,
-  getImageById,
-  getProductByCategory,
-  getDiscountedProductByCategory,
+  getHomeDiscountProducts,
+  getProduct,
+  getImage,
   getAllCartProducts,
   deleteProductFromCart,
   addProductToCart,
-  getProductsTitle,
   getProductsByTitle,
   addRecentlySearched,
   getRecentlySearched,
@@ -383,5 +276,4 @@ export {
   deleteAllRecentSearches,
   getBrandNames,
   getFilteredProducts,
-  getFilteredProductsLength,
 };

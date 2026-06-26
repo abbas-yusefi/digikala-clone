@@ -13,9 +13,10 @@ const AwaitedDisplayProducts = async ({
   params: Params;
   category: string;
 }) => {
-  const products = await getFilteredProducts(params);
+  const limit = 8;
 
-  const productsLength = await getFilteredProductsLength(params);
+  const products = await getFilteredProducts(params, limit);
+  const productsLength = await getFilteredProducts(params);
 
   return (
     <>

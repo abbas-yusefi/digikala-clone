@@ -7,8 +7,6 @@ import {
   secondCategories,
 } from "@/public/categoriesGrid/index";
 import CategoriesGrid from "@/components/home/categories-grid";
-import SingleCardAd from "@/components/home/single-card-ad";
-import { firstHomePageDiscount, secondHomePageDiscount } from "@/lib/querys";
 import { Suspense } from "react";
 import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
 import Footer from "@/components/home/footer/footer";
@@ -17,9 +15,6 @@ import Image from "next/image";
 import SingleAd from "@/public/single-ad-pic.png";
 
 const page = async () => {
-  const firstDiscountProducts = firstHomePageDiscount();
-  const secondDiscountProducts = secondHomePageDiscount();
-
   return (
     <>
       <ResponsiveImageSlider
@@ -29,11 +24,11 @@ const page = async () => {
       <main className="z-40 bg-surface-primary lg:mx-20 ">
         <ProductCWrapper />
         <Suspense fallback={<PulsingDotLoader className="h-70" />}>
-          <DiscountProducts data={firstDiscountProducts} />
+          <DiscountProducts />
         </Suspense>
         <AdvertisementGrid data={firstCategories} imageClassName="rounded-md" />
         <Suspense fallback={<PulsingDotLoader className="h-70" />}>
-          <DiscountProducts secondRow data={secondDiscountProducts} />
+          <DiscountProducts secondRow />
         </Suspense>
         <AdvertisementGrid
           data={secondCategories}

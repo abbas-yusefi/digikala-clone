@@ -8,21 +8,13 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import DiscountMdHeader from "./discount-md-header";
 import ScrollLeftButton from "@/components/ui/scroll-left-button";
 import ScrollRightButton from "@/components/ui/scroll-right-button";
-
-type Product = {
-  product_id: number;
-  title: string;
-  description: string;
-  price: number;
-  discount: number;
-  image_url: string;
-};
+import { ProductCard, WithImage } from "@/lib/types/product";
 
 const DisplayDesktopDiscount = ({
   data,
   secondRow,
 }: {
-  data: Product[];
+  data: WithImage<ProductCard>[];
   secondRow?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);

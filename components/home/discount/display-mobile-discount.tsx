@@ -8,21 +8,13 @@ import Image from "next/image";
 import { FaChevronLeft } from "react-icons/fa";
 import discountEmoji from "@/public/other/discount-emoji.svg";
 import amazingDiscount from "@/public/other/amazing-discount.svg";
-
-type Product = {
-  product_id: number;
-  title: string;
-  description: string;
-  price: number;
-  discount: number;
-  image_url: string;
-};
+import { ProductCard, WithImage } from "@/lib/types/product";
 
 const DisplayMobileDiscount = async ({
   data,
   secondRow,
 }: {
-  data: Product[];
+  data: WithImage<ProductCard>[];
   secondRow?: boolean;
 }) => {
   return (

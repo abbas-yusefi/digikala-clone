@@ -1,18 +1,13 @@
-import {
-  getProductById,
-  type GetProductById,
-  type GetImageById,
-  getImageById,
-} from "@/lib/querys";
+import { getImage, getProduct } from "@/lib/querys";
 import { calculateDiscountedPrice } from "@/lib/utils/discount";
 import Image from "next/image";
 
 const TopProduct = async ({ id }: { id: number }) => {
-  const singleProductData: GetProductById[] = await getProductById(id);
+  const singleProductData = await getProduct(id);
   const product = singleProductData[0];
   const { description, discount, price, product_id, title } = product;
 
-  const singleImageData: GetImageById[] = await getImageById(id);
+  const singleImageData = await getImage(id);
   const image = singleImageData[0];
   const { image_url, product_image_id } = image;
 
