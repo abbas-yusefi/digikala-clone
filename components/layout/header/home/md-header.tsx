@@ -30,7 +30,7 @@ const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
 
   return (
     <>
-      <header className="lg:hidden text-xs font-semibold sticky -my-5 top-0 z-50 bg-surface-primary">
+      <header className="lg:hidden text-xs font-semibold sticky -my-5 top-0 z-50 bg-surface-primary pt-3">
         <nav>
           <HorizontalNav className="gap-2 px-5">
             {tabsData.map((tab) => (

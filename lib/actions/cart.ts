@@ -3,7 +3,7 @@
 import { addProductToCart, deleteProductFromCart } from "@/lib/querys";
 import { revalidatePath } from "next/cache";
 
-async function deleteCartItem(cartId: number) {
+async function deleteProductFromCartAction(cartId: number) {
   try {
     await deleteProductFromCart(cartId);
     revalidatePath("/checkout");
@@ -14,11 +14,11 @@ async function deleteCartItem(cartId: number) {
   }
 }
 
-const addToCart = async (
-  productId: string,
-  userId: string,
-  quantity: string,
-) => {
+const addToCartAction = async (
+  productId: string | number,
+  userId: string | number,
+  quantity: string | number,
+): Promise<void> => {
   try {
     const result = await addProductToCart(productId, userId, quantity);
     console.log(result);
@@ -28,4 +28,4 @@ const addToCart = async (
   }
 };
 
-export { deleteCartItem, addToCart };
+export { deleteProductFromCartAction, addToCartAction };

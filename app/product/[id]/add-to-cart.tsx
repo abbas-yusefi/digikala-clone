@@ -1,23 +1,20 @@
 "use client";
 
-import { addToCart } from "@/lib/actions/cart";
+import { addToCartAction } from "@/lib/actions/cart";
+import { Cart } from "@/lib/types/product";
 import React from "react";
 
-type AddToCartProps = {
-  productId: string;
-  userId: string;
-  quantity: number;
-};
-
-type LocalStorageItem = {
-  id: string;
-  quantity: string;
-};
-
-const AddToCart = ({ productId, userId, quantity }: AddToCartProps) => {
+const AddToCart = ({
+  product_id,
+  user_id,
+  quantity,
+}: Pick<Cart, "quantity" | "product_id"> & {
+  user_id: string | number | undefined;
+}) => {
   const handleDatabaseAddToCart = async () => {
     try {
-      await addToCart(productId, userId, quantity);
+      if (!user_id) return;
+      await addToCartAction(product_id, user_id, quantity);
     } catch (err) {
       console.log(err);
     }
@@ -27,7 +24,9 @@ const AddToCart = ({ productId, userId, quantity }: AddToCartProps) => {
     const data = localStorage.getItem("cart") || null;
     const parsedData = data ? JSON.parse(data) : null;
     const exists = parsedData
-      ? parsedData.some((item: LocalStorageItem) => item.id === productId)
+      ? parsedData.some(
+          (item: Pick<Cart, "id" | "quantity">) => +item.id === product_id,
+        )
       : false;
     const itemExistsInCart = () => {
       if (exists) {
@@ -38,13 +37,13 @@ const AddToCart = ({ productId, userId, quantity }: AddToCartProps) => {
           "cart",
           JSON.stringify([
             ...parsedData,
-            { id: productId, quantity: quantity },
+            { id: product_id, quantity: quantity },
           ]),
         );
       } else {
         localStorage.setItem(
           "cart",
-          JSON.stringify([{ id: productId, quantity: quantity }]),
+          JSON.stringify([{ id: product_id, quantity: quantity }]),
         );
       }
     };
@@ -53,7 +52,7 @@ const AddToCart = ({ productId, userId, quantity }: AddToCartProps) => {
 
   return (
     <button
-      onClick={userId ? handleDatabaseAddToCart : handleLocalstorageAddToCart}
+      onClick={user_id ? handleDatabaseAddToCart : handleLocalstorageAddToCart}
     >
       add to cart
     </button>

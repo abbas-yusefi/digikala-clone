@@ -109,9 +109,9 @@ const deleteProductFromCart = async (Id: number | string): Promise<void> => {
 };
 
 const addProductToCart = async (
-  productId: string,
-  userId: string,
-  quantity: string,
+  productId: string | number,
+  userId: string | number,
+  quantity: string | number,
 ): Promise<void> => {
   await pool.query(
     `

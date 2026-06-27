@@ -1,19 +1,13 @@
+import { Product, WithImage } from "@/lib/types/product";
 import Image from "next/image";
 import Link from "next/link";
 
-type Product = {
-  product_id: number;
-  title: string;
-  description: string;
-  price: number;
-  discount: number;
-  image_url: string;
-};
-
-const ProductCard = async ({ product }: { product: Product }) => {
+const ProductCard = async ({ product }: { product: WithImage<Product> }) => {
   const discountedPrice =
     Math.round(
-      (product.price - product.price * (product.discount / 100)) / 10000,
+      (product.price -
+        product.price * (product.discount ? product.discount : 0 / 100)) /
+        10000,
     ) * 10000;
 
   return (

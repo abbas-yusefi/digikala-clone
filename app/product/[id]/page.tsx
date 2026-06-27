@@ -6,30 +6,44 @@ import { auth } from "@/auth";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ id: string }>;
-// }): Promise<Metadata> {
-//   const { id } = await params;
-//   const productRow = await getProduct(id);
-//   const imagesRow = await getImageById(id);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const productRow = await getProduct(id);
+  const ImageRow = await getImage(id);
 
-//   const productData = productRow[0];
+  const productData = productRow[0];
+  const productImage = ImageRow[0].image_url;
 
-//   if (!product) {
-//     return {
-//       title: "محصول یافت نشد",
-//     };
-//   }
+  if (!productRow || productRow.length === 0) {
+    return {
+      title: "محصول یافت نشد",
+      robots: { index: false },
+    };
+  }
 
-//   return {
-//     title: productData.title,
+  return {
+    title: productData.title,
+    description: productData.description,
 
-//     description: productData
-//   }
+    openGraph: {
+      title: productData.title,
+      description: productData.description,
+      type: "website",
+      images: productImage ? [{ url: `${productImage}` }] : [],
+    },
 
-// }
+    twitter: {
+      card: "summary_large_image",
+      title: productData.title,
+      description: productData.description,
+      images: productImage ? [{ url: `${productImage}` }] : [],
+    },
+  };
+}
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -39,8 +53,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!productRow || productRow.length === 0) {
     notFound();
   }
-
-  console.log(productRow[0]);
 
   const session = await auth();
   const userId = session?.user?.id;
@@ -60,8 +72,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         key={`product-${productRow[0].product_id}`}
       />
       <AddToCart
-        productId={productRow[0].product_id}
-        userId={userId}
+        product_id={productRow[0].product_id}
+        user_id={userId && userId}
         quantity={2}
       />
     </>

@@ -5,6 +5,28 @@ import TopProduct from "@/components/landing/mobile/top-product";
 import DisplayProducts from "@/components/landing/mobile/display-products";
 import { getFilteredProducts } from "@/lib/querys";
 import { Params } from "@/lib/types/params";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "خرید گوشی موبایل",
+  description:
+    "خرید جدیدترین گوشی‌های موبایل از برندهای سامسونگ، شیائومی، آیفون، نوکیا و هواوی با بهترین قیمت و گارانتی معتبر | مقایسه قیمت موبایل، نظرات کاربران و ارسال رایگان در دیجی‌کالا",
+
+  openGraph: {
+    title: "خرید انواع گوشی موبایل در دیجی کالا",
+    description:
+      "خرید جدیدترین گوشی‌های موبایل از برندهای سامسونگ، شیائومی، آیفون، نوکیا و هواوی با بهترین قیمت و گارانتی معتبر | مقایسه قیمت موبایل، نظرات کاربران و ارسال رایگان در دیجی‌کالا",
+    type: "website",
+    images: [
+      {
+        url: "/other/mobileOpengraph.png",
+        width: 1200,
+        height: 630,
+        alt: "لوگو دیجی کالا",
+      },
+    ],
+  },
+};
 
 const page = async () => {
   const topProductId = 1;
