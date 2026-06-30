@@ -6,6 +6,7 @@
   --color-brand-primary: #e04;
   --color-brand-secondary: #f45;
   --color-brand-discount: #e35;
+  --color-discount-green: #84bf3a;
   --color-text-primary: #202220;
   --color-text-secondary: #918e93;
   --color-text-link: #19bfd3;
@@ -18,6 +19,7 @@
   --color-brand-primary: var(--color-brand-primary);
   --color-brand-secondary: var(--color-brand-secondary);
   --color-brand-discount: var(--color-brand-discount);
+  --color-discount-green: var(--color-discount-green);
   --color-text-primary: var(--color-text-primary);
   --color-text-secondary: var(--color-text-secondary);
   --color-text-link: var(--color-text-link);

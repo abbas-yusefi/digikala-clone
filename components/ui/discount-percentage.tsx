@@ -11,7 +11,7 @@ const DiscountPercentage = ({
     <span
       className={`${className} bg-brand-secondary text-white rounded-2xl w-10 flex justify-center items-center h-5 ml-1`}
     >
-      {discount}%
+      {discount > 0 && discount}%
     </span>
   );
 };

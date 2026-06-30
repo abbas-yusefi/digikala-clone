@@ -166,13 +166,6 @@ const deleteAllRecentSearches = async (userId: string): Promise<void> => {
   );
 };
 
-const getBrandNames = async (): Promise<Brand[]> => {
-  const { rows } = await pool.query(`
-    SELECT brand_id,name,slug FROM brand
-    `);
-  return rows;
-};
-
 const getFilteredProducts = async (
   params: Params,
   limit?: number,
@@ -186,7 +179,7 @@ const getFilteredProducts = async (
 
   if (params.q) {
     conditions.push(
-      `to_tsvector(p.title || ' ' || p.description || ' ' || b.name || ' ' || b.slug || c.slug ||' ' || c.name) @@ plainto_tsquery($${paramIndex})`,
+      `to_tsvector(p.title || ' ' || p.description || ' ' || b.name || ' ' || b.slug || c.slug || ' ' || c.name) @@ plainto_tsquery($${paramIndex})`,
     );
     values.push(params.q);
     paramIndex++;
@@ -252,6 +245,32 @@ const getFilteredProducts = async (
   return products;
 };
 
+const getFilteredBrandsPerCategory = async (
+  category_id: string | number,
+): Promise<
+  {
+    brand_brand_id: number;
+    brand_name: string;
+    product_count: number;
+  }[]
+> => {
+  const { rows } = await pool.query(
+    `SELECT 
+    b.brand_id AS brand_brand_id,
+    b.name AS brand_name,
+    b.slug AS slug,
+    COUNT(p.product_id) AS product_count
+FROM product p
+JOIN brand b ON p.brand_id = b.brand_id
+WHERE p.category_id = $1
+GROUP BY b.brand_id, b.name
+HAVING COUNT(p.product_id) >= 3
+ORDER BY b.name;`,
+    [category_id],
+  );
+  return rows;
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -263,6 +282,6 @@ export {
   getRecentlySearched,
   deleteOldSearches,
   deleteAllRecentSearches,
-  getBrandNames,
   getFilteredProducts,
+  getFilteredBrandsPerCategory,
 };

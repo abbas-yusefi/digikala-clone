@@ -10,6 +10,7 @@ import SuperwebTab from "./superweb-tab";
 import tabsData from "@/public/superweb";
 import { usePathname, useSearchParams } from "next/navigation";
 import SearchMdHeader from "@/components/search/search-md-header";
+import digikalatext from "@/public/other/digikalatext.svg";
 
 const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
   const scrolled = useScrollThreshold({
@@ -62,9 +63,10 @@ const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
               childrenxPosition="right-29"
             >
               <Image
-                src={"https://www.digikala.com/brand/typography.svg"}
+                src={digikalatext}
                 width={64}
                 height={64}
+                priority
                 alt="digikala icon"
                 className="w-14 h-14"
               />

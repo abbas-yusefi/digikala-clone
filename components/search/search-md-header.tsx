@@ -17,14 +17,16 @@ const SearchMdHeader = ({
   return (
     <header className="lg:hidden">
       {category === undefined && (
-        <Image
-          priority
-          alt="header ad"
-          src={HeaderImage}
-          className="h-8 object-cover"
-        />
+        <>
+          <Image
+            priority
+            alt="header ad"
+            src={HeaderImage}
+            className="h-8 object-cover sticky w-full"
+          />
+        </>
       )}
-      <HorizantalNav className="gap-2 px-5">
+      <HorizantalNav className="gap-2 px-5 py-2">
         {tabsData.map((tab) => (
           <SuperwebTab
             key={tab.href}

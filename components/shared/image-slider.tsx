@@ -88,7 +88,7 @@ const ImageSlider = ({
       >
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {data.map((src, index) => (
+            {data!.map((src, index) => (
               <div key={index} className={`${imageClass} min-w-0 max-lg:px-1`}>
                 <Image
                   title={src.alt}
@@ -101,12 +101,11 @@ const ImageSlider = ({
             ))}
           </div>
         </div>
-
         {/* Dot indicators */}
         <div
           className={`${dotNavBg} absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2`}
         >
-          {data.map((_, index) => (
+          {data!.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
@@ -119,7 +118,7 @@ const ImageSlider = ({
             />
           ))}
         </div>
-
+        ``
         {/* Navigation Buttons - uncomment if needed */}
         {/* <button className="absolute left-2 top-1/2 -translate-y-1/2 p-3 bg-sky-700 text-white rounded-full" onClick={prevSlide}>←</button>
       <button className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-sky-700 text-white rounded-full" onClick={nextSlide}>→</button> */}

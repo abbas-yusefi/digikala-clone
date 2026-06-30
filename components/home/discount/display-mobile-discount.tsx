@@ -3,14 +3,10 @@ import HorizontalNav from "../../shared/horizontal-nav";
 import Link from "next/link";
 import DiscountProductCard from "./discount-product-card";
 import { BiLeftArrowAlt } from "react-icons/bi";
-import Timer from "../timer";
-import Image from "next/image";
-import { FaChevronLeft } from "react-icons/fa";
-import discountEmoji from "@/public/other/discount-emoji.svg";
-import amazingDiscount from "@/public/other/amazing-discount.svg";
 import { ProductCard, WithImage } from "@/lib/types/product";
+import DiscountMdHeader from "./discount-md-header";
 
-const DisplayMobileDiscount = async ({
+const DisplayMobileDiscount = ({
   data,
   secondRow,
 }: {
@@ -19,35 +15,9 @@ const DisplayMobileDiscount = async ({
 }) => {
   return (
     <section
-      className={`${secondRow ? "bg-[#84bf3a]" : "bg-brand-discount"} text-surface-primary lg:rounded-2xl lg:hidden`}
+      className={`${secondRow ? "bg-discount-green" : "bg-brand-discount"} text-surface-primary lg:rounded-2xl lg:hidden`}
     >
-      <div className="flex justify-between items-center px-5 py-5">
-        <Link href={"/search?discount"}>
-          <FaChevronLeft className="inline scale-90" />
-          همه
-        </Link>
-        <div className="flex">
-          <Timer />
-          <div className="flex gap-2 ml-4">
-            <Image
-              src={amazingDiscount}
-              alt="شگفت انگیز"
-              width={110}
-              height={110}
-              className="w-28"
-              draggable="false"
-            />
-            <Image
-              src={discountEmoji}
-              alt="تخفیف"
-              width={25}
-              height={25}
-              className="w-7"
-              draggable="false"
-            />
-          </div>
-        </div>
-      </div>
+      <DiscountMdHeader />
       <HorizontalNav className="pb-5 gap-1 px-3 text-black lg:flex-row-reverse">
         {data.map((product) => (
           <DiscountProductCard

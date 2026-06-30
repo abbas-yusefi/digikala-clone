@@ -3,22 +3,12 @@ import Image from "next/image";
 import DiscountPercentage from "../ui/discount-percentage";
 import Link from "next/link";
 import specialSell from "@/public/other/SpecialSell.svg";
+import { Product, WithImage } from "@/lib/types/product";
 
-type Data = {
-  brand_id?: number;
-  category_id?: number;
-  description: string;
-  discount: number;
-  price: number;
-  product_id: number;
-  title: string;
-  image_url: string;
-};
-
-const ProductCard = ({ data }: { data: Data }) => {
+const ProductCard = ({ data }: { data: WithImage<Product> }) => {
   const discountedPrice = calculateDiscountedPrice(data.price, data.discount);
 
-  const isDiscounted = data.discount > 0;
+  const isDiscounted = data.discount ? data.discount > 0 : false;
 
   return (
     <>
@@ -51,7 +41,7 @@ const ProductCard = ({ data }: { data: Data }) => {
               <div>
                 {isDiscounted && (
                   <DiscountPercentage
-                    discount={data.discount}
+                    discount={data.discount !== null ? data.discount : 0}
                     className="scale-80"
                   />
                 )}
@@ -84,15 +74,13 @@ const ProductCard = ({ data }: { data: Data }) => {
         className="hover:z-20 max-[425px]:hidden hover:shadow-[0px_0px_22px_7px_rgba(0,_0,_0,_0.1)]"
       >
         <article
-          className={` h-96 w-auto flex-col justify-center items-center py-4 border border-black/7 -mr-0.5 bg-surface-primary z-10 border-b-0 text-sm font-semibold`}
+          className={`h-96 w-auto flex flex-col justify-center items-center py-4 border border-black/7 -mr-0.5 bg-surface-primary z-10 border-b-0 text-sm font-semibold`}
         >
           <div className="w-full h-auto flex-col justify-center items-center relative pt-5">
             {isDiscounted && (
               <Image
                 alt="فروش ویژه"
-                src={
-                  "https://www.digikala.com/statics/img/svg/productCard/topBadge/SpecialSell.svg"
-                }
+                src={specialSell}
                 className="ml-auto absolute right-3 top-0"
                 width={60}
                 height={60}
@@ -106,10 +94,10 @@ const ProductCard = ({ data }: { data: Data }) => {
               className="object-contain mx-auto"
             />
           </div>
-          <div className="h-[35%] w-full px-5">
-            <div className="text-right mb-10">{data.title}</div>
+          <div className="h-[35%] w-full px-5 flex flex-col justify-between">
+            <div className="text-right line-clamp-2">{data.title}</div>
             <div className="flex justify-between">
-              <div className="">
+              <div className="mt-auto">
                 <span
                   className="text-sm font-semibold block"
                   style={{ direction: "rtl" }}
@@ -123,7 +111,11 @@ const ProductCard = ({ data }: { data: Data }) => {
                   {isDiscounted && data.price.toLocaleString()}
                 </span>
               </div>
-              {isDiscounted && <DiscountPercentage discount={data.discount} />}
+              {isDiscounted && (
+                <DiscountPercentage
+                  discount={data.discount !== null ? data.discount : 0}
+                />
+              )}
             </div>
           </div>
         </article>

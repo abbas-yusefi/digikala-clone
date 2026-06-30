@@ -3,7 +3,7 @@ import DisplayMobileDiscount from "./display-mobile-discount";
 import DisplayDesktopDiscount from "./display-desktop-discount";
 import { getHomeDiscountProducts } from "@/lib/querys";
 
-const DiscountProducts = async ({ secondRow }: { secondRow?: boolean }) => {
+const DiscountSection = async ({ secondRow }: { secondRow?: boolean }) => {
   const products = await getHomeDiscountProducts(secondRow);
   return (
     <>
@@ -13,4 +13,4 @@ const DiscountProducts = async ({ secondRow }: { secondRow?: boolean }) => {
   );
 };
 
-export default DiscountProducts;
+export default DiscountSection;

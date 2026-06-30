@@ -7,7 +7,7 @@ const ProductCWrapper = () => {
   return (
     <HorizontalNav className="lg:justify-center pb-2">
       {circleData.map((data) => (
-        <ProductCircle key={data} data={data} />
+        <ProductCircle key={data.textFirstLine} data={data} />
       ))}
     </HorizontalNav>
   );

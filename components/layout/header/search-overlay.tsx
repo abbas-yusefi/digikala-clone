@@ -81,7 +81,7 @@ const SearchOverlay = () => {
     }
   };
 
-  const handleDeleteAllRecentSearches = (id: string) => {
+  const handleDeleteAllRecentSearches = (id: string | undefined) => {
     if (!id) return;
     deleteAllRecentSearchesAction(id);
     setRecentSearches([]);

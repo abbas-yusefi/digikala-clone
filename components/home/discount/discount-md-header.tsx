@@ -3,6 +3,8 @@ import React from "react";
 import Timer from "../timer";
 import Image from "next/image";
 import { FaChevronLeft } from "react-icons/fa";
+import amazingoffer from "@/public/other/amazing-discount.svg";
+import discounticon from "@/public/other/discounticon.svg";
 
 const DiscountMdHeader = () => {
   return (
@@ -15,9 +17,7 @@ const DiscountMdHeader = () => {
         <Timer />
         <div className="flex gap-2 ml-4">
           <Image
-            src={
-              "https://dkstatics-public.digikala.com/digikala-static/e0c05f5d67bf71be7605ec22cb3ee6be57d43e94_1746354561.svg"
-            }
+            src={amazingoffer}
             alt="شگفت انگیز"
             width={110}
             height={110}
@@ -25,9 +25,7 @@ const DiscountMdHeader = () => {
             draggable="false"
           />
           <Image
-            src={
-              "https://dkstatics-public.digikala.com/digikala-static/0d072059918d0c22b88320554ce4b3e07d0472f2_1746354551.svg"
-            }
+            src={discounticon}
             alt="تخفیف"
             width={25}
             height={25}

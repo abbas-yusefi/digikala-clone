@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ProductBrands from "./product-brands";
 import { FaAngleLeft } from "react-icons/fa";
-import { GetBrandNamesAction } from "@/lib/actions/get-brand-names";
 import Link from "next/link";
+import { filterBrandAction } from "@/lib/actions/filter-brand-action";
 
 type Brands = {
-  name: string;
-  brand_id: string;
+  brand_brand_id: number;
+  brand_name: string;
+  product_count: number;
   slug: string;
 };
 
@@ -31,19 +32,16 @@ const DisplayCategoryProducts = ({
               : "";
 
   useEffect(() => {
-    const getBrands = async () => {
+    const getFilteredBrands = async () => {
       try {
-        const result = await GetBrandNamesAction();
-        if (result?.error) {
-          console.log(result?.error?.message);
-        }
-
-        if (result) setBrands(result);
+        const result = await filterBrandAction(1);
+        setBrands(result);
+        console.log(result);
       } catch (err) {
         console.log(err);
       }
     };
-    getBrands();
+    getFilteredBrands();
   }, []);
 
   return (
@@ -58,11 +56,11 @@ const DisplayCategoryProducts = ({
       {brands &&
         brands.map((brand) => (
           <ProductBrands
-            key={brand.brand_id}
+            key={brand.brand_brand_id}
             categorySelected={categorySelected}
             brand={brand.slug}
           >
-            {typeOfProduct} های {brand.name}
+            {typeOfProduct} های {brand.brand_name}
           </ProductBrands>
         ))}
     </div>

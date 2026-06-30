@@ -20,7 +20,7 @@ const DisplayDesktopDiscount = ({
   const ref = useRef<HTMLDivElement>(null);
   return (
     <section
-      className={`${secondRow ? "bg-[#84bf3a]" : "bg-brand-discount"} text-surface-primary lg:rounded-2xl max-lg:hidden`}
+      className={`${secondRow ? "bg-discount-green" : "bg-brand-discount"} text-surface-primary lg:rounded-2xl max-lg:hidden`}
     >
       <DiscountMdHeader />
 
