@@ -38,6 +38,20 @@ export type RecentSearches = {
 
 export type WithImage<T> = T & { image_url: string };
 
+export type CategorySlugs =
+  | "mobile"
+  | "laptop"
+  | "headphones"
+  | "smartwatch"
+  | "tablet";
+
+export type FilteredBrands = {
+  brand_brand_id: number;
+  brand_name: string;
+  slug: string;
+  product_count: number;
+};
+
 export type ProductCard = Omit<
   Product,
   "category_id" | "brand_id" | "descripiton"

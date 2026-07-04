@@ -1,12 +1,12 @@
 "use client";
 
+import { ProductCard, WithImage } from "@/lib/types/product";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
-const NavButtons = ({ products }: { products: any }) => {
-  const [page, setPage] = useState(1);
+const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
   const searchParams = useSearchParams();
 
   if (!products || products.length === 0) return null;

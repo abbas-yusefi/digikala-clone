@@ -3,9 +3,9 @@ import Image from "next/image";
 import DiscountPercentage from "../ui/discount-percentage";
 import Link from "next/link";
 import specialSell from "@/public/other/SpecialSell.svg";
-import { Product, WithImage } from "@/lib/types/product";
+import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
 
-const ProductCard = ({ data }: { data: WithImage<Product> }) => {
+const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
   const discountedPrice = calculateDiscountedPrice(data.price, data.discount);
 
   const isDiscounted = data.discount ? data.discount > 0 : false;

@@ -3,20 +3,16 @@ import ProductBrands from "./product-brands";
 import { FaAngleLeft } from "react-icons/fa";
 import Link from "next/link";
 import { filterBrandAction } from "@/lib/actions/filter-brand-action";
-
-type Brands = {
-  brand_brand_id: number;
-  brand_name: string;
-  product_count: number;
-  slug: string;
-};
+import PulsingDotLoader from "../ui/pulsing-dot-loader";
+import { notFound } from "next/navigation";
+import { CategorySlugs, FilteredBrands } from "@/lib/types/product";
 
 const DisplayCategoryProducts = ({
   categorySelected,
 }: {
-  categorySelected: string;
+  categorySelected: CategorySlugs;
 }) => {
-  const [brands, setBrands] = useState<[] | Brands[]>([]);
+  const [brands, setBrands] = useState<undefined | FilteredBrands[]>([]);
 
   const typeOfProduct =
     categorySelected === "mobile"

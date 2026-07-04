@@ -1,24 +1,14 @@
 import React from "react";
 import ProductCard from "./product-card";
 import Link from "next/link";
-
-type Products = {
-  brand_id: number;
-  category_id: number;
-  description: string;
-  discount: number;
-  price: number;
-  product_id: number;
-  title: string;
-  image_url: string;
-};
+import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
 
 const DisplayProducts = ({
   products,
   productsLength,
   category,
 }: {
-  products: Products[];
+  products: WithImage<ProductCardType>[];
   productsLength: number;
   category: string;
 }) => {

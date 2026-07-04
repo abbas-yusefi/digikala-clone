@@ -1,10 +1,11 @@
-import React from "react";
+import { CategorySlugs } from "@/lib/types/product";
+import React, { SetStateAction } from "react";
 import { IconType } from "react-icons/lib";
 
 type CategoryCardProps = {
-  setCategorySelected: React.Dispatch<React.SetStateAction<string>>;
+  setCategorySelected: React.Dispatch<SetStateAction<CategorySlugs>>;
   categorySelected: string;
-  stateCategoryName: string;
+  stateCategoryName: CategorySlugs;
   icon: IconType;
   categoryName: string;
 };

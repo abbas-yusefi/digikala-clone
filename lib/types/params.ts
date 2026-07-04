@@ -1,8 +1,18 @@
 export type Params = {
-  q: string;
-  category: string;
-  brand: string;
-  discount: boolean | string;
-  cursor: string;
-  dir: "prev" | "next" | string;
+  params: {
+    q: string;
+    category: string;
+    brand: string;
+    discount: boolean | string;
+    cursor: string;
+    dir: "prev" | "next" | string;
+  };
+  limitedParams: {
+    q: string;
+    category: string;
+    brand: string;
+    discount: boolean | string;
+    cursor: string;
+    dir: string;
+  };
 };

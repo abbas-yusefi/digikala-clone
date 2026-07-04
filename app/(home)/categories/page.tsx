@@ -9,9 +9,11 @@ import DisplayCategoryProducts from "@/components/categories/display-category-pr
 import { useScreenWidth } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
+import { CategorySlugs } from "@/lib/types/product";
 
 const CategoryPage = () => {
-  const [categorySelected, setCategorySelected] = useState("mobile");
+  const [categorySelected, setCategorySelected] =
+    useState<CategorySlugs>("mobile");
   const screenWidth = useScreenWidth();
   const router = useRouter();
   if (screenWidth && screenWidth > 1024) router.replace("/");
