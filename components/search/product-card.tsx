@@ -15,20 +15,12 @@ const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
       <Link href={`/product/${data.product_id}`} className="min-[425px]:hidden">
         <article className="flex w-full justify-between px-5 border-b border-black/10 py-3 h-32 mt-5 cursor-pointer">
           <div className="w-full pr-7 flex flex-col justify-between">
-            <div
-              style={{
-                direction: "rtl",
-              }}
-              className="pt-3 text-sm"
-            >
+            <div dir="rtl" className="pt-3 text-sm">
               {data.title}
             </div>
             <div className="flex justify-between">
               <div className="flex flex-col justify-center items-center gap-3">
-                <span
-                  className="text-sm font-semibold"
-                  style={{ direction: "rtl" }}
-                >
+                <span className="text-sm font-semibold" dir="rtl">
                   {isDiscounted
                     ? discountedPrice.toLocaleString()
                     : data.price.toLocaleString()}{" "}
@@ -95,13 +87,12 @@ const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
             />
           </div>
           <div className="h-[35%] w-full px-5 flex flex-col justify-between">
-            <div className="text-right line-clamp-2">{data.title}</div>
+            <div className="text-right line-clamp-2" dir="rtl">
+              {data.title}
+            </div>
             <div className="flex justify-between">
               <div className="mt-auto">
-                <span
-                  className="text-sm font-semibold block"
-                  style={{ direction: "rtl" }}
-                >
+                <span className="text-sm font-semibold block" dir="rtl">
                   {isDiscounted
                     ? discountedPrice.toLocaleString()
                     : data.price.toLocaleString()}{" "}

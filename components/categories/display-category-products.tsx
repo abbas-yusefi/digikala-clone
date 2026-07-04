@@ -36,7 +36,11 @@ const DisplayCategoryProducts = ({
       }
     };
     getFilteredBrands();
-  }, []);
+  }, [categoryId]);
+
+  if (!categoryId) return notFound();
+
+  if (!brands) return <PulsingDotLoader className="w-full h-[50rem]" />;
 
   return (
     <div className="flex flex-col w-full">

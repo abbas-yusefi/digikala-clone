@@ -31,14 +31,12 @@ const DisplayProducts = ({
       <div
         className={`${isCategory ? "hidden" : ""} flex justify-between text-xs text-text-secondary pb-7`}
       >
-        <span style={{ direction: "rtl" }}>{productsLength} کالا</span>
+        <span dir="rtl">{productsLength} کالا</span>
         <span>همه کالاها</span>
       </div>
       <div
         className={`${isCategory ? "" : "hidden"} flex justify-start py-6 text-xs text-gray-400 font-semibold cursor-default`}
-        style={{
-          direction: "rtl",
-        }}
+        dir="rtl"
       >
         <Link href="/">فروشگاه اینترنتی دیجی کالا</Link>
         <span className="px-3">/</span>
