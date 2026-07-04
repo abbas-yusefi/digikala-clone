@@ -14,23 +14,21 @@ const DisplayCategoryProducts = ({
 }) => {
   const [brands, setBrands] = useState<undefined | FilteredBrands[]>([]);
 
-  const typeOfProduct =
-    categorySelected === "mobile"
-      ? "موبایل"
-      : categorySelected === "laptop"
-        ? "لپ تاپ"
-        : categorySelected === "headphones"
-          ? "هدفون"
-          : categorySelected === "smartwatch"
-            ? "ساعت"
-            : categorySelected === "tablet"
-              ? "تبلت"
-              : "";
+  const categoryMap = {
+    mobile: { id: 1, label: "موبایل" },
+    laptop: { id: 2, label: "لپ تاپ" },
+    headphones: { id: 3, label: "هدفون" },
+    smartwatch: { id: 4, label: "ساعت" },
+    tablet: { id: 5, label: "تبلت" },
+  } as const;
+
+  const { id: categoryId, label: typeOfProduct } =
+    categoryMap[categorySelected] || {};
 
   useEffect(() => {
     const getFilteredBrands = async () => {
       try {
-        const result = await filterBrandAction(1);
+        const result = await filterBrandAction(categoryId);
         setBrands(result);
         console.log(result);
       } catch (err) {
