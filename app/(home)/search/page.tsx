@@ -15,8 +15,8 @@ const AwaitedDisplayProducts = async ({
 }) => {
   const limit = 8;
 
-  const products = await getFilteredProducts(params, limit);
-  const productsLength = await getFilteredProducts(params);
+  const products = await getFilteredProducts(params.limitedParams, limit);
+  const productsLength = await getFilteredProducts(params.params);
 
   return (
     <>
@@ -43,13 +43,23 @@ const SearchResultPage = async ({
   const cursor = param.cursor || "";
   const dir = param.dir || "";
 
-  const params: Params = {
-    q: query,
-    category: category,
-    brand: brand,
-    discount: discount,
-    cursor,
-    dir,
+  const params = {
+    params: {
+      q: query,
+      category: category,
+      brand: brand,
+      discount: discount,
+      cursor: "",
+      dir: "",
+    },
+    limitedParams: {
+      q: query,
+      category: category,
+      brand: brand,
+      discount: discount,
+      cursor,
+      dir,
+    },
   };
   return (
     <>
