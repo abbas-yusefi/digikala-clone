@@ -4,6 +4,7 @@ import { Params } from "./types/params";
 import {
   Brand,
   Cart,
+  FilteredBrands,
   Image,
   Product,
   ProductCard,
@@ -174,7 +175,10 @@ const deleteAllRecentSearches = async (userId: string): Promise<void> => {
 };
 
 const getFilteredProducts = unstable_cache(
-  async (params: Params, limit?: number): Promise<WithImage<ProductCard>[]> => {
+  async (
+    params: Params["params"],
+    limit?: number,
+  ): Promise<WithImage<ProductCard>[]> => {
     const conditions: string[] = [];
     const values: any[] = [];
     let paramIndex = 1;
@@ -184,7 +188,14 @@ const getFilteredProducts = unstable_cache(
 
     if (params.q) {
       conditions.push(
-        `to_tsvector(p.title || ' ' || p.description || ' ' || b.name || ' ' || b.slug || c.slug || ' ' || c.name) @@ plainto_tsquery($${paramIndex})`,
+        `to_tsvector('simple', 
+      COALESCE(p.title, '') || ' ' || 
+      COALESCE(p.description, '') || ' ' || 
+      COALESCE(b.name, '') || ' ' || 
+      COALESCE(b.slug, '') || ' ' || 
+      COALESCE(c.name, '') || ' ' || 
+      COALESCE(c.slug, '')
+    ) @@ websearch_to_tsquery('simple', $${paramIndex})`,
       );
       values.push(params.q);
       paramIndex++;
@@ -254,15 +265,7 @@ const getFilteredProducts = unstable_cache(
 );
 
 const getFilteredBrandsPerCategory = unstable_cache(
-  async (
-    category_id: string | number,
-  ): Promise<
-    {
-      brand_brand_id: number;
-      brand_name: string;
-      product_count: number;
-    }[]
-  > => {
+  async (category_id: string | number): Promise<FilteredBrands[]> => {
     const { rows } = await pool.query(
       `SELECT 
     b.brand_id AS brand_brand_id,
