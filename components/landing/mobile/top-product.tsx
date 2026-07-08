@@ -5,11 +5,11 @@ import Image from "next/image";
 const TopProduct = async ({ id }: { id: number }) => {
   const singleProductData = await getProduct(id);
   const product = singleProductData[0];
-  const { description, discount, price, product_id, title } = product;
+  const { discount, price, title } = product;
 
   const singleImageData = await getImage(id);
   const image = singleImageData[0];
-  const { image_url, product_image_id } = image;
+  const { image_url } = image;
 
   const discountedPrice = calculateDiscountedPrice(price, discount);
   return (

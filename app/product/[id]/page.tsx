@@ -110,7 +110,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 </span>
                 <DiscountPercentage
                   className="text-xs"
-                  discount={productData.discount}
+                  discount={productData.discount ? productData.discount : 0}
                 />
               </div>
               <span

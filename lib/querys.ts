@@ -2,7 +2,6 @@ import { unstable_cache } from "next/cache";
 import pool from "./db";
 import { Params } from "./types/params";
 import {
-  Brand,
   Cart,
   FilteredBrands,
   Image,
@@ -180,7 +179,7 @@ const getFilteredProducts = unstable_cache(
     limit?: number,
   ): Promise<WithImage<ProductCard>[]> => {
     const conditions: string[] = [];
-    const values: any[] = [];
+    const values: (string | number)[] = [];
     let paramIndex = 1;
     let orderBy = "ORDER BY p.product_id ASC";
     const productsLimit = limit && limit > 0 ? `LIMIT ${limit}` : "";

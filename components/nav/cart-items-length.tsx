@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
 const CartItemsLength = ({ position }: { position?: string }) => {
-  const [cartLength, setCartLength] = useState<any>(null);
+  const [cartLength, setCartLength] = useState<number | null>(null);
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const CartItemsLength = ({ position }: { position?: string }) => {
     const getDatabaseCartItmes = async () => {
       try {
         const data = await getCartProductsAction();
-        setCartLength(data == undefined ? null : data.length);
+        setCartLength(typeof data === "undefined" ? null : data.length);
       } catch (err) {
         console.log(err);
       }

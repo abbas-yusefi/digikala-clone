@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaCaretDown, FaRegUser, FaRegHeart } from "react-icons/fa";
@@ -10,8 +9,6 @@ import UserNavItem from "./user-nav-items";
 
 const Usernav = ({ username }: { username: string | null }) => {
   const [isToggeled, setIsToggeled] = useState(false);
-  // const { data: session } = useSession();
-  // const username = session?.user?.name;
   return (
     <>
       <button

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { KeyboardEventHandler, useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 
 type SearchBar = {
@@ -13,8 +13,8 @@ type SearchBar = {
   childrenxPosition?: string;
   hideOnFocuse?: boolean;
   ariaLabel?: string;
-  onChange?: any;
-  onKeyDown?: any;
+  onChange?: React.Dispatch<React.SetStateAction<string>>;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement> | undefined;
   autoFocus?: boolean;
   value?: string;
 };
@@ -46,7 +46,7 @@ const SearchBar = ({
         type="search"
         aria-label={ariaLabel || placeholder}
         role="searchbox"
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange && onChange(e.target.value)}
         placeholder={isFocused ? "" : placeholder}
         autoFocus={autoFocus ? true : false}
         onFocus={() => (hideOnFocuse ? setIsFocused(true) : null)}
@@ -55,7 +55,7 @@ const SearchBar = ({
       />
       <button
         className="absolute ml-4 cursor-pointer"
-        onClick={() => onChange("")}
+        onClick={() => onChange && onChange("")}
       >
         <FaXmark className="scale-125 text-black/40" />
       </button>

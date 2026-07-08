@@ -1,17 +1,9 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
+import { TabsData } from "@/public/superweb";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-type CategoryProps = {
-  alt: string;
-  image: StaticImageData;
-  superTabName: string;
-  href: string;
-  bgColor: string;
-  scrolled?: boolean;
-};
 
 const SuperwebTab = ({
   alt,
@@ -20,7 +12,7 @@ const SuperwebTab = ({
   href,
   bgColor,
   scrolled,
-}: CategoryProps) => {
+}: TabsData & { scrolled: boolean }) => {
   const path = usePathname();
   const isActive = path === href;
 

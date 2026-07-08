@@ -4,8 +4,17 @@ import food from "@/public/superweb/food.png";
 import gold from "@/public/superweb/gold.png";
 import market from "@/public/superweb/market.png";
 import creditbuy from "@/public/superweb/creditbuy.png";
+import { StaticImageData } from "next/image";
 
-const tabsData = [
+export type TabsData = {
+  alt: string;
+  superTabName: string;
+  image: StaticImageData;
+  href: string;
+  bgColor: string;
+};
+
+const tabsData: TabsData[] = [
   {
     alt: "services section",
     superTabName: "سرویس  ها",

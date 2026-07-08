@@ -33,7 +33,7 @@ const AwaitedDisplayProducts = async ({
 const SearchResultPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const param = await searchParams;
   const query = param.q || "";

@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -69,13 +69,13 @@ const ImageSlider = ({
   }, [emblaApi]);
 
   // Navigation functions
-  const nextSlide = useCallback(() => {
-    emblaApi?.scrollNext();
-  }, [emblaApi]);
+  // const nextSlide = useCallback(() => {
+  //   emblaApi?.scrollNext();
+  // }, [emblaApi]);
 
-  const prevSlide = useCallback(() => {
-    emblaApi?.scrollPrev();
-  }, [emblaApi]);
+  // const prevSlide = useCallback(() => {
+  //   emblaApi?.scrollPrev();
+  // }, [emblaApi]);
 
   const goToSlide = (index: number) => {
     emblaApi?.scrollTo(index);
@@ -118,7 +118,7 @@ const ImageSlider = ({
             />
           ))}
         </div>
-        ``
+
         {/* Navigation Buttons - uncomment if needed */}
         {/* <button className="absolute left-2 top-1/2 -translate-y-1/2 p-3 bg-sky-700 text-white rounded-full" onClick={prevSlide}>←</button>
       <button className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-sky-700 text-white rounded-full" onClick={nextSlide}>→</button> */}

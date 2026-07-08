@@ -17,13 +17,23 @@ const SignupPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<SignupSchema>({
     resolver: zodResolver(signupSchema),
     mode: "onSubmit",
     shouldFocusError: false,
   });
 
-  const [serverError, getServerError] = useState<any>(null);
+  const [serverError, getServerError] = useState<
+    | {
+        message: string;
+        field: string;
+      }
+    | {
+        message: string;
+        field?: undefined;
+      }
+    | null
+  >(null);
 
   const submitHandler = async (data: SignupSchema) => {
     const formData = new FormData();
@@ -85,7 +95,7 @@ const SignupPage = () => {
         inputType={"password"}
         autoComplete="new-password"
         isPasswordHidden={isPasswordHidden}
-        onTogglePassword={() => setIsPasswordHidden((prev) => !prev)}
+        onTogglePassword={setIsPasswordHidden}
       >
         رمز ورود
       </Input>
@@ -95,7 +105,7 @@ const SignupPage = () => {
         registerName={"confirmPassword"}
         inputType={"password"}
         isPasswordHidden={isPasswordHidden}
-        onTogglePassword={() => setIsPasswordHidden((prev) => !prev)}
+        onTogglePassword={setIsPasswordHidden}
       >
         تایید رمز ورود
       </Input>

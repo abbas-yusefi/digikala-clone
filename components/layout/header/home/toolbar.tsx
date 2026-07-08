@@ -12,7 +12,7 @@ import { useState } from "react";
 
 const Toolbar = ({ className }: { className: string }) => {
   const [locatoinHovered, setLocationHovered] = useState(false);
-  const [categoriesHovered, setCategoriesHovered] = useState(false);
+  // const [categoriesHovered, setCategoriesHovered] = useState(false);
 
   return (
     <div
