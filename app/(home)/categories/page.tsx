@@ -10,6 +10,7 @@ import { useScreenWidth } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
 import { CategorySlugs } from "@/lib/types/product";
+import Support from "@/components/home/support";
 
 const CategoryPage = () => {
   const [categorySelected, setCategorySelected] =
@@ -20,7 +21,8 @@ const CategoryPage = () => {
   return (
     <>
       <div className="mb-5"></div>
-      <main className="flex justify-between bg-surface-primary">
+      <main className="flex justify-between bg-surface-primary relative">
+        <Support />
         <Suspense fallback={<PulsingDotLoader className="w-full h-60" />}>
           <DisplayCategoryProducts categorySelected={categorySelected} />
         </Suspense>

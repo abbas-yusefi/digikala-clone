@@ -12,6 +12,7 @@ import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
 import Footer from "@/components/home/footer/footer";
 import Brands from "@/components/home/brands";
 import AdvertisementImage from "@/components/home/advertisement-image";
+import Support from "@/components/home/support";
 
 const page = async () => {
   return (
@@ -20,7 +21,8 @@ const page = async () => {
         autoSlideInterval={4000}
         wrapperClass="max-md:sticky max-md:top-[11.5rem] max-md:z-10"
       />
-      <main className="z-40 bg-surface-primary lg:mx-20">
+      <main className="z-40 bg-surface-primary lg:mx-20 relative">
+        <Support />
         <ProductCWrapper />
         <Suspense fallback={<PulsingDotLoader className="h-72" />}>
           <DiscountSection />
