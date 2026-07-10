@@ -34,7 +34,7 @@ const useScrollThreshold = ({
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [disableThreshold, enableThreshold]);
   if (!disableThreshold || !enableThreshold)
     console.error("enable and disable threshold was not provided");
   return scrolled;
