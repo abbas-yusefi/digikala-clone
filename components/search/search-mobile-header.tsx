@@ -7,7 +7,7 @@ import PulsingDotLoader from "../ui/pulsing-dot-loader";
 import HeaderImage from "@/public/header.png";
 import tabsData from "@/public/superweb";
 
-const SearchMdHeader = ({
+const SearchMobileHeader = ({
   category,
   query,
 }: {
@@ -46,4 +46,4 @@ const SearchMdHeader = ({
   );
 };
 
-export default SearchMdHeader;
+export default SearchMobileHeader;

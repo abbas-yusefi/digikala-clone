@@ -24,15 +24,15 @@ const LgHeader = ({ scrolled }: { scrolled: boolean }) => {
       <Image
         src={headerImage}
         alt="header ad"
-        title="خرید کولر"
+        title="خرید صنایع دستی"
         priority
         className="sticky top-0 w-full"
       />
       <div className="flex justify-between items-center bg-surface-primary px-4 h-11 my-3 z-50">
         <div className="flex items-center">
           <Link href={"/checkout"} className="cursor-pointer px-3 relative">
-            <IoCartOutline className=" scale-170 " />
-            <CartItemsLength position="-bottom-2 right-0" />
+            <IoCartOutline className="text-2xl" />
+            <CartItemsLength position="bottom-2 right-0" />
           </Link>
           <span className="h-6 w-0.5 bg-black/10 mx-4"></span>
           {authenticated ? (
@@ -40,21 +40,21 @@ const LgHeader = ({ scrolled }: { scrolled: boolean }) => {
           ) : (
             <Link
               href={"/signin"}
-              className="pl-4 pr-12 py-3 rounded-lg text-xs font-semibold border-black/10 border relative flex items-center shadow-md cursor-pointer"
+              className="py-2 px-4 gap-2 rounded-lg text-xs font-semibold border-black/10 border  flex items-center shadow-md cursor-pointer"
             >
               ورود | ثبت نام
-              <HiOutlineLogin className="absolute right-5 scale-180" />
+              <HiOutlineLogin className="text-2xl" />
             </Link>
           )}
 
-          <IoNotificationsOutline className="scale-160 cursor-pointer mx-7" />
+          <IoNotificationsOutline className="text-2xl cursor-pointer mx-7" />
         </div>
         <div className="flex w-[53vw] items-center">
           <SearchBar
             placeholder="جستجو"
             searchIcon={<FiSearch />}
             divClassName="bg-[#f0f0f1] w-40 mr-4"
-            inputClassName="h-10 rounded-4xl text-right font-bold text-black/70 text-xs pr-11"
+            inputClassName="h-10 rounded-4xl text-right font-bold text-black/70 text-xs pr-13"
             iconxPosition="right-50"
             ariaLabel="searchbox"
           />

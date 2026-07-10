@@ -7,12 +7,13 @@ import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import useScrollThreshold from "@/lib/hooks/useScrollThreshold";
 import SuperwebTab from "./superweb-tab";
-import tabsData from "@/public/superweb";
+import tabsData, { TabsData } from "@/public/superweb";
 import { usePathname, useSearchParams } from "next/navigation";
-import SearchMdHeader from "@/components/search/search-md-header";
+import SearchMobileHeader from "@/components/search/search-mobile-header";
 import digikalatext from "@/public/other/digikalatext.svg";
+import { FaAngleLeft } from "react-icons/fa6";
 
-const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
+const MobileHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
   const scrolled = useScrollThreshold({
     disableThreshold: 350,
     enableThreshold: 450,
@@ -24,17 +25,17 @@ const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
 
   const path = usePathname();
 
-  if (path == "/checkout") return null;
+  if (path == "/checkout" || path == "/profile") return null;
 
   if (path == "/search")
-    return <SearchMdHeader category={category} query={query} />;
+    return <SearchMobileHeader category={category} query={query} />;
 
   return (
     <>
       <header className="lg:hidden text-xs font-semibold sticky -my-5 top-0 z-50 bg-surface-primary pt-3">
         <nav>
           <HorizontalNav className="gap-2 px-5">
-            {tabsData.map((tab) => (
+            {tabsData.map((tab: TabsData) => (
               <SuperwebTab
                 key={tab.href}
                 alt={tab.alt}
@@ -57,10 +58,10 @@ const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
             <SearchBar
               placeholder="جستجو"
               divClassName="border border-black/10 p-2.5"
-              inputClassName="text-right pr-7"
+              inputClassName="text-right pr-9"
               searchIcon={<FiSearch />}
               iconxPosition="right-10"
-              childrenxPosition="right-29"
+              childrenxPosition="right-28"
             >
               <Image
                 src={digikalatext}
@@ -73,9 +74,10 @@ const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
             </SearchBar>
           </div>
           <div
-            className={`${scrolled || path === "/categories" ? "opacity-0 h-0" : "h-10"} flex items-center justify-end mx-5 cursor-text transition duration-100`}
+            className={`${scrolled || path === "/categories" ? "opacity-0 h-0" : "h-10"} flex items-center justify-end mx-5 cursor-text transition duration-100 font-semibold`}
           >
-            &lt;انتخواب استان و شهر
+            <FaAngleLeft className="-mb-1.5 mr-1 text-sm" />
+            انتخواب استان و شهر
             <IoLocationOutline className="ml-1 text-[1.1rem]" />
           </div>
         </nav>
@@ -84,4 +86,4 @@ const MdHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
   );
 };
 
-export default MdHeader;
+export default MobileHeader;
