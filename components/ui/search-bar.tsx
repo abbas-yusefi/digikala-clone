@@ -57,12 +57,12 @@ const SearchBar = ({
         className="absolute ml-4 cursor-pointer"
         onClick={() => onChange && onChange("")}
       >
-        <FaXmark className="scale-125 text-black/40" />
+        <FaXmark className="text-lg text-black/40" />
       </button>
       {searchIcon && (
         <label
           htmlFor="inputid"
-          className={`absolute scale-140 text-black/30 cursor-text
+          className={`absolute text-2xl text-black/30 cursor-text
             ${iconxPosition ? `${iconxPosition}` : ""}
             `}
         >

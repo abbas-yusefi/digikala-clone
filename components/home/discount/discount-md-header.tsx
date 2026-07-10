@@ -10,7 +10,7 @@ const DiscountMdHeader = () => {
   return (
     <div className="flex justify-between items-center px-5 py-5">
       <Link href={"/search?discount"}>
-        <FaChevronLeft className="inline scale-90" />
+        <FaChevronLeft className="inline text-lg" />
         همه
       </Link>
       <div className="flex">

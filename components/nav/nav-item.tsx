@@ -21,7 +21,7 @@ const NavItem = ({
   return (
     <Link
       href={href}
-      className={`flex flex-col w-20 justify-center outline-none items-center  ${path === href ? "text-black" : "text-text-secondary"} text-xs gap-1 relative`}
+      className={`flex flex-col w-20 justify-center outline-none items-center  ${path === href ? "text-black" : "text-text-secondary"} text-xs relative font-semibold`}
     >
       {path === href ? iconSolid : iconOutline}
       {children}

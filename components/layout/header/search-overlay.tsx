@@ -98,7 +98,7 @@ const SearchOverlay = () => {
           onChange={setSearchResult}
           placeholder="جستجو در همه کالاها"
           divClassName="border border-black/10 p-2.5"
-          inputClassName="text-right pr-7 font-semibold"
+          inputClassName="text-right pr-9 font-semibold"
           onKeyDown={handleKeyPress}
           autoFocus
           searchIcon={

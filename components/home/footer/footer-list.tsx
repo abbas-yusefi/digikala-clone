@@ -115,9 +115,9 @@ const FooterList = ({
       <div className="flex justify-between text-[1em] text-black font-semibold ">
         <button className="cursor-pointer">
           {isToggeled[sectionToggleName] ? (
-            <FaChevronDown className="scale-75 select-none" />
+            <FaChevronDown className="text-xs select-none" />
           ) : (
-            <FaChevronUp className="scale-75 select-none" />
+            <FaChevronUp className="text-xs  select-none" />
           )}
         </button>
         <h4 className="select-none">{sectionName}</h4>
@@ -162,7 +162,6 @@ const FooterList = ({
           ) : (
             children
           )}
-          {/* {children} */}
         </ul>
       </div>
     </div>

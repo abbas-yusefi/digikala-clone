@@ -25,7 +25,7 @@ const ScrollLeftButton = forwardRef<HTMLButtonElement, ScrollLeftButtonProps>(
          left ${className || "left-7 lg:left-28"}`}
         aria-label="Scroll"
       >
-        <FaAngleLeft className="scale-75 text-black" />
+        <FaAngleLeft className="text-sm text-black" />
       </button>
     );
   },

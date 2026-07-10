@@ -48,7 +48,7 @@ const DisplayDesktopDiscount = ({
             className="bg-surface-primary w-32 h-52 flex flex-col items-center justify-center px-10 rounded-l-xl text-sm pt-2"
           >
             <span className="border-black border-2 p-4 rounded-full">
-              <BiLeftArrowAlt className="scale-250" />
+              <BiLeftArrowAlt className="text-4xl" />
             </span>
             مشاهده همه
           </Link>
