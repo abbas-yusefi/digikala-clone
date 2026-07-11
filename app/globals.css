@@ -26,6 +26,10 @@
   --color-status-discount: var(--color-status-discount);
 }
 
+@theme {
+  --breakpoint-xs: 375px;
+}
+
 @layer components {
   .underline-animation {
     @apply absolute bottom-0 left-0 bg-brand-primary h-0.5 w-0 group-hover:w-full transition-all duration-400 rounded-2xl;

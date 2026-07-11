@@ -60,14 +60,14 @@ const MobileSetting = ({
           className="flex justify-between items-center text-brand-secondary py-4 cursor-pointer"
         >
           <FaAngleLeft className="opacity-0" />
-          <div className="flex items-center gap-4 text-sm font-semibold">
+          <div className="flex items-center gap-4 font-semibold">
             خروج از حساب کاربری
-            <TbLogout className="text-2xl" />
+            <TbLogout className="text-2xl max-xs:text-xl" />
           </div>
         </button>
       </div>
       <Image
-        className="fixed bottom-20 left-1/2 -translate-x-1/2"
+        className="fixed bottom-10 left-1/2 -translate-x-1/2"
         src={brand}
         alt="ایکون دیجی کالا"
         width={100}

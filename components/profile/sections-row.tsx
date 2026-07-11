@@ -17,8 +17,9 @@ const SectionsRow = ({ href, children, icon }: SectionsRowProps) => {
       className="flex justify-between items-center border-b border-black/6 py-4"
     >
       <FaAngleLeft />
-      <div className="flex items-center gap-4 text-sm font-semibold">
-        {children} <Icon className="text-2xl text-text-secondary" />
+      <div className="flex items-center gap-4 font-semibold">
+        {children}{" "}
+        <Icon className="text-2xl max-xs:text-xl text-text-secondary" />
       </div>
     </Link>
   );
