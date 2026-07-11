@@ -1,15 +1,13 @@
-// app/(home)/checkout/delete-cart-product.tsx
 "use client";
 
-import { deleteCartItem } from "@/lib/actions/cart";
+import { deleteProductFromCartAction } from "@/lib/actions/cart";
 import React from "react";
 
-const DeleteCartProduct = ({ id }) => {
+const DeleteCartProduct = ({ id }: { id: number }) => {
   const deleteProduct = async () => {
     try {
-      const result = await deleteCartItem(id);
+      const result = await deleteProductFromCartAction(+id);
       if (result.success) {
-        // Optional: add some UI feedback
         console.log("Item deleted successfully");
       }
     } catch (err) {

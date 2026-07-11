@@ -21,7 +21,7 @@ const ScrollLeftButton = forwardRef<HTMLButtonElement, ScrollLeftButtonProps>(
       <button
         ref={ref}
         onClick={scrollLeft}
-        className={`bg-white border border-gray-300 shadow-md p-2 rounded-full hover:bg-gray-50 active:scale-95 transition-all flex-shrink-0 absolute  z-50 focus:outline-none
+        className={`bg-white border border-gray-300 shadow-md p-2 rounded-full hover:bg-gray-50 active:scale-95 transition-all shrink-0 absolute  z-50 focus:outline-none
          left ${className || "left-7 lg:left-28"}`}
         aria-label="Scroll"
       >

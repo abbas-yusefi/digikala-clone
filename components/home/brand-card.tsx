@@ -9,7 +9,7 @@ type Data = {
 
 const BrandCard = ({ data }: { data: Data }) => {
   const path = data.src.src;
-  const name = path.match(/media\/(.*?)\./)[1];
+  const name = path.match(/media\/(.*?)\./)![1] || "";
 
   return (
     <>

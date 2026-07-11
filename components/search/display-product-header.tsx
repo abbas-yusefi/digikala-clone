@@ -19,8 +19,8 @@ const DisplayProductHeader = ({
     mobile: "گوشی موبایل",
     tablet: "تبلت",
     laptop: "لپ تاپ",
-    headphone: "هدفون، هدست و هندزفری",
-    watch: "ساعت هوشمند",
+    headphones: "هدفون، هدست و هندزفری",
+    smartwatch: "ساعت هوشمند",
   };
 
   const heading = headings[category as keyof typeof headings] || "";
@@ -47,7 +47,7 @@ const DisplayProductHeader = ({
               <IoShareSocialSharp className="scale-125 cursor-pointer" />
             </button>
             <button onClick={() => (window.location.hash = "search")}>
-              <FiSearch className="scale-125 cursor-pointer" />
+              <FiSearch className="text-lg cursor-pointer" />
             </button>
           </div>
           <div className="flex gap-7 font-bold">
@@ -62,7 +62,7 @@ const DisplayProductHeader = ({
     <div>
       <div className="flex items-center pl-4 pr-6">
         <input
-          style={{ direction: "rtl" }}
+          dir="rtl"
           type="search"
           readOnly
           value={handleInput}
@@ -75,7 +75,7 @@ const DisplayProductHeader = ({
           className="absolute ml-4 cursor-pointer"
           onClick={() => (window.location.hash = "search")}
         >
-          <FaXmark className="scale-125 text-black/40" />
+          <FaXmark className="text-lg text-black/40" />
         </button>
         <BackButton />
       </div>

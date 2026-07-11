@@ -35,7 +35,7 @@ const ResponsiveImageSlider = ({
   return (
     <>
       <ImageSlider
-        className={`${wrapperClass} ${scrolled ? "invisible hidden pointer-events-none" : "cursor-pointer"}`}
+        className={`${wrapperClass} ${scrolled ? "max-lg:invisible max-lg:hidden max-lg:pointer-events-none" : "cursor-pointer"}`}
         autoSlideInterval={autoSlideInterval}
         data={data}
         dotNavBg={dotNavBg}
@@ -45,7 +45,7 @@ const ResponsiveImageSlider = ({
         notSelectedIndexClass={notSelectedIndexClass}
       />
       <div
-        className={`${scrolled ? "" : "hidden"} lg:h-72 xl:h-96 bg-surface-primary w-full h-52`}
+        className={`${scrolled ? "" : "hidden"} lg:h-72 xl:h-96 bg-surface-primary w-full h-52 lg:hidden`}
       ></div>
     </>
   );

@@ -29,7 +29,10 @@ const SigninPage = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  const [serverError, setServerError] = useState({});
+  const [serverError, setServerError] = useState<{
+    field: string;
+    message: string;
+  }>();
 
   const onSubmit = async (data: SigninSchema) => {
     try {
@@ -47,7 +50,7 @@ const SigninPage = () => {
         return;
       }
 
-      setServerError({});
+      // setServerError();
       router.replace(callbackUrl);
       router.refresh();
     } catch (err) {
@@ -94,7 +97,7 @@ const SigninPage = () => {
         register={register}
         registerName={"password"}
         inputType={"password"}
-        onTogglePassword={() => setIsPasswordHidden((prev) => !prev)}
+        onTogglePassword={setIsPasswordHidden}
         isPasswordHidden={isPasswordHidden}
         serverError={serverError}
       >

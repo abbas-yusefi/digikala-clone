@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 const page = async () => {
   const topProductId = 1;
 
-  const params: Params = {
+  const params: Params["params"] = {
     q: "",
     category: "mobile",
     brand: "",

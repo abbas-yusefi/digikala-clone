@@ -21,7 +21,7 @@ const ScrollRightButton = forwardRef<HTMLButtonElement, ScrollLeftButtonProps>(
       <button
         ref={ref}
         onClick={scrollRight}
-        className={`bg-white border border-gray-300 shadow-md p-2 rounded-full hover:bg-gray-50 active:scale-95 transition-all flex-shrink-0 absolute text-black z-50 focus:outline-none ${className || "right-7 lg:right-28"}`}
+        className={`bg-white border border-gray-300 shadow-md p-2 rounded-full hover:bg-gray-50 active:scale-95 transition-all shrink-0 absolute text-black z-50 focus:outline-none ${className || "right-7 lg:right-28"}`}
         aria-label="Scroll right"
       >
         <FaAngleRight className="text-sm" />

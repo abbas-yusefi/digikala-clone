@@ -1,9 +1,10 @@
+import { ProductCard, WithImage } from "@/lib/types/product";
 import { calculateDiscountedPrice } from "@/lib/utils/discount";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const ProCard = ({ product }) => {
+const ProCard = ({ product }: { product: WithImage<ProductCard> }) => {
   const discountedPrice = calculateDiscountedPrice(
     product.price,
     product.discount,

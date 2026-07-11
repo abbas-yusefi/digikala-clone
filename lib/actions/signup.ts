@@ -48,7 +48,8 @@ const signup = async (formData: FormData) => {
       return { message: result.error };
     }
   } catch (error) {
-    return { message: error?.message || "حطایی رخ داد" };
+    const message = error instanceof Error ? error?.message : "خطایی رخ داد";
+    return { message };
   }
   redirect("/profile");
 };

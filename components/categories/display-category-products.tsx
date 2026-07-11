@@ -40,7 +40,7 @@ const DisplayCategoryProducts = ({
 
   if (!categoryId) return notFound();
 
-  if (!brands) return <PulsingDotLoader className="w-full h-[50rem]" />;
+  if (!brands) return <PulsingDotLoader className="w-full h-200" />;
 
   return (
     <div className="flex flex-col w-full">

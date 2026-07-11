@@ -68,8 +68,8 @@ const Toolbar = ({ className }: { className: string }) => {
         <div>
           <div
             className="relative group cursor-pointer px-5 py-2 h-10 text-black text-sm font-semibold pr-5 mr-3"
-            onMouseEnter={() => setCategoriesHovered(true)}
-            onMouseLeave={() => setCategoriesHovered(false)}
+            // onMouseEnter={() => setCategoriesHovered(true)}
+            // onMouseLeave={() => setCategoriesHovered(false)}
           >
             {/* <Modal>something</Modal> */}
             دسته بندی کالاها
