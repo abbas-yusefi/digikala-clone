@@ -46,7 +46,7 @@ const FooterLinks = () => {
 
       {/* desktop links */}
 
-      <div className="max-lg:hidden">
+      <div className="max-lg:hidden contents">
         <div className="flex gap-5 flex-col items-end h-full text-sm font-semibold ">
           <h3 className="font-bold text-base text-black" dir="rtl">
             راهنمای خرید از دیجی کالا
