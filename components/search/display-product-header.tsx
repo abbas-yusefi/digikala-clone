@@ -1,12 +1,10 @@
 "use client";
 
-import { IoShareSocialSharp } from "react-icons/io5";
-import { FiSearch } from "react-icons/fi";
 import BackButton from "../ui/back-button";
 import Image from "next/image";
 import HeaderImage from "@/public/header.png";
 import { useEffect, useState } from "react";
-import { FaXmark } from "react-icons/fa6";
+import { Icons } from "@/lib/icons";
 
 const DisplayProductHeader = ({
   category,
@@ -44,10 +42,10 @@ const DisplayProductHeader = ({
                 navigator.clipboard.writeText(window.location.href)
               }
             >
-              <IoShareSocialSharp className="scale-125 cursor-pointer" />
+              <Icons.Share className="text-2xl cursor-pointer" />
             </button>
             <button onClick={() => (window.location.hash = "search")}>
-              <FiSearch className="text-lg cursor-pointer" />
+              <Icons.Search className="text-2xl cursor-pointer" />
             </button>
           </div>
           <div className="flex gap-7 font-bold">
@@ -75,7 +73,7 @@ const DisplayProductHeader = ({
           className="absolute ml-4 cursor-pointer"
           onClick={() => (window.location.hash = "search")}
         >
-          <FaXmark className="text-lg text-black/40" />
+          <Icons.XMark className="text-lg text-black/40" />
         </button>
         <BackButton />
       </div>

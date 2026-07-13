@@ -25,7 +25,7 @@ const NavComponent = ({
 
       {icon ? (
         <span
-          className={`${iconClassName ? `${iconClassName}` : `right-1`} absolute scale-130 mt-1`}
+          className={`${iconClassName ? `${iconClassName}` : `right-1`} absolute text-2xl mt-1`}
         >
           {icon}
         </span>

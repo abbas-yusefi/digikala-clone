@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { FaAngleLeft } from "react-icons/fa6";
 import Returned from "@/public/orderprocess/status-returned.svg";
 import Delivered from "@/public/orderprocess/status-delivered.svg";
 import Processing from "@/public/orderprocess/status-processing.svg";
 import OrderProcessSteps from "./order-process-steps";
+import { Icons } from "@/lib/icons";
 
 const OrderProcess = () => {
   return (
@@ -13,8 +13,7 @@ const OrderProcess = () => {
           href={"#"}
           className="flex items-center font-semibold text-text-link"
         >
-          {" "}
-          <FaAngleLeft />
+          <Icons.Left className="text-lg max-xs:text-sm" />
           مشاهده همه
         </Link>
         <h2 className="font-semibold relative after:absolute after:-bottom-4 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-0.5 after:bg-brand-discount">

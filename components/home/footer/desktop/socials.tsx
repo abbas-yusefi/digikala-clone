@@ -1,13 +1,10 @@
 import bale from "@/public/other/Logo06.png";
 import aparat from "@/public/other/icon--black.svg";
-
-import { FaLinkedin } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
 import { useState } from "react";
 import { submitEmailSubscriptionAction } from "@/lib/actions/email-subscription-action";
 import Link from "next/link";
 import Image from "next/image";
+import { Icons } from "@/lib/icons";
 
 const Socials = () => {
   const [email, setEmail] = useState("");
@@ -18,20 +15,20 @@ const Socials = () => {
         همراه ما باشید!
       </h3>
       <div className="flex items-center justify-between gap-7 opacity-40">
-        <Link href={"https://ble.ir/digikala"}>
+        <Link href={"https://ble.ir/digikala"} className="pr-3">
           <Image alt="" src={bale} width={35} height={35} />
         </Link>
         <Link href={"https://www.aparat.com/digikala/"}>
           <Image alt="" src={aparat} width={35} height={35} />
         </Link>
         <Link href={"https://www.linkedin.com/company/digikala/mycompany/"}>
-          <FaLinkedin className="scale-300 mx-3" />
+          <Icons.Linkedin className="text-4xl mx-3" />
         </Link>
         <Link href={"https://x.com/digikalacom"}>
-          <FaTwitter className="scale-300 mx-3" />
+          <Icons.Twitter className="text-4xl mx-3" />
         </Link>
         <Link href={"https://www.instagram.com/digikalacom/"}>
-          <FaInstagram className="scale-300 ml-3" />
+          <Icons.Instagram className="text-4xl ml-3" />
         </Link>
       </div>
       <h3 className="font-semibold text-base mt-2" dir="rtl">

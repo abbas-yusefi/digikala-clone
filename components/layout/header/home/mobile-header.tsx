@@ -1,9 +1,7 @@
 "use client";
 
 import HorizontalNav from "@/components/shared/horizontal-nav";
-import { IoNotificationsOutline, IoLocationOutline } from "react-icons/io5";
 import SearchBar from "@/components/ui/search-bar";
-import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import useScrollThreshold from "@/lib/hooks/useScrollThreshold";
 import SuperwebTab from "./superweb-tab";
@@ -11,7 +9,7 @@ import tabsData, { TabsData } from "@/public/superweb";
 import { usePathname, useSearchParams } from "next/navigation";
 import SearchMobileHeader from "@/components/search/search-mobile-header";
 import digikalatext from "@/public/other/digikalatext.svg";
-import { FaAngleLeft } from "react-icons/fa6";
+import { Icons } from "@/lib/icons";
 
 const MobileHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
   const scrolled = useScrollThreshold({
@@ -52,14 +50,14 @@ const MobileHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
             className={`px-5 flex justify-center items-center mt-3 cursor-pointer pb-2 ${scrolled ? "border-b border-black/20" : ""}`}
           >
             <span className="p-3 border rounded-full border-black/10 mr-4 text-[1.5rem]">
-              <IoNotificationsOutline />
+              <Icons.Bell />
             </span>
 
             <SearchBar
               placeholder="جستجو"
               divClassName="border border-black/10 p-2.5"
               inputClassName="text-right pr-9"
-              searchIcon={<FiSearch />}
+              searchIcon={<Icons.Search />}
               iconxPosition="right-10"
               childrenxPosition="right-28"
             >
@@ -76,9 +74,9 @@ const MobileHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
           <div
             className={`${scrolled || path === "/categories" ? "opacity-0 h-0" : "h-10"} flex items-center justify-end mx-5 cursor-text transition duration-100 font-semibold`}
           >
-            <FaAngleLeft className="-mb-1.5 mr-1 text-sm" />
+            <Icons.Left className="-mb-1.5 mr-1 text-sm" />
             انتخواب استان و شهر
-            <IoLocationOutline className="ml-1 text-[1.1rem]" />
+            <Icons.Map className="ml-1 text-[1.1rem]" />
           </div>
         </nav>
       </header>

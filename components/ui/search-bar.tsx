@@ -1,7 +1,7 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { KeyboardEventHandler, useState } from "react";
-import { FaXmark } from "react-icons/fa6";
 
 type SearchBar = {
   placeholder: string;
@@ -57,7 +57,7 @@ const SearchBar = ({
         className="absolute ml-4 cursor-pointer"
         onClick={() => onChange && onChange("")}
       >
-        <FaXmark className="text-lg text-black/40" />
+        <Icons.XMark className="text-lg text-black/40" />
       </button>
       {searchIcon && (
         <label

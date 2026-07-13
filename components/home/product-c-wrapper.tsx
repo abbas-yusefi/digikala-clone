@@ -5,7 +5,7 @@ import ProductCircle from "./product-circle";
 
 const ProductCWrapper = () => {
   return (
-    <HorizontalNav className="lg:justify-center pb-2">
+    <HorizontalNav className="justify-center max-lg:gap-3 pb-2">
       {circleData.map((data) => (
         <ProductCircle key={data.textFirstLine} data={data} />
       ))}

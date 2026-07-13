@@ -23,7 +23,7 @@ const UserNavItem = ({
         className="flex justify-end items-center gap-5 text-[0.9rem] py-4 border-b border-black/5"
       >
         {text}
-        <Icon className="scale-150" />
+        <Icon className="text-2xl" />
       </div>
     );
   return (
@@ -32,7 +32,7 @@ const UserNavItem = ({
       className="flex justify-end items-center gap-5 text-[0.9rem] py-4 border-b border-black/5"
     >
       {text}
-      <Icon className="scale-150" />
+      <Icon className="text-2xl" />
     </Link>
   );
 };

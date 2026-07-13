@@ -23,7 +23,7 @@ const CategoryCard = ({
       onClick={() => setCategorySelected(stateCategoryName)}
       className={`${categorySelected === stateCategoryName ? "text-brand-primary bg-surface-primary border-l-0" : "bg-surface-secondary"} flex justify-center items-center flex-col gap-2  border-b border-l py-3 px-6 border-black/10`}
     >
-      <Icon className="scale-175" />
+      <Icon className="text-2xl" />
       <p>{categoryName}</p>
     </div>
   );

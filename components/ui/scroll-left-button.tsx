@@ -1,7 +1,7 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { forwardRef } from "react";
-import { FaAngleLeft } from "react-icons/fa6";
 
 type ScrollLeftButtonProps = {
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
@@ -21,11 +21,11 @@ const ScrollLeftButton = forwardRef<HTMLButtonElement, ScrollLeftButtonProps>(
       <button
         ref={ref}
         onClick={scrollLeft}
-        className={`bg-white border border-gray-300 shadow-md p-2 rounded-full hover:bg-gray-50 active:scale-95 transition-all shrink-0 absolute  z-50 focus:outline-none
-         left ${className || "left-7 lg:left-28"}`}
+        className={`bg-white border border-gray-300 shadow-md p-2 rounded-full hover:bg-gray-50 active:scale-95 transition-all shrink-0 absolute z-40 focus:outline-none
+         left ${className || "left-7 lg:left-14"}`}
         aria-label="Scroll"
       >
-        <FaAngleLeft className="text-sm text-black" />
+        <Icons.Left className="text-lg lg:text-2xl text-black" />
       </button>
     );
   },

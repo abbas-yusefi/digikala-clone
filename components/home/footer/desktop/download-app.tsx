@@ -2,18 +2,18 @@ import logo from "@/public/other/logo.png";
 import sib from "@/public/other/sib-app.svg";
 import bazzar from "@/public/other/coffe-bazzar.svg";
 import myket from "@/public/other/myket.svg";
-import { GoDotFill } from "react-icons/go";
 import Link from "next/link";
 import Image from "next/image";
+import { Icons } from "@/lib/icons";
 
 const DownloadApp = () => {
   return (
     <div className="h-20 flex justify-between items-center bg-[#457] w-full rounded-lg px-4 my-8 ">
       <div className="flex items-center gap-4">
         <span className="flex justify-center items-center rounded-md w-[2.8rem] h-[2.8rem] bg-surface-primary">
-          <GoDotFill />
-          <GoDotFill />
-          <GoDotFill />
+          <Icons.Dot />
+          <Icons.Dot />
+          <Icons.Dot />
         </span>
 
         <Link href={"https://sibapp.com/applications/digikala"}>

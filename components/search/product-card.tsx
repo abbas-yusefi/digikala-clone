@@ -34,7 +34,7 @@ const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
                 {isDiscounted && (
                   <DiscountPercentage
                     discount={data.discount !== null ? data.discount : 0}
-                    className="scale-80"
+                    className="text-2xl"
                   />
                 )}
               </div>

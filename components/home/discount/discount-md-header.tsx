@@ -2,15 +2,15 @@ import Link from "next/link";
 import React from "react";
 import Timer from "../timer";
 import Image from "next/image";
-import { FaChevronLeft } from "react-icons/fa";
 import amazingoffer from "@/public/other/amazing-discount.svg";
 import discounticon from "@/public/other/discounticon.svg";
+import { Icons } from "@/lib/icons";
 
 const DiscountMdHeader = () => {
   return (
     <div className="flex justify-between items-center px-5 py-5">
       <Link href={"/search?discount"}>
-        <FaChevronLeft className="inline text-lg" />
+        <Icons.Left className="inline text-lg" />
         همه
       </Link>
       <div className="flex">

@@ -1,12 +1,12 @@
 import React from "react";
-import { BiSupport } from "react-icons/bi";
 import digikalaIcon from "@/public/image.png";
 import Image from "next/image";
+import { Icons } from "@/lib/icons";
 const MobileFooterContact = () => {
   return (
     <>
       {/* support */}
-      <div className=" w-full flex justify-between items-center py-3 border-b border-black/10">
+      <div className=" w-full flex justify-between items-center py-3 border-b border-black/10 px-5">
         {/* call button */}
         <button className="contact-button bg-surface-secondary">تماس</button>
         {/* right section */}
@@ -21,12 +21,12 @@ const MobileFooterContact = () => {
           </div>
           {/* image */}
           <div className="p-3 ml-2 bg-surface-secondary rounded-full">
-            <BiSupport className="text-2xl" />
+            <Icons.Support className="text-2xl" />
           </div>
         </div>
       </div>
       {/* support */}
-      <div className="w-full flex justify-between aitems-center py-3 border-b border-black/10">
+      <div className="w-full flex justify-between aitems-center py-3 border-b border-black/10 px-5">
         {/* call button */}
         <button className="contact-button">دانلود</button>
         {/* right section */}

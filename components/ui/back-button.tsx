@@ -1,7 +1,7 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { useRouter } from "next/navigation";
-import { BiRightArrowAlt } from "react-icons/bi";
 
 const BackButton = ({ className }: { className?: string }) => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const BackButton = ({ className }: { className?: string }) => {
       className={`${className} cursor-pointer`}
       onClick={() => router.back()}
     >
-      <BiRightArrowAlt className="scale-200" />
+      <Icons.RightArrow className="text-3xl" />
     </button>
   );
 };

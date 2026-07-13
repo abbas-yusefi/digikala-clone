@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import FooterPartnerRow from "./footer-partner-row";
+import { Icons } from "@/lib/icons";
 
 type FooterListProps = {
   children?: React.ReactNode;
@@ -104,7 +104,7 @@ const FooterList = ({
 
   return (
     <div
-      className="py-5 border-b border-black/20 cursor-pointer"
+      className="py-5 border-b border-black/20 cursor-pointer px-4"
       onClick={() =>
         setIsToggeled((prev) => ({
           ...prev,
@@ -115,9 +115,9 @@ const FooterList = ({
       <div className="flex justify-between text-[1em] text-black font-semibold ">
         <button className="cursor-pointer">
           {isToggeled[sectionToggleName] ? (
-            <FaChevronDown className="text-xs select-none" />
+            <Icons.Down className="text-lg select-none" />
           ) : (
-            <FaChevronUp className="text-xs  select-none" />
+            <Icons.Up className="text-lg select-none" />
           )}
         </button>
         <h4 className="select-none">{sectionName}</h4>

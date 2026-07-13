@@ -1,6 +1,6 @@
+import { Icons } from "@/lib/icons";
 import Link from "next/link";
 import React from "react";
-import { FaAngleLeft } from "react-icons/fa6";
 import { IconType } from "react-icons/lib";
 
 type SectionsRowProps = {
@@ -16,7 +16,7 @@ const SectionsRow = ({ href, children, icon }: SectionsRowProps) => {
       href={href}
       className="flex justify-between items-center border-b border-black/6 py-4"
     >
-      <FaAngleLeft />
+      <Icons.Left className="text-lg max-xs:text-sm" />
       <div className="flex items-center gap-4 font-semibold">
         {children}{" "}
         <Icon className="text-2xl max-xs:text-xl text-text-secondary" />

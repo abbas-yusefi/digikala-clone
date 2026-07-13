@@ -1,14 +1,6 @@
-import { IoCart, IoCartOutline } from "react-icons/io5";
-import {
-  BiCategory,
-  BiSolidCategory,
-  BiHome,
-  BiSolidHome,
-} from "react-icons/bi";
-import { FaRegUser, FaUser } from "react-icons/fa6";
-
 import NavItem from "./nav-item";
 import CartItemsLength from "./cart-items-length";
+import { Icons } from "@/lib/icons";
 
 const Nav = async () => {
   return (
@@ -17,16 +9,16 @@ const Nav = async () => {
         <div className="px-[clamp(16px,5vw,40px)] flex justify-between items-center h-full">
           <NavItem
             href="/profile"
-            iconOutline={<FaRegUser className={"text-2xl"} />}
-            iconSolid={<FaUser className={"text-2xl"} />}
+            iconOutline={<Icons.UserOutline className={"text-2xl"} />}
+            iconSolid={<Icons.User className={"text-2xl"} />}
           >
             دیجی کالای من
           </NavItem>
 
           <NavItem
             href="/checkout"
-            iconOutline={<IoCartOutline className={"text-2xl"} />}
-            iconSolid={<IoCart className={"text-2xl"} />}
+            iconOutline={<Icons.CartOutline className={"text-2xl"} />}
+            iconSolid={<Icons.Cart className={"text-2xl"} />}
           >
             <CartItemsLength />
             سبد خرید
@@ -34,16 +26,16 @@ const Nav = async () => {
 
           <NavItem
             href="/categories"
-            iconOutline={<BiCategory className={"text-2xl"} />}
-            iconSolid={<BiSolidCategory className={"text-2xl"} />}
+            iconOutline={<Icons.CategoryOutline className={"text-2xl"} />}
+            iconSolid={<Icons.Category className={"text-2xl"} />}
           >
             دسته بندی
           </NavItem>
 
           <NavItem
             href="/"
-            iconOutline={<BiHome className={"text-2xl"} />}
-            iconSolid={<BiSolidHome className={"text-2xl"} />}
+            iconOutline={<Icons.HomeOutline className={"text-2xl"} />}
+            iconSolid={<Icons.Home className={"text-2xl"} />}
           >
             خانه
           </NavItem>

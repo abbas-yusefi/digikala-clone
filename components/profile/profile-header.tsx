@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { BiSupport } from "react-icons/bi";
-import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
 import MobileSetting from "./mobile-setting";
+import { Icons } from "@/lib/icons";
 
 const ProfileHeader = () => {
   const [isSetting, setIsSetting] = useState(false);
@@ -14,11 +13,11 @@ const ProfileHeader = () => {
         className={`${isSetting ? "opacity-0 pointer-events-none" : "opacity-100"} flex justify-between items-center w-full px-7 transition-all duration-500 bg-surface-primary sticky inset-0 py-6 z-50`}
       >
         <div className="flex gap-8">
-          <IoNotificationsOutline className={`text-2xl cursor-pointer`} />
-          <BiSupport className={`text-2xl cursor-pointer`} />
+          <Icons.Bell className={`text-2xl cursor-pointer`} />
+          <Icons.Support className={`text-2xl cursor-pointer`} />
         </div>
         <div>
-          <IoSettingsOutline
+          <Icons.Setting
             onClick={() => setIsSetting((prev) => !prev)}
             className={`text-2xl cursor-pointer`}
           />

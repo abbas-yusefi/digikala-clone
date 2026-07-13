@@ -5,7 +5,7 @@ const FooterLinks = () => {
   return (
     <>
       {/* mobile links */}
-      <section className="px-3 lg:hidden">
+      <section className="lg:hidden">
         <div>
           <FooterList
             sectionName="با دیجی کالا"

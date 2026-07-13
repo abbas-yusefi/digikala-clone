@@ -1,13 +1,7 @@
 "use client";
-import {
-  IoFlameOutline,
-  IoBasketOutline,
-  IoPricetagOutline,
-  IoLocationOutline,
-} from "react-icons/io5";
-import { HiMenu } from "react-icons/hi";
-import { CiPercent } from "react-icons/ci";
+
 import NavComponent from "@/components/ui/nav-component";
+import { Icons } from "@/lib/icons";
 import { useState } from "react";
 
 const Toolbar = ({ className }: { className: string }) => {
@@ -16,7 +10,7 @@ const Toolbar = ({ className }: { className: string }) => {
 
   return (
     <div
-      className={`${className} max-lg:hidden transition duration-100 relative bg-surface-primary z-40 h-10 flex justify-between items-center pl-4 border-b border-black/20 shadow-md text-[0.8rem] `}
+      className={`${className} max-lg:hidden transition duration-100 relative bg-surface-primary z-40 h-10 flex justify-between items-center pl-4 pr-2 border-b border-black/20 shadow-md text-[0.8rem] `}
     >
       {/* chose locatoin */}
       <div
@@ -25,7 +19,7 @@ const Toolbar = ({ className }: { className: string }) => {
         className="text-[#f5801a] bg-[#fef6ef] relative flex items-center pr-8 pl-4 rounded-4xl font-semibold py-1.5 cursor-pointer lg:px-4 lg:w-44 lg:py-2"
       >
         شهر خود را انتخواب کنید
-        <IoLocationOutline className="absolute right-2 scale-170 lg:right-3" />
+        <Icons.Map className="absolute right-2 text-xl lg:right-3" />
         {locatoinHovered ? (
           <div className="absolute left-8 w-25 rounded-md text-xs/6 text-center mt-23 z-20 bg-[#474264] text-white p-2">
             <p>انتخواب آدرس</p>
@@ -46,17 +40,17 @@ const Toolbar = ({ className }: { className: string }) => {
         <span className="h-4 w-0.5 bg-black/7"></span>
         {/* second section */}
         <div className="flex items-center h-full">
-          <NavComponent icon={<IoFlameOutline />} className="pr-6 py-2 pl-4  ">
+          <NavComponent icon={<Icons.Flame />} className="pr-6 py-2 pl-4  ">
             پرفروشترین ها
           </NavComponent>
-          <NavComponent icon={<IoPricetagOutline />} className="pr-6 py-2 pl-4">
+          <NavComponent icon={<Icons.PriceTag />} className="pr-6 py-2 pl-4">
             طلای دیجیتال
           </NavComponent>
-          <NavComponent icon={<IoBasketOutline />} className="pr-6 py-2 pl-4">
+          <NavComponent icon={<Icons.Basket />} className="pr-6 py-2 pl-4">
             سوپرمارکت
           </NavComponent>
           <NavComponent
-            icon={<CiPercent />}
+            icon={<Icons.Percent />}
             iconClassName="right-3"
             className="pr-8 py-2 pl-4 "
           >
@@ -73,7 +67,7 @@ const Toolbar = ({ className }: { className: string }) => {
           >
             {/* <Modal>something</Modal> */}
             دسته بندی کالاها
-            <HiMenu className="absolute right-0 top-3 scale-150" />
+            <Icons.HamMenu className="absolute -right-1 top-2 text-xl" />
             <span className="underline-animation"></span>
           </div>
         </div>

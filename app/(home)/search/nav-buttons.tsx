@@ -1,10 +1,10 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { ProductCard, WithImage } from "@/lib/types/product";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
   const searchParams = useSearchParams();
@@ -28,7 +28,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
     <div className="flex justify-between mb-32 lg:mb-16">
       {noPrevPage ? (
         <span className="flex items-center bg-gray-500 text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-not-allowed">
-          <FaAngleLeft />
+          <Icons.Left />
           صفحه قبل
         </span>
       ) : (
@@ -37,7 +37,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
           href={createHref(firstProductId, "prev")}
           className="flex items-center bg-brand-discount text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-[#f02a4f]"
         >
-          <FaAngleLeft />
+          <Icons.Left />
           صفحه قبل
         </Link>
       )}
@@ -49,7 +49,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
       {noNextPage ? (
         <span className="flex items-center bg-gray-500 text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-not-allowed">
           صفحه بعد
-          <FaAngleRight />
+          <Icons.Right />
         </span>
       ) : (
         <Link
@@ -58,7 +58,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
           className="flex items-center bg-brand-discount text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-[#f02a4f]"
         >
           صفحه بعد
-          <FaAngleRight />
+          <Icons.Right />
         </Link>
       )}
     </div>
