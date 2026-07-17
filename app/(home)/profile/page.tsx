@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import ProfileHeader from "@/components/profile/profile-header";
 import OrderProcess from "@/components/profile/order-process";
 import PersonalInfo from "@/components/profile/personal-info";
+import MobileProfileDashboard from "@/components/profile/profileDashboard/mobile-profile-dashboard";
 
 const page = async () => {
   const session = await auth();
@@ -12,11 +13,17 @@ const page = async () => {
   if (!session) redirect("/signin");
 
   return (
-    <main className="flex flex-col items-center pb-6 text-sm max-xs:text-xs">
-      <ProfileHeader />
-      <PersonalInfo session={session} />
-      <OrderProcess />
-    </main>
+    <>
+      <main className="flex flex-col items-center pb-20 lg:hidden">
+        <ProfileHeader />
+        <PersonalInfo session={session} />
+        <OrderProcess />
+        <MobileProfileDashboard />
+      </main>
+      <section className="max-lg:hidden">
+        <OrderProcess />
+      </section>
+    </>
   );
 };
 

@@ -19,6 +19,7 @@ import {
   FiShoppingBag,
   FiShare2,
   FiArrowRight,
+  FiClock,
 } from "react-icons/fi";
 import {
   FaRegUser,
@@ -56,6 +57,7 @@ import { CiMobile2, CiLaptop, CiHeadphones, CiPercent } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
 
 export const Icons = {
+  Clock: FiClock,
   RightArrow: FiArrowRight,
   Share: FiShare2,
   Dot: GoDotFill,
