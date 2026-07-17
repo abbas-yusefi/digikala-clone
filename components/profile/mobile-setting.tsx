@@ -2,10 +2,9 @@ import { IoMdClose } from "react-icons/io";
 import brand from "@/public/other/brand.svg";
 import Image from "next/image";
 import SectionsRow from "./sections-row";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { Icons } from "@/lib/icons";
+import SignoutButton from "@/components/ui/signout-button";
 
 const MobileSetting = ({
   isSetting,
@@ -14,8 +13,6 @@ const MobileSetting = ({
   isSetting: boolean;
   setIsSetting: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const router = useRouter();
-
   return (
     <div
       className={`${!isSetting ? "opacity-0 pointer-events-none" : "opacity-100"} fixed top-0 right-0 bg-surface-primary min-h-screen flex flex-col w-full px-7 transition-all duration-500 z-50`}
@@ -46,19 +43,7 @@ const MobileSetting = ({
         <SectionsRow icon={Icons.Bug} href="#">
           گزارش خطا
         </SectionsRow>
-        <button
-          onClick={() => {
-            signOut();
-            router.replace("/");
-          }}
-          className="flex justify-between items-center text-brand-secondary py-4 cursor-pointer"
-        >
-          <Icons.Left className="opacity-0 text-lg max-xs:text-sm" />
-          <div className="flex items-center gap-4 font-semibold">
-            خروج از حساب کاربری
-            <Icons.Signout className="text-2xl max-xs:text-xl" />
-          </div>
-        </button>
+        <SignoutButton variant="setting" />
       </div>
       <Image
         className="fixed bottom-10 left-1/2 -translate-x-1/2"

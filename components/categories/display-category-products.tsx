@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ProductBrands from "./product-brands";
-import { FaAngleLeft } from "react-icons/fa";
 import Link from "next/link";
 import { filterBrandAction } from "@/lib/actions/filter-brand-action";
 import PulsingDotLoader from "../ui/pulsing-dot-loader";
 import { notFound } from "next/navigation";
 import { CategorySlugs, FilteredBrands } from "@/lib/types/product";
+import { Icons } from "@/lib/icons";
 
 const DisplayCategoryProducts = ({
   categorySelected,
@@ -47,7 +47,7 @@ const DisplayCategoryProducts = ({
       <div className="w-full text-sm items-center flex justify-end px-5 py-5 text-text-link cursor-pointer">
         <Link href={`search?category=${categorySelected}`}>
           <h2 className="flex items-center">
-            <FaAngleLeft className="mr-5" /> همه محصولات {typeOfProduct}
+            <Icons.Left className="mr-5 text-xl" /> همه محصولات {typeOfProduct}
           </h2>
         </Link>
       </div>
