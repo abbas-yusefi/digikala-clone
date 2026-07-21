@@ -8,11 +8,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex w-full justify-center gap-4 mt-14 text-sm max-xs:text-xs text-text-primary">
-      <div className="w-200 border rounded-2xl border-black/10">
+    <div className="flex w-full justify-center lg:gap-4 lg:mt-14 text-sm max-xs:text-xs text-text-primary lg:px-7">
+      <div className="lg:max-w-200 w-full lg:h-fit lg:py-7 border rounded-2xl border-black/10">
         <Suspense fallback={<PulsingDotLoader />}>{children}</Suspense>
       </div>
-      <div className="max-lg:hidden">
+      <div className="max-lg:hidden w-80">
         <DesktopProfileDashboard />
       </div>
     </div>

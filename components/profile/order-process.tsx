@@ -7,7 +7,7 @@ import { Icons } from "@/lib/icons";
 
 const OrderProcess = () => {
   return (
-    <section className="w-full px-4 mt-10">
+    <section className="w-full px-4 max-lg:mt-10">
       <div className="flex justify-between items-center w-full">
         <Link
           href={"#"}
@@ -20,7 +20,41 @@ const OrderProcess = () => {
           سفارش های من
         </h2>
       </div>
-      <div className="justify-around flex items-center py-5 mt-10 border-b border-black/10">
+
+      {/* Mobile version */}
+      <div className="justify-around flex items-center py-5 mt-10 border-b border-black/10 lg:hidden">
+        <OrderProcessSteps
+          href="#"
+          alt="سفارشات مرجوع شده"
+          image={Returned}
+          number={0}
+        >
+          مرجوع شده
+        </OrderProcessSteps>
+        <span className="h-20 bg-black/5 w-0.5"></span>
+
+        <OrderProcessSteps
+          href="#"
+          alt="سفارشات تحویل داده شده"
+          image={Delivered}
+          number={0}
+        >
+          تحویل شده
+        </OrderProcessSteps>
+        <span className="h-20 bg-black/5 w-0.5"></span>
+
+        <OrderProcessSteps
+          href="#"
+          alt="سفارشات جاری"
+          image={Processing}
+          number={0}
+        >
+          جاری
+        </OrderProcessSteps>
+      </div>
+
+      {/* Desktop version */}
+      <div className="justify-around flex items-center py-5 border-black/10 max-lg:hidden">
         <OrderProcessSteps
           href="#"
           alt="سفارشات مرجوع شده"

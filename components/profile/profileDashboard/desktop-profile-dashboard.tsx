@@ -13,7 +13,7 @@ const DesktopProfileDashboard = () => {
   if (!session) redirect("/");
   const path = usePathname();
   return (
-    <section className="max-lg:hidden bg-surface-primary border rounded-2xl border-black/10 w-100">
+    <section className="max-lg:hidden bg-surface-primary border rounded-2xl border-black/10 w-full">
       <PersonalInfo session={session} />
       <SectionsRow href="/profile" path={path}>
         خلاصه فعالیت ها
