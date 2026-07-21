@@ -10,7 +10,7 @@ const OrderProcess = () => {
     <section className="w-full max-lg:px-4 max-lg:mt-10">
       <div className="flex lg:px-5 justify-between items-center w-full lg:mb-4 lg:py-10">
         <Link
-          href={"#"}
+          href={"/profile/orders"}
           className="flex items-center font-semibold text-text-link"
         >
           <Icons.Left className="text-lg max-xs:text-sm" />

@@ -6,19 +6,19 @@ import SignoutButton from "@/components/ui/signout-button";
 const MobileProfileDashboard = () => {
   return (
     <section className="w-full lg:hidden">
-      <SectionsRow href="#" icon={Icons.Bag}>
+      <SectionsRow href="/profile/orders" icon={Icons.Bag}>
         سفارش ها
       </SectionsRow>
-      <SectionsRow href="#" icon={Icons.Heart}>
+      <SectionsRow href="/profile/lists" icon={Icons.Heart}>
         لیست های من
       </SectionsRow>
-      <SectionsRow href="#" icon={Icons.Address}>
+      <SectionsRow href="/profile/addresses" icon={Icons.Address}>
         آدرس ها
       </SectionsRow>
-      <SectionsRow href="#" icon={Icons.Clock}>
+      <SectionsRow href="/profile/user-history" icon={Icons.Clock}>
         بازدید های اخیر
       </SectionsRow>
-      <SectionsRow href="#" icon={Icons.UserOutline}>
+      <SectionsRow href="/profile/personal-info" icon={Icons.UserOutline}>
         اطلاعات حساب
       </SectionsRow>
       <SignoutButton />
