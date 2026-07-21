@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getProduct, getImage } from "@/lib/querys";
+import { getProduct, getImage } from "@/lib/queries";
 import AddToCart from "./add-to-cart";
 import { auth } from "@/auth";
 import { Metadata } from "next";

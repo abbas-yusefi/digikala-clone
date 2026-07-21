@@ -1,6 +1,6 @@
 "use server";
 
-import { addProductToCart } from "@/lib/querys";
+import { addProductToCart } from "@/lib/queries";
 
 export async function SyncCartItemsAction(
   userId: string,

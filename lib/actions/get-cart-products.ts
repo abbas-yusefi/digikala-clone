@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { getAllCartProducts } from "../querys";
+import { getAllCartProducts } from "../queries";
 
 export const getCartProductsAction = async () => {
   try {

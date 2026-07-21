@@ -1,6 +1,6 @@
 "use server";
 
-import { addProductToCart, deleteProductFromCart } from "@/lib/querys";
+import { addProductToCart, deleteProductFromCart } from "@/lib/queries";
 import { revalidatePath } from "next/cache";
 
 async function deleteProductFromCartAction(cartId: number) {

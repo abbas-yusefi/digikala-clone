@@ -1,4 +1,4 @@
-import { getImage, getProduct } from "@/lib/querys";
+import { getImage, getProduct } from "@/lib/queries";
 import { calculateDiscountedPrice } from "@/lib/utils/discount";
 import Image from "next/image";
 

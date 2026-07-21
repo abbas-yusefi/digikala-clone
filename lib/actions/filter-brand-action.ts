@@ -1,6 +1,6 @@
 "use server";
 
-import { getFilteredBrandsPerCategory } from "../querys";
+import { getFilteredBrandsPerCategory } from "../queries";
 
 const filterBrandAction = async (category_id: string | number) => {
   if (!category_id) return;

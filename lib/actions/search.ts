@@ -5,7 +5,7 @@ import {
   deleteOldSearches,
   getRecentlySearched,
   deleteAllRecentSearches,
-} from "../querys";
+} from "../queries";
 
 const addRecenetlySearchedAction = async (
   searchedTerm: string,

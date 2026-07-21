@@ -1,6 +1,6 @@
 "use server";
 
-import { getProduct } from "../querys";
+import { getProduct } from "../queries";
 import { ProductCard, WithImage } from "../types/product";
 
 const getProductAction = async (

@@ -3,7 +3,7 @@ import Image from "next/image";
 import headerAd from "@/public/header.png";
 import TopProduct from "@/components/landing/mobile/top-product";
 import DisplayProducts from "@/components/landing/mobile/display-products";
-import { getFilteredProducts } from "@/lib/querys";
+import { getFilteredProducts } from "@/lib/queries";
 import { Params } from "@/lib/types/params";
 import { Metadata } from "next";
 
