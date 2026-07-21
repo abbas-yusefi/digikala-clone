@@ -15,9 +15,9 @@ const MobileSetting = ({
 }) => {
   return (
     <div
-      className={`${!isSetting ? "opacity-0 pointer-events-none" : "opacity-100"} fixed top-0 right-0 bg-surface-primary min-h-screen flex flex-col w-full px-7 transition-all duration-500 z-50`}
+      className={`${!isSetting ? "opacity-0 pointer-events-none" : "opacity-100"} fixed top-0 right-0 bg-surface-primary min-h-screen flex flex-col w-full transition-all duration-500 z-50`}
     >
-      <div className="flex justify-between items-center w-full py-5">
+      <div className="flex justify-between items-center w-full py-5 px-10">
         <IoMdClose
           onClick={() => setIsSetting(false)}
           className={`text-2xl cursor-pointer`}

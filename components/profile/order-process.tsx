@@ -7,8 +7,8 @@ import { Icons } from "@/lib/icons";
 
 const OrderProcess = () => {
   return (
-    <section className="w-full px-4 max-lg:mt-10">
-      <div className="flex justify-between items-center w-full">
+    <section className="w-full max-lg:px-4 max-lg:mt-10">
+      <div className="flex lg:px-5 justify-between items-center w-full lg:mb-4 lg:py-10">
         <Link
           href={"#"}
           className="flex items-center font-semibold text-text-link"

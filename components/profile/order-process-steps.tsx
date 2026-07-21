@@ -31,8 +31,8 @@ const OrderProcessSteps = ({
       </Link>
 
       {/* Desktop version */}
-      <Link href={href} className="max-lg:hidden flex ml-auto mr-5">
-        <div className="flex flex-col gap-2 mr-4 justify-center">
+      <Link href={href} className="max-lg:hidden flex w-full pr-5 py-7">
+        <div className="flex flex-col gap-2 pr-4 justify-center ml-auto">
           <span className="font-semibold text-sm" dir="rtl">
             {number} سفارش
           </span>

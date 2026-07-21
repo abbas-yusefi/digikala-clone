@@ -15,7 +15,7 @@ const SignoutButton = ({ variant }: SignoutButtonProps) => {
       // Mobile Setting
       <button
         onClick={handleSignout}
-        className="flex justify-between items-center text-brand-secondary py-4 cursor-pointer"
+        className="flex justify-between items-center text-brand-secondary px-10 py-4 cursor-pointer"
       >
         <Icons.Left className="opacity-0 text-lg max-xs:text-sm" />
         <div className="flex items-center gap-4 font-semibold">

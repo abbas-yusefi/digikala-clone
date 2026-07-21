@@ -16,17 +16,22 @@ const Header = () => {
 
   const path = usePathname();
 
+  const advertisementHeader =
+    path.startsWith("/profile") ||
+    path === "/checkout" ||
+    path === "/search" ? null : (
+      <Image
+        src={headerImage}
+        alt="header ad"
+        title="خرید صنایع دستی"
+        priority
+        className={`${path == "/search" ? "hidden" : ""} lg:hidden cursor-pointer max-lg:h-8.5 object-cover`}
+      />
+    );
+
   return (
     <>
-      {path !== "/search" && path !== "/checkout" && path !== "/profile" && (
-        <Image
-          src={headerImage}
-          alt="header ad"
-          title="خرید صنایع دستی"
-          priority
-          className={`${path == "/search" ? "hidden" : ""} lg:hidden cursor-pointer max-lg:h-8.5 object-cover`}
-        />
-      )}
+      {advertisementHeader}
       <MobileHeader />
       <DesktopHeader scrolled={scrolled} />
       <Toolbar

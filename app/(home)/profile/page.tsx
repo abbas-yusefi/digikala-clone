@@ -14,7 +14,7 @@ const page = async () => {
 
   return (
     <>
-      <main className="flex flex-col items-center pb-20 lg:hidden">
+      <main className="flex flex-col items-center pb-14 lg:hidden">
         <ProfileHeader />
         <PersonalInfo session={session} />
         <OrderProcess />

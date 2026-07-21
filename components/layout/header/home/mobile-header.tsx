@@ -23,7 +23,7 @@ const MobileHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
 
   const path = usePathname();
 
-  if (path == "/checkout" || path == "/profile") return null;
+  if (path == "/checkout" || path.startsWith("/profile")) return null;
 
   if (path == "/search")
     return <SearchMobileHeader category={category} query={query} />;
