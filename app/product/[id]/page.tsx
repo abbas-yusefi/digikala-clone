@@ -4,8 +4,8 @@ import AddToCart from "./add-to-cart";
 import { auth } from "@/auth";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { calculateDiscountedPrice } from "@/lib/utils/discount";
-import DiscountPercentage from "@/components/ui/discount-percentage";
+import AddToCartSection from "@/components/product/add-to-cart-section";
+import ProductHeader from "@/components/product/product-header";
 
 export async function generateMetadata({
   params,
@@ -87,6 +87,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           }),
         }}
       />
+      <main>
+        <ProductHeader />
       <article className="bg-surface-primary">
         <Image
           key={productImage.product_image_id}
@@ -129,6 +131,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
       </article>
+      </main>
     </>
   );
 };
