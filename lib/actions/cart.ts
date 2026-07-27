@@ -2,6 +2,8 @@
 
 import { addProductToCart, deleteProductFromCart } from "@/lib/queries";
 import { revalidatePath } from "next/cache";
+import { getAllCartProducts } from "../queries";
+import { auth } from "@/auth";
 
 async function deleteProductFromCartAction(cartId: number) {
   try {
@@ -28,4 +30,42 @@ const addToCartAction = async (
   }
 };
 
-export { deleteProductFromCartAction, addToCartAction };
+const getCartProductsAction = async () => {
+  try {
+    const session = await auth();
+    const email = session?.user?.email;
+    const products = email ? await getAllCartProducts(email) : undefined;
+    return products;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+async function SyncCartItemsAction(
+  userId: string,
+  cartItems: Array<{ id: string; quantity: string }> | null,
+) {
+  if (!cartItems || cartItems.length === 0) return { ok: true };
+
+  try {
+    await Promise.all(
+      cartItems.map(async (item) => {
+        try {
+          await addProductToCart(item.id, userId, item.quantity);
+        } catch (err) {
+          console.log("Sync cart failed! ", err);
+        }
+      }),
+    );
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, error };
+  }
+}
+
+export {
+  deleteProductFromCartAction,
+  addToCartAction,
+  getCartProductsAction,
+  SyncCartItemsAction,
+};

@@ -1,7 +1,6 @@
 "use client";
 
-import { getCartProductsAction } from "@/lib/actions/get-cart-products";
-import { SyncCartItemsAction } from "@/lib/actions/sync-cart-items";
+import { getCartProductsAction, SyncCartItemsAction } from "@/lib/actions/cart";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
