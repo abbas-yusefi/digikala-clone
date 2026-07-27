@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import HorizantalNav from "../shared/horizontal-nav";
 import SuperwebTab from "../layout/header/home/superweb-tab";
 import DisplayProductHeader from "./display-product-header";
-import PulsingDotLoader from "../ui/pulsing-dot-loader";
+import LoadingDots from "../ui/loading-dots";
 import HeaderImage from "@/public/header.png";
 import tabsData from "@/public/superweb";
 
@@ -39,7 +39,7 @@ const SearchMobileHeader = ({
           />
         ))}
       </HorizantalNav>
-      <Suspense fallback={<PulsingDotLoader />}>
+      <Suspense fallback={<LoadingDots />}>
         <DisplayProductHeader category={category} query={query} />
       </Suspense>
     </header>

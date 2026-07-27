@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 
 import DisplayProducts from "@/components/search/display-products";
 import NavButtons from "./nav-buttons";
-import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
+import LoadingDots from "@/components/ui/loading-dots";
 import { Params } from "@/lib/types/params";
 
 const AwaitedDisplayProducts = async ({
@@ -64,9 +64,7 @@ const SearchResultPage = async ({
   return (
     <>
       <main className="min-[425px]:px-7">
-        <Suspense
-          fallback={<PulsingDotLoader className="min-h-screen w-full" />}
-        >
+        <Suspense fallback={<LoadingDots className="min-h-screen w-full" />}>
           <AwaitedDisplayProducts category={category} params={params} />
         </Suspense>
       </main>

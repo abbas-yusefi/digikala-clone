@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductBrands from "./product-brands";
 import Link from "next/link";
 import { filterBrandAction } from "@/lib/actions/filter-brand-action";
-import PulsingDotLoader from "../ui/pulsing-dot-loader";
+import LoadingDots from "../ui/loading-dots";
 import { notFound } from "next/navigation";
 import { CategorySlugs, FilteredBrands } from "@/lib/types/product";
 import { Icons } from "@/lib/icons";
@@ -40,7 +40,7 @@ const DisplayCategoryProducts = ({
 
   if (!categoryId) return notFound();
 
-  if (!brands) return <PulsingDotLoader className="w-full h-200" />;
+  if (!brands) return <LoadingDots className="w-full h-200" />;
 
   return (
     <div className="flex flex-col w-full">

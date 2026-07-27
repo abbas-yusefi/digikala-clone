@@ -8,7 +8,7 @@ import {
 } from "@/public/categoriesGrid/index";
 import CategoriesGrid from "@/components/home/categories-grid";
 import { Suspense } from "react";
-import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
+import LoadingDots from "@/components/ui/loading-dots";
 import Footer from "@/components/home/footer/footer";
 import Brands from "@/components/home/brands";
 import AdvertisementImage from "@/components/home/advertisement-image";
@@ -24,11 +24,11 @@ const page = async () => {
       <main className="z-40 bg-surface-primary lg:mx-20 relative">
         <Support />
         <ProductCWrapper />
-        <Suspense fallback={<PulsingDotLoader className="h-72" />}>
+        <Suspense fallback={<LoadingDots className="h-72" />}>
           <DiscountSection />
         </Suspense>
         <AdvertisementGrid data={firstCategories} imageClassName="rounded-md" />
-        <Suspense fallback={<PulsingDotLoader className="h-72" />}>
+        <Suspense fallback={<LoadingDots className="h-72" />}>
           <DiscountSection secondRow />
         </Suspense>
         <AdvertisementGrid

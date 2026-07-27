@@ -1,13 +1,13 @@
 "use client";
 
-import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
-import { getCartProductsAction } from "@/lib/actions/get-cart-products";
+import LoadingDots from "@/components/ui/loading-dots";
 import { getProductAction } from "@/lib/actions/product";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import EmptyCart from "@/components/checkout/empty-cart";
 import ProductCard from "@/components/search/product-card";
 import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
+import { getCartProductsAction } from "@/lib/actions/cart";
 
 type parsedData = { id: number; quantity: number };
 
@@ -56,7 +56,7 @@ const CheckoutPage = () => {
   if (isLoading) {
     return (
       <div className="w-full h-screen flex justify-center items-center">
-        <PulsingDotLoader />
+        <LoadingDots />
       </div>
     );
   } else if (

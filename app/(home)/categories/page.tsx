@@ -8,7 +8,7 @@ import CategoryCard from "@/components/categories/category-card";
 import DisplayCategoryProducts from "@/components/categories/display-category-products";
 import { useScreenWidth } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
-import PulsingDotLoader from "@/components/ui/pulsing-dot-loader";
+import LoadingDots from "@/components/ui/loading-dots";
 import { CategorySlugs } from "@/lib/types/product";
 import Support from "@/components/home/support";
 
@@ -23,7 +23,7 @@ const CategoryPage = () => {
       <div className="mb-5"></div>
       <main className="flex justify-between bg-surface-primary relative">
         <Support />
-        <Suspense fallback={<PulsingDotLoader className="w-full h-60" />}>
+        <Suspense fallback={<LoadingDots className="w-full h-60" />}>
           <DisplayCategoryProducts categorySelected={categorySelected} />
         </Suspense>
 

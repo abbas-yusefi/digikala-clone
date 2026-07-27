@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-const PulsingDotLoader = ({ className }: { className?: string }) => {
+const LoadingDots = ({ className }: { className?: string }) => {
   const [firstAnimate, setFirstAnimate] = useState(false);
   const [secondAnimate, setSecondAnimate] = useState(false);
 
@@ -17,7 +17,7 @@ const PulsingDotLoader = ({ className }: { className?: string }) => {
 
   return (
     <div
-      className={`${className} flex justify-center items-center bg-(--color-surface-secondary)`}
+      className={`${className} flex justify-center items-center bg-surface-secondary`}
     >
       <div className="bg-gray-500 rounded-full p-1 animate-pulse"></div>
       <div
@@ -30,4 +30,4 @@ const PulsingDotLoader = ({ className }: { className?: string }) => {
   );
 };
 
-export default PulsingDotLoader;
+export default LoadingDots;
