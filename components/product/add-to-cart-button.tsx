@@ -3,7 +3,9 @@
 import {
   addToCartAction,
   deleteProductFromCartAction,
+  incrementProductQuantityAction,
   itemExistsInCartAction,
+  itemQuantityAction,
 } from "@/lib/actions/cart";
 import { Icons } from "@/lib/icons";
 import { Cart } from "@/lib/types/product";
@@ -118,6 +120,51 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
     checkExistsInCart(product_id, user_id);
   }, [product_id, user_id]);
 
+  useEffect(() => {
+    const getItemQuantity = async () => {
+      if (!user_id) {
+        const data = localStorage.getItem("cart");
+        const parsedData = data ? JSON.parse(data) : null;
+        if (parsedData) {
+          const product = parsedData.find(
+            (item: Pick<Cart, "id" | "quantity">) => item.id === product_id,
+          );
+          if (product) {
+            setQuantity(product.quantity);
+          } else {
+            setQuantity(0);
+          }
+        } else {
+          setQuantity(0);
+        }
+        return;
+      }
+      try {
+        const result = await itemQuantityAction(user_id, product_id);
+        if (result && result.length > 0) {
+          setQuantity(result[0].quantity);
+        } else {
+          setQuantity(0);
+        }
+      } catch (err) {
+        console.log(err);
+        setQuantity(0);
+      }
+    };
+    getItemQuantity();
+  }, [product_id, user_id]);
+
+  const incrementProductQuantity = async () => {
+    if (!user_id) return;
+    try {
+      const result = await incrementProductQuantityAction(product_id, user_id);
+      if (result?.success) setQuantity((prev) => prev + 1);
+      console.log(result, quantity);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       {isItemInCart ? (
@@ -129,7 +176,10 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
             {quantity <= 1 ? <Icons.Trash /> : <Icons.Minus />}
           </span>
           <span className="text-lg cursor-pointer">{quantity}</span>
-          <span className="text-2xl cursor-pointer p-1">
+          <span
+            className="text-2xl cursor-pointer p-1"
+            onClick={incrementProductQuantity}
+          >
             <Icons.Plus />
           </span>
         </button>

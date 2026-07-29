@@ -310,6 +310,34 @@ const itemExistsInCart = async (
   return false;
 };
 
+const itemQuantity = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<Pick<Cart, "quantity">[]> => {
+  const { rows } = await pool.query(
+    `SELECT quantity FROM cart WHERE user_id = $1 AND product_id = $2`,
+    [user_id, product_id],
+  );
+  return rows;
+};
+
+const incrementProductQuantity = async (
+  product_id: string | number,
+  user_id: string | number,
+): Promise<Response> => {
+  const result = await pool.query(
+    `
+    UPDATE cart set quantity = quantity + 1 WHERE product_id = $1 AND user_id = $2
+    `,
+    [product_id, user_id],
+  );
+
+  return {
+    success: result.rowCount === 1,
+    rowCount: result.rowCount,
+  };
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -324,4 +352,6 @@ export {
   getFilteredProducts,
   getFilteredBrandsPerCategory,
   itemExistsInCart,
+  itemQuantity,
+  incrementProductQuantity,
 };

@@ -5,6 +5,8 @@ import {
   deleteProductFromCart,
   itemExistsInCart,
   getAllCartProducts,
+  itemQuantity,
+  incrementProductQuantity,
 } from "@/lib/queries";
 import { auth } from "@/auth";
 
@@ -22,12 +24,12 @@ async function deleteProductFromCartAction(
 }
 
 const addToCartAction = async (
-  productId: string | number,
-  userId: string | number,
+  product_id: string | number,
+  user_id: string | number,
   quantity: string | number,
 ): Promise<{ success: boolean; rowCount: number | null }> => {
   try {
-    const result = await addProductToCart(productId, userId, quantity);
+    const result = await addProductToCart(product_id, user_id, quantity);
     return result;
   } catch (err) {
     console.log(err);
@@ -81,10 +83,36 @@ const itemExistsInCartAction = async (
   }
 };
 
+const itemQuantityAction = async (
+  user_id: string | number,
+  product_id: string | number,
+) => {
+  try {
+    const result = await itemQuantity(user_id, product_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const incrementProductQuantityAction = async (
+  product_id: string | number,
+  user_id: string | number,
+) => {
+  try {
+    const result = await incrementProductQuantity(product_id, user_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
   deleteProductFromCartAction,
   addToCartAction,
   getCartProductsAction,
   SyncCartItemsAction,
   itemExistsInCartAction,
+  itemQuantityAction,
+  incrementProductQuantityAction,
 };
