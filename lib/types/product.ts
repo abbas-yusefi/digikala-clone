@@ -1,4 +1,4 @@
-export type Product = {
+type Product = {
   product_id: number;
   title: string;
   description: string;
@@ -8,19 +8,19 @@ export type Product = {
   category_id: number;
 };
 
-export type Image = {
+type Image = {
   product_id: number;
   product_image_id: number;
   image_url: string;
 };
 
-export type Brand = {
+type Brand = {
   brand_id: number;
   name: string;
   slug: string;
 };
 
-export type Cart = {
+type Cart = {
   id: number;
   user_id: number;
   product_id: number;
@@ -29,30 +29,45 @@ export type Cart = {
   updated_at: number;
 };
 
-export type RecentSearches = {
+type RecentSearches = {
   id: number;
   search_term: string;
   searched_at: number;
   user_id: number;
 };
 
-export type WithImage<T> = T & { image_url: string };
+type WithImage<T> = T & { image_url: string };
 
-export type CategorySlugs =
+type CategorySlugs =
   | "mobile"
   | "laptop"
   | "headphones"
   | "smartwatch"
   | "tablet";
 
-export type FilteredBrands = {
+type FilteredBrands = {
   brand_brand_id: number;
   brand_name: string;
   slug: string;
   product_count: number;
 };
 
-export type ProductCard = Omit<
+type ProductCard = Omit<Product, "category_id" | "brand_id" | "descripiton">;
+
+type Response = {
+  success: boolean;
+  rowCount: number | null;
+};
+
+export type {
   Product,
-  "category_id" | "brand_id" | "descripiton"
->;
+  Image,
+  Brand,
+  Cart,
+  RecentSearches,
+  WithImage,
+  CategorySlugs,
+  FilteredBrands,
+  ProductCard,
+  Response,
+};

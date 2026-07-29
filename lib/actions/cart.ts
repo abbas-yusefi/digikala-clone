@@ -1,15 +1,20 @@
 "use server";
 
-import { addProductToCart, deleteProductFromCart } from "@/lib/queries";
-import { revalidatePath } from "next/cache";
-import { getAllCartProducts } from "../queries";
+import {
+  addProductToCart,
+  deleteProductFromCart,
+  itemExistsInCart,
+  getAllCartProducts,
+} from "@/lib/queries";
 import { auth } from "@/auth";
 
-async function deleteProductFromCartAction(cartId: number) {
+async function deleteProductFromCartAction(
+  product_id: string | number,
+  user_Id: string | number,
+) {
   try {
-    await deleteProductFromCart(cartId);
-    revalidatePath("/checkout");
-    return { success: true };
+    const result = await deleteProductFromCart(product_id, user_Id);
+    return result;
   } catch (error) {
     console.error(error);
     return { success: false, error: "Failed to delete item" };
@@ -20,13 +25,13 @@ const addToCartAction = async (
   productId: string | number,
   userId: string | number,
   quantity: string | number,
-): Promise<void> => {
+): Promise<{ success: boolean; rowCount: number | null }> => {
   try {
     const result = await addProductToCart(productId, userId, quantity);
-    console.log(result);
-    revalidatePath("/checkout");
+    return result;
   } catch (err) {
     console.log(err);
+    return { success: false, rowCount: null };
   }
 };
 
@@ -63,9 +68,23 @@ async function SyncCartItemsAction(
   }
 }
 
+const itemExistsInCartAction = async (
+  product_id: number | string,
+  user_id: undefined | string,
+): Promise<boolean | undefined> => {
+  try {
+    if (!user_id) return;
+    const result = itemExistsInCart(product_id, user_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
   deleteProductFromCartAction,
   addToCartAction,
   getCartProductsAction,
   SyncCartItemsAction,
+  itemExistsInCartAction,
 };

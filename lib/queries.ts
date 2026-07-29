@@ -8,6 +8,7 @@ import {
   Product,
   ProductCard,
   RecentSearches,
+  Response,
   WithImage,
 } from "./types/product";
 
@@ -105,28 +106,40 @@ WHERE u.email = $1
   return rows;
 };
 
-const deleteProductFromCart = async (Id: number | string): Promise<void> => {
-  await pool.query(
+const deleteProductFromCart = async (
+  product_id: number | string,
+  user_id: string | number,
+): Promise<Response> => {
+  const result = await pool.query(
     `
     DELETE FROM cart
-    WHERE id = $1
+    WHERE product_id = $1 AND user_id = $2
     `,
-    [Id],
+    [product_id, user_id],
   );
+  return {
+    success: result.rowCount === 1,
+    rowCount: result.rowCount,
+  };
 };
 
 const addProductToCart = async (
   productId: string | number,
   userId: string | number,
   quantity: string | number,
-): Promise<void> => {
-  await pool.query(
+): Promise<Response> => {
+  const result = await pool.query(
     `
     INSERT INTO cart(product_id,user_id,quantity)
     VALUES($1,$2,$3)
     `,
     [productId, userId, quantity ? quantity : 1],
   );
+
+  return {
+    success: result.rowCount === 1,
+    rowCount: result.rowCount,
+  };
 };
 
 const addRecentlySearched = async (
@@ -285,6 +298,18 @@ ORDER BY b.name;`,
   { revalidate: 86400 },
 );
 
+const itemExistsInCart = async (
+  product_id: number | string,
+  user_id: undefined | string,
+): Promise<boolean> => {
+  const { rows } = await pool.query(
+    `SELECT * FROM cart WHERE product_id = $1 AND user_id = $2`,
+    [product_id, user_id],
+  );
+  if (rows.length > 0) return true;
+  return false;
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -298,4 +323,5 @@ export {
   deleteAllRecentSearches,
   getFilteredProducts,
   getFilteredBrandsPerCategory,
+  itemExistsInCart,
 };
