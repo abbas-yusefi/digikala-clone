@@ -7,6 +7,7 @@ import {
   getAllCartProducts,
   itemQuantity,
   incrementProductQuantity,
+  decrementProductQuantity,
 } from "@/lib/queries";
 import { auth } from "@/auth";
 
@@ -106,6 +107,17 @@ const incrementProductQuantityAction = async (
     console.log(err);
   }
 };
+const decrementProductQuantityAction = async (
+  product_id: string | number,
+  user_id: string | number,
+) => {
+  try {
+    const result = await decrementProductQuantity(product_id, user_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export {
   deleteProductFromCartAction,
@@ -115,4 +127,5 @@ export {
   itemExistsInCartAction,
   itemQuantityAction,
   incrementProductQuantityAction,
+  decrementProductQuantityAction,
 };

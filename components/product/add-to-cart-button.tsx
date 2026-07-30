@@ -2,6 +2,7 @@
 
 import {
   addToCartAction,
+  decrementProductQuantityAction,
   deleteProductFromCartAction,
   incrementProductQuantityAction,
   itemExistsInCartAction,
@@ -17,8 +18,6 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
   const user_id = session?.user.id;
   const [isItemInCart, setIsItemInCart] = useState(false);
   const [quantity, setQuantity] = useState(1);
-
-  // const getProductQuantity =
 
   const deleteProductFromCart = async () => {
     const deleteDatabaseProduct = async () => {
@@ -155,11 +154,47 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
   }, [product_id, user_id]);
 
   const incrementProductQuantity = async () => {
-    if (!user_id) return;
     try {
+      if (!user_id) {
+        const data = localStorage.getItem("cart");
+        const parsedData = data ? JSON.parse(data) : null;
+        if (parsedData) {
+          const updatedCart = parsedData.map(
+            (item: Pick<Cart, "id" | "quantity">) =>
+              item.id === product_id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item,
+          );
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          setQuantity((prev) => (prev = prev + 1));
+        }
+        return;
+      }
       const result = await incrementProductQuantityAction(product_id, user_id);
       if (result?.success) setQuantity((prev) => prev + 1);
-      console.log(result, quantity);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const decrementProductQuantity = async () => {
+    try {
+      if (!user_id) {
+        const data = localStorage.getItem("cart");
+        const parsedData = data ? JSON.parse(data) : null;
+        if (parsedData) {
+          const updatedCart = parsedData.map(
+            (item: Pick<Cart, "id" | "quantity">) =>
+              item.id === product_id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item,
+          );
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          setQuantity((prev) => (prev = prev - 1));
+        }
+        return;
+      }
+      const result = await decrementProductQuantityAction(product_id, user_id);
+      if (result?.success) setQuantity((prev) => prev - 1);
     } catch (err) {
       console.log(err);
     }
@@ -170,7 +205,9 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
       {isItemInCart ? (
         <button className="w-[47%] h-14 rounded-lg bg-surface-primary border border-black/15 font-semibold flex justify-between items-center px-4 text-brand-discount cursor-default">
           <span
-            onClick={deleteProductFromCart}
+            onClick={
+              quantity <= 1 ? deleteProductFromCart : decrementProductQuantity
+            }
             className="text-2xl cursor-pointer p-1"
           >
             {quantity <= 1 ? <Icons.Trash /> : <Icons.Minus />}

@@ -338,6 +338,23 @@ const incrementProductQuantity = async (
   };
 };
 
+const decrementProductQuantity = async (
+  product_id: string | number,
+  user_id: string | number,
+): Promise<Response> => {
+  const result = await pool.query(
+    `
+    UPDATE cart set quantity = quantity - 1 WHERE product_id = $1 AND user_id = $2
+    `,
+    [product_id, user_id],
+  );
+
+  return {
+    success: result.rowCount === 1,
+    rowCount: result.rowCount,
+  };
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -354,4 +371,5 @@ export {
   itemExistsInCart,
   itemQuantity,
   incrementProductQuantity,
+  decrementProductQuantity,
 };
