@@ -46,47 +46,46 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
     }
   };
 
-  const handleDatabaseAddToCart = async () => {
+  const addToCart = async () => {
+    // Guest (localStorage)
+    if (!user_id) {
+      try {
+        const data = localStorage.getItem("cart");
+        const parsedData: Array<{ id: number; quantity: number }> = data
+          ? JSON.parse(data)
+          : [];
+
+        const exists = parsedData.some(
+          (item) => Number(item.id) === Number(product_id),
+        );
+
+        if (exists) return; // already in cart – do nothing (or increment if you prefer)
+
+        const updatedCart = [
+          ...parsedData,
+          { id: Number(product_id), quantity: 1 },
+        ];
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        setIsItemInCart(true);
+        setQuantity(1);
+      } catch (err) {
+        console.error(err);
+        setIsItemInCart(false);
+      }
+      return;
+    }
+
+    // Authenticated (server action)
     try {
-      if (!user_id) return;
       const result = await addToCartAction(product_id, user_id, "1");
       if (result.success) {
         setIsItemInCart(true);
         setQuantity(1);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      setIsItemInCart(false);
     }
-  };
-
-  const handleLocalstorageAddToCart = () => {
-    const data = localStorage.getItem("cart") || null;
-    const parsedData = data ? JSON.parse(data) : null;
-    const exists = parsedData
-      ? parsedData.some(
-          (item: Pick<Cart, "id" | "quantity">) => +item.id === product_id,
-        )
-      : false;
-    const itemExistsInCart = () => {
-      if (exists) {
-        return;
-      }
-      if (parsedData) {
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([...parsedData, { id: product_id, quantity: 1 }]),
-        );
-
-        setIsItemInCart(true);
-        setQuantity(1);
-      } else {
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([{ id: product_id, quantity: 1 }]),
-        );
-      }
-    };
-    itemExistsInCart();
   };
 
   useEffect(() => {
@@ -222,9 +221,7 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
         </button>
       ) : (
         <button
-          onClick={
-            user_id ? handleDatabaseAddToCart : handleLocalstorageAddToCart
-          }
+          onClick={addToCart}
           className="w-[47%] h-14 rounded-lg bg-brand-secondary cursor-pointer text-white font-semibold text-sm"
         >
           افزودن به سبد خرید

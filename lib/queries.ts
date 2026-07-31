@@ -50,7 +50,9 @@ const getProduct = unstable_cache(
           description,
           price,
           discount,
-          image_url
+          image_url,
+          category_id,
+          brand_id
           FROM product p
           INNER JOIN product_image i
           ON p.product_id = i.product_id
