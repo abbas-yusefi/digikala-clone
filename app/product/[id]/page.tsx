@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import AddToCartSection from "@/components/product/add-to-cart-section";
 import ProductHeader from "@/components/product/product-header";
+import ProductDetailBody from "@/components/product/product-detail-body";
+import ProductDetailNav from "@/components/product/product-detail-nav";
 
 export async function generateMetadata({
   params,
@@ -79,16 +81,15 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       />
       <main>
         <ProductHeader />
-        <article className="bg-surface-primary">
-          <Image
-            key={productImage.product_image_id}
-            alt={productData.title}
-            src={productImage.image_url}
-            height={70}
-            width={70}
-          />
-          <AddToCartSection data={productData} />
-        </article>
+        <ProductDetailNav
+          brand_id={productData.brand_id}
+          category_id={productData.category_id}
+        />
+        <ProductDetailBody
+          productData={productData}
+          productImage={productImage}
+        />
+        <AddToCartSection data={productData} />
       </main>
     </>
   );
