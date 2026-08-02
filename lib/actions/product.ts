@@ -1,7 +1,12 @@
 "use server";
 
-import { getProduct } from "../queries";
-import { ProductCard, WithImage } from "../types/product";
+import {
+  addFavorite,
+  deleteFavorite,
+  getFavorite,
+  getProduct,
+} from "../queries";
+import { ActionResponse, ProductCard, WithImage } from "../types/product";
 
 const getProductAction = async (
   id: string,
@@ -18,4 +23,50 @@ const getProductAction = async (
   }
 };
 
-export { getProductAction };
+const addFavoriteAction = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<ActionResponse> => {
+  if (!user_id || !product_id) return;
+  try {
+    const result = await addFavorite(user_id, product_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getFavoriteActoin = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<boolean | undefined> => {
+  if (!user_id || !product_id) {
+    console.log("user id or product id is not provided");
+    return false;
+  }
+  try {
+    const result = await getFavorite(user_id, product_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteFavoriteAction = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<ActionResponse> => {
+  if (!user_id || !product_id) return;
+  try {
+    const result = await deleteFavorite(user_id, product_id);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  getProductAction,
+  addFavoriteAction,
+  getFavoriteActoin,
+  deleteFavoriteAction,
+};

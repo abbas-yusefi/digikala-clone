@@ -357,6 +357,58 @@ const decrementProductQuantity = async (
   };
 };
 
+const addFavorite = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<Response> => {
+  const result = await pool.query(
+    `
+    INSERT INTO favorite(user_id,product_id)
+    VALUES($1,$2)
+    `,
+    [user_id, product_id],
+  );
+
+  return {
+    success: result.rowCount === 1,
+    rowCount: result.rowCount,
+  };
+};
+
+const getFavorite = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<boolean> => {
+  const { rows } = await pool.query(
+    `
+    SELECT * FROM favorite WHERE user_id = $1 AND product_id = $2
+    `,
+    [user_id, product_id],
+  );
+  if (rows && rows.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const deleteFavorite = async (
+  user_id: string | number,
+  product_id: string | number,
+): Promise<Response> => {
+  const result = await pool.query(
+    `
+    DELETE FROM favorite WHERE user_id = $1 AND product_id = $2
+    `,
+    [user_id, product_id],
+  );
+
+  return {
+    success: result.rowCount === 1,
+    rowCount: result.rowCount,
+  };
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -374,4 +426,7 @@ export {
   itemQuantity,
   incrementProductQuantity,
   decrementProductQuantity,
+  addFavorite,
+  getFavorite,
+  deleteFavorite,
 };

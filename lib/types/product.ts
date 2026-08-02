@@ -59,6 +59,13 @@ type Response = {
   rowCount: number | null;
 };
 
+type ActionResponse =
+  | {
+      success: boolean;
+      rowCount: number | null;
+    }
+  | undefined;
+
 export type {
   Product,
   Image,
@@ -70,4 +77,5 @@ export type {
   FilteredBrands,
   ProductCard,
   Response,
+  ActionResponse,
 };

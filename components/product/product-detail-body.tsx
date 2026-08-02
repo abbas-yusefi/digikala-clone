@@ -1,9 +1,8 @@
-import { Icons } from "@/lib/icons";
 import { Image as ImageType, Product, WithImage } from "@/lib/types/product";
 import Image from "next/image";
 
-import React from "react";
 import ShareButton from "../shared/share-button";
+import FavoriteButton from "./favorite-button";
 
 const ProductDetailBody = ({
   productImage,
@@ -16,6 +15,7 @@ const ProductDetailBody = ({
     <article className="h-full">
       <div className="flex justify-center items-center w-full h-72 bg-surface-primary my-10">
         <Image
+          priority
           key={productImage.product_image_id}
           alt={productData.title}
           src={productImage.image_url}
@@ -27,9 +27,7 @@ const ProductDetailBody = ({
       <div className="border-t border-black/20 py-8">
         <div className="flex justify-between px-5 font-semibold">
           <div className="text-xl flex items-center gap-4">
-            <button className="cursor-pointer">
-              <Icons.Heart />
-            </button>
+            <FavoriteButton product_id={productData.product_id} />
             <ShareButton />
           </div>
           <h1 dir="rtl">{productData.title}</h1>

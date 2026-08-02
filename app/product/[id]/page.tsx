@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getProduct, getImage } from "@/lib/queries";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
