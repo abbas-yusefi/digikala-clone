@@ -5,6 +5,7 @@ import Image from "next/image";
 import HeaderImage from "@/public/header.png";
 import { useEffect, useState } from "react";
 import { Icons } from "@/lib/icons";
+import ShareButton from "../shared/share-button";
 
 const DisplayProductHeader = ({
   category,
@@ -36,16 +37,10 @@ const DisplayProductHeader = ({
     return (
       <>
         <div className="flex items-center justify-between px-7 py-5">
-          <div className="flex gap-7">
-            <button
-              onClick={() =>
-                navigator.clipboard.writeText(window.location.href)
-              }
-            >
-              <Icons.Share className="text-2xl cursor-pointer" />
-            </button>
+          <div className="flex gap-7 text-2xl">
+            <ShareButton />
             <button onClick={() => (window.location.hash = "search")}>
-              <Icons.Search className="text-2xl cursor-pointer" />
+              <Icons.Search className="cursor-pointer" />
             </button>
           </div>
           <div className="flex gap-7 font-bold">

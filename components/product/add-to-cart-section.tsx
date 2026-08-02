@@ -13,7 +13,7 @@ const AddToCartSection = ({
   const discountedPrice = calculateDiscountedPrice(data.price, data.discount);
 
   return (
-    <div className="fixed bottom-0 right-0 w-full h-20 border border-black/15 px-3">
+    <div className="fixed bottom-0 right-0 w-full h-20 border border-black/15 px-3 z-50 bg-surface-primary">
       <div className="flex justify-between items-center h-full w-full">
         <div className="flex flex-col">
           <div className="flex items-center gap-2">

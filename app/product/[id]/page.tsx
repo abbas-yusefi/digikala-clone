@@ -79,7 +79,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           }),
         }}
       />
-      <main>
+      <main className="h-full">
         <ProductHeader />
         <ProductDetailNav
           brand_id={productData.brand_id}
