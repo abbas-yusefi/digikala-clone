@@ -3,18 +3,17 @@ import Link from "next/link";
 import React from "react";
 import DiscountPercentage from "../../ui/discount-percentage";
 import { ProductCard, WithImage } from "@/lib/types/product";
+import { calculateDiscountedPrice } from "@/lib/utils/discount";
 
 const DiscountProductCard = ({
   product,
 }: {
   product: WithImage<ProductCard>;
 }) => {
-  const discountedPrice =
-    Math.round(
-      (product.price -
-        product.price * (product.discount ? product.discount : 0 / 100)) /
-        10000,
-    ) * 10000;
+  const discountedPrice = calculateDiscountedPrice(
+    product.price,
+    product.discount,
+  );
 
   return (
     <>
