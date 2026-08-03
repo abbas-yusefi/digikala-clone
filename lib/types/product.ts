@@ -66,6 +66,12 @@ type ActionResponse =
     }
   | undefined;
 
+type Favorite = {
+  id: number;
+  product_id: number;
+  favorited_at: string | number;
+};
+
 export type {
   Product,
   Image,
@@ -78,4 +84,5 @@ export type {
   ProductCard,
   Response,
   ActionResponse,
+  Favorite,
 };

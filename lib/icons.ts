@@ -23,6 +23,7 @@ import {
   FiTrash2,
   FiPlus,
   FiMinus,
+  FiCheck,
 } from "react-icons/fi";
 import {
   FaRegUser,
@@ -34,6 +35,7 @@ import {
   FaLinkedin,
   FaTabletAlt,
   FaCaretDown,
+  FaSortAmountDown,
 } from "react-icons/fa";
 import { BsSignpost2 } from "react-icons/bs";
 import { TbLogout } from "react-icons/tb";
@@ -60,6 +62,8 @@ import { CiMobile2, CiLaptop, CiHeadphones, CiPercent } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
 
 export const Icons = {
+  Check: FiCheck,
+  Sort: FaSortAmountDown,
   Minus: FiMinus,
   Plus: FiPlus,
   Trash: FiTrash2,

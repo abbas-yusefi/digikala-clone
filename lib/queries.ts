@@ -411,15 +411,32 @@ const deleteFavorite = async (
 
 const getAllFavorites = async (
   user_id: string | undefined,
+  order_by: "lowest price" | "highest price" | "recent" | "oldest",
 ): Promise<WithImage<Product>[]> => {
+  const orderBy =
+    order_by === "lowest price"
+      ? "product.price"
+      : order_by === "highest price"
+        ? "product.price"
+        : order_by === "recent"
+          ? "favorite.favorited_at"
+          : "favorite.favorited_at";
+
+  const orient =
+    order_by === "highest price" || order_by === "recent" ? "DESC" : "";
   const { rows } = await pool.query(
     `
-SELECT DISTINCT ON(product.product_id) product.*, product_image.* FROM product 
+SELECT DISTINCT ON(${orderBy}) product.*, product_image.* FROM product 
 INNER JOIN favorite
 ON product.product_id = favorite.product_id
-INNER JOIN product_image
+INNER JOIN (
+  SELECT DISTINCT ON (product_id) * 
+  FROM product_image 
+  ORDER BY product_id, product_image_id
+) product_image
 ON product_image.product_id = product.product_id
 WHERE user_id = $1
+ORDER BY ${orderBy} ${orient}
     `,
     [user_id],
   );

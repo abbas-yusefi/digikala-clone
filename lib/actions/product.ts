@@ -3,10 +3,16 @@
 import {
   addFavorite,
   deleteFavorite,
+  getAllFavorites,
   getFavorite,
   getProduct,
 } from "../queries";
-import { ActionResponse, ProductCard, WithImage } from "../types/product";
+import {
+  ActionResponse,
+  Product,
+  ProductCard,
+  WithImage,
+} from "../types/product";
 
 const getProductAction = async (
   id: string,
@@ -64,9 +70,23 @@ const deleteFavoriteAction = async (
   }
 };
 
+const getAllFavoriteProductsAction = async (
+  user_id: string | undefined,
+  order_by: "lowest price" | "highest price" | "recent" | "oldest",
+): Promise<WithImage<Product>[] | undefined> => {
+  if (!user_id || !order_by) return;
+  try {
+    const result = await getAllFavorites(user_id, order_by);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
   getProductAction,
   addFavoriteAction,
   getFavoriteActoin,
   deleteFavoriteAction,
+  getAllFavoriteProductsAction,
 };
