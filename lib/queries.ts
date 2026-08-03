@@ -409,6 +409,24 @@ const deleteFavorite = async (
   };
 };
 
+const getAllFavorites = async (
+  user_id: string | undefined,
+): Promise<WithImage<Product>[]> => {
+  const { rows } = await pool.query(
+    `
+SELECT DISTINCT ON(product.product_id) product.*, product_image.* FROM product 
+INNER JOIN favorite
+ON product.product_id = favorite.product_id
+INNER JOIN product_image
+ON product_image.product_id = product.product_id
+WHERE user_id = $1
+    `,
+    [user_id],
+  );
+
+  return rows;
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -429,4 +447,5 @@ export {
   addFavorite,
   getFavorite,
   deleteFavorite,
+  getAllFavorites,
 };
