@@ -1,79 +1,98 @@
 import React from "react";
 import FooterPartnerRow from "../footer-partner-row";
 
+import digimag from "@/public/partners/digimag.svg";
+import digipay from "@/public/partners/digipay.svg";
+import digistyle from "@/public/partners/digistyle.svg";
+import digiplus from "@/public/partners/digiplus.svg";
+import digiclub from "@/public/partners/digiclub.svg";
+import jet from "@/public/partners/jet.svg";
+import digify from "@/public/partners/digify.svg";
+import digikalads from "@/public/partners/digikalads.svg";
+import digiMehr from "@/public/partners/digiMehr.svg";
+import diginext from "@/public/partners/diginext.svg";
+import ganjeh from "@/public/partners/ganjeh.svg";
+import digiexpress from "@/public/partners/digiexpress.svg";
+import smartech from "@/public/partners/smartech.svg";
+import digitalGold from "@/public/partners/digital-gold.svg";
+import digikalaService from "@/public/partners/digikala-service.svg";
+import digikalaBusiness from "@/public/partners/digikala-business.svg";
+import miare from "@/public/partners/miare.svg";
+import vidomart from "@/public/partners/vidomart.svg";
+
 const FooterPartners = () => {
   const partners = [
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digimag.svg",
-      alt: "",
+      src: digimag,
+      alt: "digimag",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digipay.svg",
-      alt: "",
+      src: digipay,
+      alt: "digipay",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digistyle.svg",
-      alt: "",
+      src: digistyle,
+      alt: "digistyle",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digiplus.svg",
-      alt: "",
+      src: digiplus,
+      alt: "digiplus",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digiclub.svg",
-      alt: "",
+      src: digiclub,
+      alt: "digiclub",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/jet.svg",
-      alt: "",
+      src: jet,
+      alt: "jet",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digify.svg",
-      alt: "",
+      src: digify,
+      alt: "digify",
     },
     {
-      src: "https://dkstatics-public.digikala.com/digikala-static/6d8b4e67f90b80c581949f1e680aeaa60fa49d0e_1770621595.svg",
-      alt: "",
+      src: digikalads,
+      alt: "digikalads",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digiMehr.svg",
-      alt: "",
+      src: digiMehr,
+      alt: "digiMehr",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/diginext.svg",
-      alt: "",
+      src: diginext,
+      alt: "diginext",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/ganjeh.svg",
-      alt: "",
+      src: ganjeh,
+      alt: "ganjeh",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digiexpress.svg",
-      alt: "",
+      src: digiexpress,
+      alt: "digiexpress",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/smartech.svg",
-      alt: "",
+      src: smartech,
+      alt: "smartech",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digital-gold.svg",
-      alt: "",
+      src: digitalGold,
+      alt: "digitalGold",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digikala-service.svg",
-      alt: "",
+      src: digikalaService,
+      alt: "digikalaService",
     },
     {
-      src: "https://www.digikala.com/statics/img/svg/footer/digikala-business.svg",
-      alt: "",
+      src: digikalaBusiness,
+      alt: "digikalaBusiness",
     },
     {
-      src: "https://dkstatics-public.digikala.com/digikala-static/e7661075abe11edde27e6d550c3507756122e1cf_1758969434.svg",
-      alt: "",
+      src: miare,
+      alt: "miare",
     },
     {
-      src: "https://dkstatics-public.digikala.com/digikala-static/9814bb50f330280b887fe545a6074cc72f33388e_1758978427.svg",
-      alt: "",
+      src: vidomart,
+      alt: "vidomart",
     },
   ];
   return (
