@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "./product-card";
 import Link from "next/link";
 import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
+import ProductsLength from "./products-length";
 
 const DisplayProducts = ({
   products,
@@ -28,12 +29,7 @@ const DisplayProducts = ({
               : "";
   return (
     <div className="pb-10">
-      <div
-        className={`${isCategory ? "hidden" : ""} flex justify-between text-xs text-text-secondary pb-7`}
-      >
-        <span dir="rtl">{productsLength} کالا</span>
-        <span>همه کالاها</span>
-      </div>
+      <ProductsLength isCategory={isCategory} productsLength={productsLength} />
       <div
         className={`${isCategory ? "" : "hidden"} flex justify-start py-6 text-xs text-gray-400 font-semibold cursor-default`}
         dir="rtl"

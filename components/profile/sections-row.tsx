@@ -15,7 +15,7 @@ const SectionsRow = ({ href, children, icon, path }: SectionsRowProps) => {
   return (
     <Link
       href={href}
-      className={`${path === href ? "lg:relative after:absolute after:w-[0.20rem] after:rounded-3xl after:h-10 after:bg-brand-secondary after:right-0" : ""} flex justify-between items-center border-b border-black/6 py-4 px-10 lg:px-5 hover:bg-surface-secondary `}
+      className={`${path === href ? "lg:relative after:absolute after:w-[0.20rem] after:rounded-3xl after:h-10 after:bg-brand-secondary after:right-0" : ""} flex justify-between items-center border-b border-black/6 py-5 px-10 lg:px-5 hover:bg-surface-secondary `}
     >
       <Icons.Left className="text-lg max-xs:text-sm text-black/50 lg:opacity-0 pointer-events-none" />
       <div className="flex items-center gap-4 font-semibold">

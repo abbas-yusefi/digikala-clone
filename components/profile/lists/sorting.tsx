@@ -25,6 +25,15 @@ const Sorting = ({
     disableScrolling();
   }, [isOpen]);
 
+  const sortingOrder =
+    order === "highest price"
+      ? "گران ترین"
+      : order === "lowest price"
+        ? "ارزان ترین"
+        : order === "oldest"
+          ? "قدیمی ترین"
+          : "جدید ترین";
+
   return (
     <>
       <div className="w-full flex items-center justify-end px-10 mb-5 py-4 border-b border-black/20">
@@ -32,7 +41,7 @@ const Sorting = ({
           onClick={() => setIsOpen(true)}
           className="text-xl flex items-center gap-2 cursor-pointer"
         >
-          <span className="-mt-1 text-sm font-semibold">جدیدترین</span>
+          <span className="-mt-1 text-sm font-semibold">{sortingOrder}</span>
           <Icons.Sort />
         </button>
       </div>

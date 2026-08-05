@@ -24,7 +24,7 @@ const MobileSetting = ({
         />
         <span className="font-semibold">تنظیمات</span>
       </div>
-      <div className="mt-10 flex flex-col gap-2">
+      <div className="mt-10 flex flex-col">
         <SectionsRow icon={Icons.Question} href="#">
           پرسش های متداول
         </SectionsRow>

@@ -40,7 +40,7 @@ const SignoutButton = ({ variant }: SignoutButtonProps) => {
   return (
     // Mobile Default
     <button
-      className="flex justify-between items-center border-b border-black/6 py-4 w-full px-10 lg:px-4 hover:bg-surface-secondary"
+      className="flex justify-between items-center border-b border-black/6 py-5 w-full px-10 lg:px-4 hover:bg-surface-secondary"
       onClick={handleSignout}
     >
       <Icons.Left className="text-lg max-xs:text-sm text-black/50 lg:opacity-0" />

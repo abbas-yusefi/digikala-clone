@@ -1,13 +1,11 @@
-import { calculateDiscountedPrice } from "@/lib/utils/discount";
 import Image from "next/image";
 import DiscountPercentage from "../ui/discount-percentage";
 import Link from "next/link";
 import specialSell from "@/public/other/SpecialSell.svg";
 import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
+import PriceTag from "../ui/price-tag";
 
 const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
-  const discountedPrice = calculateDiscountedPrice(data.price, data.discount);
-
   const isDiscounted = data.discount ? data.discount > 0 : false;
 
   return (
@@ -19,17 +17,7 @@ const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
               {data.title}
             </div>
             <div className="flex justify-between">
-              <div className="flex flex-col justify-center items-center gap-3">
-                <span className="text-sm font-semibold" dir="rtl">
-                  {isDiscounted
-                    ? discountedPrice.toLocaleString()
-                    : data.price.toLocaleString()}{" "}
-                  تومان
-                </span>
-                <span className="text-[0.7rem] text-text-secondary line-through">
-                  {isDiscounted && data.price.toLocaleString()}
-                </span>
-              </div>
+              <PriceTag discount={data.discount} price={data.price} />
               <div>
                 {isDiscounted && (
                   <DiscountPercentage
@@ -91,17 +79,7 @@ const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
               {data.title}
             </div>
             <div className="flex justify-between">
-              <div className="mt-auto">
-                <span className="text-sm font-semibold block" dir="rtl">
-                  {isDiscounted
-                    ? discountedPrice.toLocaleString()
-                    : data.price.toLocaleString()}{" "}
-                  تومان
-                </span>
-                <span className="text-[0.7rem] text-gray-300 ml-9 line-through">
-                  {isDiscounted && data.price.toLocaleString()}
-                </span>
-              </div>
+              <PriceTag discount={data.discount} price={data.price} />
               {isDiscounted && (
                 <DiscountPercentage
                   discount={data.discount !== null ? data.discount : 0}

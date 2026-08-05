@@ -2,6 +2,7 @@
 
 import Sorting from "@/components/profile/lists/sorting";
 import ProductCard from "@/components/search/product-card";
+import ProductsLength from "@/components/search/products-length";
 import { getAllFavoriteProductsAction } from "@/lib/actions/product";
 import { Icons } from "@/lib/icons";
 import { Product, WithImage } from "@/lib/types/product";
@@ -44,14 +45,15 @@ const ListsPage = () => {
           <Icons.RightArrow className="text-2xl" />
         </button>
       </header>
-      <div>
+      <main className="mb-14">
         <Sorting setOrder={setOrder} order={order} />
+        <ProductsLength productsLength={products?.length} />
         <div className="min-[425px]:grid min-[425px]:grid-cols-2 min-[1280px]:grid-cols-3 min-[1440px]:grid-cols-4">
           {products?.map((product) => (
             <ProductCard data={product} key={product.product_id} />
           ))}
         </div>
-      </div>
+      </main>
     </>
   );
 };
