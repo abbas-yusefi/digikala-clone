@@ -1,50 +1,17 @@
 "use client";
 
-import {
-  addFavoriteAction,
-  deleteFavoriteAction,
-  getFavoriteActoin,
-} from "@/lib/actions/product";
+import { getFavoriteActoin } from "@/lib/actions/product";
+import { useFavorite } from "@/lib/hooks/useFavorite";
 import { Icons } from "@/lib/icons";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const FavoriteButton = ({ product_id }: { product_id: string | number }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const router = useRouter();
   const { data: session } = useSession();
   const user_id = session?.user.id;
 
-  const addToFavorites = async () => {
-    if (!user_id && product_id) {
-      router.push("/signin");
-    }
-    if (!user_id || !product_id) return;
-    try {
-      const result = await addFavoriteAction(user_id, product_id);
-      if (result && result.success) {
-        setIsFavorite(true);
-      } else {
-        setIsFavorite(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const deleteFavorite = async () => {
-    if (!user_id || !product_id) return;
-
-    try {
-      const result = await deleteFavoriteAction(user_id, product_id);
-      if (result?.success) {
-        setIsFavorite(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { addToFavorites, deleteFavorite } = useFavorite();
 
   useEffect(() => {
     const checkFavorite = async () => {
@@ -65,7 +32,11 @@ const FavoriteButton = ({ product_id }: { product_id: string | number }) => {
 
   return (
     <button
-      onClick={isFavorite ? deleteFavorite : addToFavorites}
+      onClick={() =>
+        isFavorite
+          ? deleteFavorite(user_id, product_id, setIsFavorite)
+          : addToFavorites(user_id, product_id, setIsFavorite)
+      }
       className="cursor-pointer"
     >
       <Icons.Heart
