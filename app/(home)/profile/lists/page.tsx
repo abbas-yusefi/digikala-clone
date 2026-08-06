@@ -1,9 +1,11 @@
 "use client";
 
 import Sorting from "@/components/profile/lists/sorting";
-import ProductCard from "@/components/search/product-card";
+import desktopProductCard from "@/components/search/product-card";
 import ProductsLength from "@/components/search/products-length";
+import ProductCard from "@/components/ui/product-card";
 import { getAllFavoriteProductsAction } from "@/lib/actions/product";
+import { useFavorite } from "@/lib/hooks/useFavorite";
 import { Icons } from "@/lib/icons";
 import { Product, WithImage } from "@/lib/types/product";
 import { useSession } from "next-auth/react";
@@ -11,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ListsPage = () => {
+  const { deleteFavorite } = useFavorite();
   const { data: session } = useSession();
   const user_id = session?.user.id;
   const [products, setProducts] = useState<WithImage<Product>[] | undefined>(
@@ -41,16 +44,21 @@ const ListsPage = () => {
           onClick={() => router.back()}
           className="flex items-center text-sm gap-2 font-semibold cursor-pointer"
         >
-          <span className="-mt-1">لیست ها</span>
+          <h1 className="-mt-1">لیست ها</h1>
           <Icons.RightArrow className="text-2xl" />
         </button>
       </header>
       <main className="mb-14">
         <Sorting setOrder={setOrder} order={order} />
         <ProductsLength productsLength={products?.length} />
-        <div className="min-[425px]:grid min-[425px]:grid-cols-2 min-[1280px]:grid-cols-3 min-[1440px]:grid-cols-4">
+        <div className="flex flex-col gap-5 justify-center lg:grid lg:grid-cols-2">
           {products?.map((product) => (
-            <ProductCard data={product} key={product.product_id} />
+            <ProductCard
+              variant="lists"
+              data={product}
+              key={product.product_id}
+              onClick={() => deleteFavorite(user_id, product.product_id)}
+            />
           ))}
         </div>
       </main>

@@ -13,7 +13,13 @@ import { Cart } from "@/lib/types/product";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
+const AddToCartButton = ({
+  product_id,
+  variant,
+}: {
+  product_id: Cart["product_id"];
+  variant?: "lists";
+}) => {
   const { data: session } = useSession();
   const user_id = session?.user.id;
   const [isItemInCart, setIsItemInCart] = useState(false);
@@ -198,6 +204,36 @@ const AddToCartButton = ({ product_id }: Pick<Cart, "product_id">) => {
       console.log(err);
     }
   };
+
+  if (variant === "lists")
+    return (
+      <>
+        {isItemInCart ? (
+          <button className="flex-3 py-2 rounded-lg bg-surface-primary border border-black/15 font-semibold flex justify-between items-center px-4 text-brand-discount cursor-default">
+            <span
+              onClick={
+                quantity <= 1 ? deleteProductFromCart : decrementProductQuantity
+              }
+              className="text-2xl cursor-pointer p-1"
+            >
+              {quantity <= 1 ? <Icons.Trash /> : <Icons.Minus />}
+            </span>
+            <span className="text-lg cursor-pointer">{quantity}</span>
+            <span
+              className="text-2xl cursor-pointer p-1"
+              onClick={incrementProductQuantity}
+            >
+              <Icons.Plus />
+            </span>
+          </button>
+        ) : (
+          <button className="flex flex-3 justify-center items-center py-2 bg-surface-primary rounded-xl border border-brand-discount text-sm max-[375px]:text-xs gap-2 cursor-pointer text-brand-discount">
+            اضافه به سبد
+            <Icons.CartOutline className="text-2xl max-[375px]:text-xl" />
+          </button>
+        )}
+      </>
+    );
 
   return (
     <>
