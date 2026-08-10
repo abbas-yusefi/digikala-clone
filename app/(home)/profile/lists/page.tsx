@@ -1,7 +1,6 @@
 "use client";
 
 import Sorting from "@/components/profile/lists/sorting";
-import desktopProductCard from "@/components/search/product-card";
 import ProductsLength from "@/components/search/products-length";
 import ProductCard from "@/components/ui/product-card";
 import { getAllFavoriteProductsAction } from "@/lib/actions/product";
@@ -51,7 +50,7 @@ const ListsPage = () => {
       <main className="mb-14">
         <Sorting setOrder={setOrder} order={order} />
         <ProductsLength productsLength={products?.length} />
-        <div className="flex flex-col gap-5 justify-center lg:grid lg:grid-cols-2">
+        <div className="flex flex-col justify-center lg:grid lg:grid-cols-2">
           {products?.map((product) => (
             <ProductCard
               variant="lists"

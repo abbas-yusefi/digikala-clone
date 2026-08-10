@@ -51,7 +51,7 @@ const ProductCard = ({ data }: { data: WithImage<ProductCardType> }) => {
 
       <Link
         href={`/product/${data.product_id}`}
-        className="hover:z-20 max-[425px]:hidden hover:shadow-[0px_0px_22px_7px_rgba(0,_0,_0,_0.1)]"
+        className="hover:z-20 max-[425px]:hidden hover:shadow-[0px_0px_22px_7px_rgba(0,0,0,0.1)]"
       >
         <article
           className={`h-96 w-auto flex flex-col justify-center items-center py-4 border border-black/7 -mr-0.5 bg-surface-primary z-10 border-b-0 text-sm font-semibold`}

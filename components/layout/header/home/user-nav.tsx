@@ -30,9 +30,21 @@ const Usernav = ({ username }: { username: string | null }) => {
             <Icons.Left className="text-lg" />
             {username && username}
           </Link>
-          <UserNavItem href="/" icon={Icons.Bag} text="سفارش ها" />
-          <UserNavItem href="/" icon={Icons.Address} text="ادرس ها" />
-          <UserNavItem href="/" icon={Icons.Heart} text="لیست ها" />
+          <UserNavItem
+            href="/profile/orders"
+            icon={Icons.Bag}
+            text="سفارش ها"
+          />
+          <UserNavItem
+            href="/profile/addresses"
+            icon={Icons.Address}
+            text="ادرس ها"
+          />
+          <UserNavItem
+            href="/profile/lists"
+            icon={Icons.Heart}
+            text="لیست ها"
+          />
           <SignoutButton variant="userNav" />
         </div>
       </button>
