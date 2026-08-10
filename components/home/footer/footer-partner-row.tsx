@@ -12,6 +12,25 @@ type FooterPartnerRowProps = {
   thirdImg: ImageVariables;
 };
 
+type RowProps = {
+  img: ImageVariables;
+  className?: string;
+};
+
+const Row = ({ img, className = "" }: RowProps) => (
+  <div
+    className={`h-full w-[33.3%] px-7  flex justify-center items-center border border-t-0 lg:bg-surface-secondary border-black/10 py-5 ${className}`}
+  >
+    <Image
+      className={`object-contain h-12 w-full`}
+      src={img.src}
+      alt={img.alt}
+      width={100}
+      height={100}
+    />
+  </div>
+);
+
 const FooterPartnerRow = ({
   firstImg,
   secondImg,
@@ -19,33 +38,9 @@ const FooterPartnerRow = ({
 }: FooterPartnerRowProps) => {
   return (
     <div className="flex justify-between w-full">
-      <div className="h-full w-[33.3%] flex justify-center items-center border border-t-0 lg:bg-surface-secondary border-l-0 border-black/10 py-5">
-        <Image
-          className="w-auto object-contain h-12 px-[clamp(16px,5vw,48px)]"
-          src={firstImg.src}
-          alt={firstImg.alt}
-          width={100}
-          height={100}
-        />
-      </div>
-      <div className="h-full w-[33.3%] flex justify-center items-center border border-t-0 border-l-0 lg:bg-surface-secondary border-black/10 py-5">
-        <Image
-          className="w-auto object-contain h-12 px-[clamp(16px,5vw,48px)]"
-          src={secondImg.src}
-          alt={secondImg.alt}
-          width={100}
-          height={100}
-        />
-      </div>
-      <div className="h-full w-[33.3%] flex justify-center items-center border border-t-0 border-black/10 lg:bg-surface-secondary py-5 border-r-0 border-l-0">
-        <Image
-          className="w-auto object-contain h-12 px-[clamp(16px,5vw,48px)]"
-          src={thirdImg.src}
-          alt={thirdImg.alt}
-          width={100}
-          height={100}
-        />
-      </div>
+      <Row img={firstImg} className="border-l-0" />
+      <Row img={secondImg} className="border-l-0" />
+      <Row img={thirdImg} className="border-r-0 border-l-0" />
     </div>
   );
 };
