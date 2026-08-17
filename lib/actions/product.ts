@@ -44,7 +44,7 @@ const addFavoriteAction = async (
 const getFavoriteActoin = async (
   user_id: string | number,
   product_id: string | number,
-): Promise<boolean | undefined> => {
+): Promise<boolean> => {
   if (!user_id || !product_id) {
     console.log("user id or product id is not provided");
     return false;
@@ -54,6 +54,7 @@ const getFavoriteActoin = async (
     return result;
   } catch (err) {
     console.log(err);
+    return false;
   }
 };
 
@@ -73,10 +74,11 @@ const deleteFavoriteAction = async (
 const getAllFavoriteProductsAction = async (
   user_id: string | undefined,
   order_by: "lowest price" | "highest price" | "recent" | "oldest",
+  limit?: number | null,
 ): Promise<WithImage<Product>[] | undefined> => {
   if (!user_id || !order_by) return;
   try {
-    const result = await getAllFavorites(user_id, order_by);
+    const result = await getAllFavorites(user_id, order_by, limit);
     return result;
   } catch (err) {
     console.log(err);

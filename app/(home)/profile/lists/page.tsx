@@ -1,6 +1,7 @@
 "use client";
 
 import Sorting from "@/components/profile/lists/sorting";
+import ProfileWrapper from "@/components/profile/profile-wrapper";
 import ProductsLength from "@/components/search/products-length";
 import ProductCard from "@/components/ui/product-card";
 import { getAllFavoriteProductsAction } from "@/lib/actions/product";
@@ -38,12 +39,14 @@ const ListsPage = () => {
 
   return (
     <>
-      <header className="flex w-full justify-end items-center px-4 py-4">
-        <button
-          onClick={() => router.back()}
-          className="flex items-center text-sm gap-2 font-semibold cursor-pointer"
-        >
+      <ProfileWrapper className="flex-col">
+        <header className="flex w-full justify-end items-center px-4 py-4 font-semibold">
           <h1 className="-mt-1">لیست ها</h1>
+
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-sm gap-2 font-semibold cursor-pointer lg:hidden"
+          >
           <Icons.RightArrow className="text-2xl" />
         </button>
       </header>
@@ -61,6 +64,7 @@ const ListsPage = () => {
           ))}
         </div>
       </main>
+      </ProfileWrapper>
     </>
   );
 };

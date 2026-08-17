@@ -412,6 +412,7 @@ const deleteFavorite = async (
 const getAllFavorites = async (
   user_id: string | undefined,
   order_by: "lowest price" | "highest price" | "recent" | "oldest",
+  limit?: number | null,
 ): Promise<WithImage<Product>[]> => {
   const orderBy =
     order_by === "lowest price"
@@ -437,6 +438,7 @@ INNER JOIN (
 ON product_image.product_id = product.product_id
 WHERE user_id = $1
 ORDER BY ${orderBy} ${orient}
+${limit ? `LIMIT ${limit}` : ""}
     `,
     [user_id],
   );
