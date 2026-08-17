@@ -9,7 +9,13 @@ const EmptyCart = () => {
         سبد خرید
       </div>
       <div className="w-full flex flex-col justify-center items-center my-20 border-b border-black/15 pb-10">
-        <Image src={emptyCart} alt="cart image" width={200} height={200} />
+        <Image
+          priority
+          src={emptyCart}
+          alt="cart image"
+          width={200}
+          height={200}
+        />
         <p className="my-5">!سبد خرید شما خالی است</p>
         <span className="text-xs">
           :می‌توانید برای مشاهده محصولات بیشتر به صفحات زیر بروید

@@ -9,7 +9,7 @@ const DiscountPercentage = ({
 }) => {
   return (
     <span
-      className={`${className} bg-brand-secondary text-white rounded-2xl w-10 flex justify-center items-center h-5 ml-1 max-[425px]:text-sm`}
+      className={`${className} bg-brand-secondary text-white rounded-2xl  flex justify-center items-center h-fit w-fit px-2 ml-1`}
     >
       {discount > 0 && discount}%
     </span>

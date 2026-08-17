@@ -5,9 +5,9 @@ import { getProductAction } from "@/lib/actions/product";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import EmptyCart from "@/components/checkout/empty-cart";
-import ProductCard from "@/components/search/product-card";
 import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
 import { getCartProductsAction } from "@/lib/actions/cart";
+import ProductCard from "@/components/ui/product-card";
 
 type parsedData = { id: number; quantity: number };
 
@@ -65,11 +65,15 @@ const CheckoutPage = () => {
     typeof products !== null
   ) {
     return (
-      <div className="min-[425px]:grid min-[425px]:grid-cols-2 min-[1280px]:grid-cols-3 min-[1440px]:grid-cols-4">
+      <main className="flex flex-col w-full mb-14">
         {products.map((product) => (
-          <ProductCard data={product} key={product.product_id} />
+          <ProductCard
+            variant="checkout"
+            data={product}
+            key={product.product_id}
+          />
         ))}
-      </div>
+      </main>
     );
   } else {
     return <EmptyCart />;

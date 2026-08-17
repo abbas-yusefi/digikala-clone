@@ -58,10 +58,17 @@ import {
   BiSolidHome,
   BiSupport,
 } from "react-icons/bi";
-import { CiMobile2, CiLaptop, CiHeadphones, CiPercent } from "react-icons/ci";
+import {
+  CiMobile2,
+  CiLaptop,
+  CiHeadphones,
+  CiPercent,
+  CiDiscount1,
+} from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
 
 export const Icons = {
+  Discount: CiDiscount1,
   Check: FiCheck,
   Sort: FaSortAmountDown,
   Minus: FiMinus,
