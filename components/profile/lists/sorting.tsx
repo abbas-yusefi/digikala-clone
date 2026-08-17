@@ -6,11 +6,13 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 const Sorting = ({
   setOrder,
   order,
+  productsLength,
 }: {
   setOrder: Dispatch<
     SetStateAction<"recent" | "oldest" | "highest price" | "lowest price">
   >;
   order: "recent" | "oldest" | "highest price" | "lowest price";
+  productsLength: number | undefined;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +38,8 @@ const Sorting = ({
 
   return (
     <>
-      <div className="w-full flex items-center justify-end px-10 mb-5 py-4 border-b border-black/20">
+      {/* Mobile version */}
+      <div className="w-full flex items-center justify-end px-10 mb-5 py-4 border-b border-black/20 lg:hidden">
         <button
           onClick={() => setIsOpen(true)}
           className="text-xl flex items-center gap-2 cursor-pointer"
@@ -46,7 +49,7 @@ const Sorting = ({
         </button>
       </div>
       <div
-        className={`${isOpen ? "" : "hidden"} fixed top-0 right-0 bottom-0 left-0 bg-black/20 z-50`}
+        className={`${isOpen ? "" : "hidden"} fixed top-0 right-0 bottom-0 left-0 bg-black/20 z-50 lg:hidden`}
       >
         <div className="fixed bottom-0 right-0 left-0 bg-surface-primary h-60 flex flex-col px-4 py-6">
           <button
@@ -105,6 +108,43 @@ const Sorting = ({
               <Icons.Check
                 className={`text-xl ${order !== "lowest price" ? "opacity-0" : ""}`}
               />
+              ارزان ترین
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop version */}
+      <div className="max-lg:hidden w-full h-12 flex justify-between items-center px-4 border-t border-black/10">
+        <div className="text-xs" dir="rtl">
+          {productsLength} کالا
+        </div>
+        <div className="flex items-center" dir="rtl">
+          <Icons.Sort />
+          <div className="text-xs font-semibold gap-4 flex">
+            مرتب سازی:
+            <button
+              className={`${order === "recent" ? "text-brand-discount" : ""} cursor-pointer`}
+              onClick={() => setOrder("recent")}
+            >
+              جدیدترین
+            </button>
+            <button
+              className={`${order === "oldest" ? "text-brand-discount" : ""} cursor-pointer`}
+              onClick={() => setOrder("oldest")}
+            >
+              قدیمی ترین
+            </button>
+            <button
+              className={`${order === "highest price" ? "text-brand-discount" : ""} cursor-pointer`}
+              onClick={() => setOrder("highest price")}
+            >
+              گران ترین
+            </button>
+            <button
+              className={`${order === "lowest price" ? "text-brand-discount" : ""} cursor-pointer`}
+              onClick={() => setOrder("lowest price")}
+            >
               ارزان ترین
             </button>
           </div>

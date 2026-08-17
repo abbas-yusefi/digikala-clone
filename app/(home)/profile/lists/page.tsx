@@ -47,23 +47,29 @@ const ListsPage = () => {
             onClick={() => router.back()}
             className="flex items-center text-sm gap-2 font-semibold cursor-pointer lg:hidden"
           >
-          <Icons.RightArrow className="text-2xl" />
-        </button>
-      </header>
-      <main className="mb-14">
-        <Sorting setOrder={setOrder} order={order} />
-        <ProductsLength productsLength={products?.length} />
-        <div className="flex flex-col justify-center lg:grid lg:grid-cols-2">
-          {products?.map((product) => (
-            <ProductCard
-              variant="lists"
-              data={product}
-              key={product.product_id}
-              onClick={() => deleteFavorite(user_id, product.product_id)}
-            />
-          ))}
-        </div>
-      </main>
+            <Icons.RightArrow className="text-2xl" />
+          </button>
+        </header>
+        <main className="mb-14">
+          <Sorting
+            setOrder={setOrder}
+            order={order}
+            productsLength={products?.length}
+          />
+          <div className="lg:hidden">
+            <ProductsLength productsLength={products?.length} />
+          </div>
+          <div className="flex flex-col justify-center lg:grid lg:grid-cols-2">
+            {products?.map((product) => (
+              <ProductCard
+                variant="lists"
+                data={product}
+                key={product.product_id}
+                onClick={() => deleteFavorite(user_id, product.product_id)}
+              />
+            ))}
+          </div>
+        </main>
       </ProfileWrapper>
     </>
   );
