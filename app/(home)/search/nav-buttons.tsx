@@ -8,16 +8,20 @@ import { useState } from "react";
 
 const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
   const searchParams = useSearchParams();
+  const pageNumber = searchParams.get("page");
+
+  const [page, setPage] = useState(1 || pageNumber);
 
   if (!products || products.length === 0) return null;
 
   const lastProductId = products[products.length - 1].product_id;
   const firstProductId = products[0].product_id;
 
-  const createHref = (cursor: number, dir: string) => {
+  const createHref = (cursor: number, dir: string, page: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("cursor", cursor.toString());
     params.set("dir", dir);
+    params.set("page", page);
     return `/search?${params.toString()}`;
   };
 
@@ -34,7 +38,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
       ) : (
         <Link
           onClick={() => setPage((prev) => (prev -= 1))}
-          href={createHref(firstProductId, "prev")}
+          href={createHref(firstProductId, "prev", page.toString())}
           className="flex items-center bg-brand-discount text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-[#f02a4f]"
         >
           <Icons.Left />
@@ -54,7 +58,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
       ) : (
         <Link
           onClick={() => setPage((prev) => (prev += 1))}
-          href={createHref(lastProductId, "next")}
+          href={createHref(lastProductId, "next", page.toString())}
           className="flex items-center bg-brand-discount text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-[#f02a4f]"
         >
           صفحه بعد
