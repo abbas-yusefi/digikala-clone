@@ -3,6 +3,7 @@ import React from "react";
 import DiscountPercentage from "../ui/discount-percentage";
 import AddToCartButton from "./add-to-cart-button";
 import { Product, WithImage } from "@/lib/types/product";
+import { CartProvider } from "@/lib/providers/cart-providers";
 
 const AddToCartSection = ({
   data,
@@ -35,7 +36,9 @@ const AddToCartSection = ({
             تومان
           </span>
         </div>
-        <AddToCartButton product_id={data.product_id} />
+        <CartProvider>
+          <AddToCartButton product_id={data.product_id} />
+        </CartProvider>
       </div>
     </div>
   );

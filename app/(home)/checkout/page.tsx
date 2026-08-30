@@ -5,14 +5,15 @@ import { getProductAction } from "@/lib/actions/product";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import EmptyCart from "@/components/checkout/empty-cart";
-import { ProductCard as ProductCardType, WithImage } from "@/lib/types/product";
 import { getCartProductsAction } from "@/lib/actions/cart";
 import ProductCard from "@/components/ui/product-card";
+import { CartProvider, useCart } from "@/lib/providers/cart-providers";
+import CartHeader from "@/components/checkout/cart-header";
 
 type parsedData = { id: number; quantity: number };
 
-const CheckoutPage = () => {
-  const [products, setProducts] = useState<WithImage<ProductCardType>[]>();
+const Page = () => {
+  const { products, setProducts } = useCart();
   const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
 
@@ -51,7 +52,7 @@ const CheckoutPage = () => {
     } else {
       setLocalStorageProducts();
     }
-  }, [session?.user?.email]);
+  }, [session?.user?.email, setProducts]);
 
   if (isLoading) {
     return (
@@ -65,19 +66,31 @@ const CheckoutPage = () => {
     typeof products !== null
   ) {
     return (
-      <main className="flex flex-col w-full mb-14">
-        {products.map((product) => (
-          <ProductCard
-            variant="checkout"
-            data={product}
-            key={product.product_id}
-          />
-        ))}
-      </main>
+      <>
+        <div className="w-full "></div>
+        <CartHeader cartLength={products.length} user_id={session?.user.id} />
+        <main className="flex flex-col w-full mb-14">
+          {products.map((product) => (
+            <ProductCard
+              variant="checkout"
+              data={product}
+              key={product.product_id}
+            /> //make checkout and lists product into usecontext so when the user removes a product you can remove it from their screen without prop drilling(normally when you remove something from the cart of favorite they have to refresh to get the fresh data)
+          ))}
+        </main>
+      </>
     );
   } else {
     return <EmptyCart />;
   }
+};
+
+const CheckoutPage = () => {
+  return (
+    <CartProvider>
+      <Page />
+    </CartProvider>
+  );
 };
 
 export default CheckoutPage;

@@ -7,6 +7,7 @@ import {
   itemQuantityAction,
 } from "@/lib/actions/cart";
 import { Icons } from "@/lib/icons";
+import { useCart } from "@/lib/providers/cart-providers";
 import { Cart } from "@/lib/types/product";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 
@@ -25,12 +26,23 @@ const ChangeQuantityButton = ({
   setQuantity: Dispatch<SetStateAction<number>>;
   variant?: "lists" | "rounded";
 }) => {
+  const { setProducts } = useCart();
+
   const deleteProductFromCart = async () => {
     const deleteDatabaseProduct = async () => {
       if (!user_id) return;
       try {
         const result = await deleteProductFromCartAction(product_id, user_id);
-        if (result.success) setIsItemInCart(false);
+        if (result.success && setIsItemInCart) {
+          setIsItemInCart(false);
+        }
+        if (result.success) {
+          setProducts((prevProducts) =>
+            prevProducts?.filter(
+              (product) => product.product_id !== product_id,
+            ),
+          );
+        }
       } catch (err) {
         console.log(err);
       }
@@ -43,7 +55,7 @@ const ChangeQuantityButton = ({
         (product: Pick<Cart, "id" | "quantity">) => product.id !== product_id,
       );
       localStorage.setItem("cart", JSON.stringify(updatedCart));
-      setIsItemInCart(false);
+      if (setIsItemInCart) setIsItemInCart(false);
     };
     if (user_id) {
       deleteDatabaseProduct();
