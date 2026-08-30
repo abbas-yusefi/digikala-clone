@@ -1,7 +1,14 @@
 import HorizantalNav from "@/components/shared/horizontal-nav";
 import ProCard from "./product-card";
+import { ProductCard, WithImage } from "@/lib/types/product";
 
-const DisplayProducts = async ({ sectionName, Data }) => {
+const DisplayProducts = async ({
+  sectionName,
+  Data,
+}: {
+  sectionName: string;
+  Data: WithImage<ProductCard>[];
+}) => {
   return (
     <section>
       <div className="h-10 w-full flex justify-between items-center bg-green-200">

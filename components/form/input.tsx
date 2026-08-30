@@ -1,7 +1,12 @@
 "use client";
 
 import React, { Dispatch, SetStateAction } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  FieldErrors,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 type InputValues =
@@ -14,17 +19,12 @@ type InputValues =
       fullName: string;
     };
 
-type InputProps = {
+type InputProps<T extends FieldValues> = {
   children: React.ReactNode;
-  register: UseFormRegister<InputValues>;
-  registerName:
-    | "email"
-    | "password"
-    | "confirmPassword"
-    | "username"
-    | "fullName";
+  register: UseFormRegister<T>;
+  registerName: Path<T>;
   inputType?: string;
-  errors: FieldErrors<InputValues>;
+  errors: FieldErrors<T>;
   serverError?:
     | {
         message: string;
@@ -40,7 +40,7 @@ type InputProps = {
   onTogglePassword?: Dispatch<SetStateAction<boolean>>;
 };
 
-const Input = ({
+const Input = <T extends FieldValues>({
   children,
   inputType,
   registerName,
@@ -50,7 +50,7 @@ const Input = ({
   isPasswordHidden,
   onTogglePassword,
   autoComplete,
-}: InputProps) => {
+}: InputProps<T>) => {
   const serverFieldError =
     serverError?.field === registerName || serverError?.field === "general"
       ? serverError.message === "Configuration"
