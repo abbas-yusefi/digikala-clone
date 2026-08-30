@@ -24,9 +24,10 @@ const ProductDetailBody = ({
           className="h-full w-full object-contain"
         />
       </div>
-      <div className="border-t border-black/20 py-8">
+
+      <div className="border-t border-black/20 py-8 pb-20">
         <div className="flex justify-between px-5 font-semibold">
-          <div className="text-xl flex items-center gap-4">
+          <div className="text-xl flex items-start justify-center gap-8 w-[20%]">
             <FavoriteButton product_id={productData.product_id} />
             <ShareButton />
           </div>

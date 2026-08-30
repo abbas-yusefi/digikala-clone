@@ -44,7 +44,7 @@ const BuyLater = ({
   return (
     <button
       onClick={() => addProductToFavorite()}
-      className={`${!user_id || isFavorite ? "hidden" : ""} px-5 py-2 border rounded-lg border-black/20 font-normal cursor-pointer`}
+      className={`${!user_id || isFavorite ? "hidden" : ""} px-5 py-1.5 border rounded-lg border-black/20 font-normal cursor-pointer`}
     >
       <h2>بعدا میخرم</h2>
     </button>

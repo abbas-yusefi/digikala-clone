@@ -24,6 +24,7 @@ import {
   FiPlus,
   FiMinus,
   FiCheck,
+  FiMoreVertical,
 } from "react-icons/fi";
 import {
   FaRegUser,
@@ -68,6 +69,7 @@ import {
 import { GoDotFill } from "react-icons/go";
 
 export const Icons = {
+  More: FiMoreVertical,
   Discount: CiDiscount1,
   Check: FiCheck,
   Sort: FaSortAmountDown,
