@@ -1,13 +1,13 @@
-import SigninForm from "@/components/auth/sigin-in-form";
 import LoadingDots from "@/components/ui/loading-dots";
 import React, { Suspense } from "react";
+import SearchOverlayClient from "./search-overlay-client";
 
-const page = () => {
+const SearchOverlayWrapper = () => {
   return (
     <Suspense fallback={<LoadingDots />}>
-      <SigninForm />
+      <SearchOverlayClient />
     </Suspense>
   );
 };
 
-export default page;
+export default SearchOverlayWrapper;

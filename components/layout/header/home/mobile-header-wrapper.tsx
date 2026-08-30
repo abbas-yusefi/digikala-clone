@@ -1,13 +1,13 @@
-import SigninForm from "@/components/auth/sigin-in-form";
 import LoadingDots from "@/components/ui/loading-dots";
 import React, { Suspense } from "react";
+import MobileHeader from "./mobile-header";
 
-const page = () => {
+const MobileHeaderWrapper = () => {
   return (
     <Suspense fallback={<LoadingDots />}>
-      <SigninForm />
+      <MobileHeader />
     </Suspense>
   );
 };
 
-export default page;
+export default MobileHeaderWrapper;

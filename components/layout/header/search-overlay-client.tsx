@@ -17,7 +17,7 @@ type RecentSearched = {
   id: number;
 };
 
-const SearchOverlay = () => {
+const SearchOverlayClient = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
 
@@ -147,4 +147,4 @@ const SearchOverlay = () => {
   );
 };
 
-export default SearchOverlay;
+export default SearchOverlayClient;

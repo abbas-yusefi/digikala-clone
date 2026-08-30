@@ -20,12 +20,14 @@ const AwaitedDisplayProducts = async ({
 
   return (
     <>
-      <DisplayProducts
-        productsLength={productsLength.length}
-        products={products}
-        category={category}
-      />
-      <NavButtons products={products} />
+      <Suspense fallback={<LoadingDots />}>
+        <DisplayProducts
+          productsLength={productsLength.length}
+          products={products}
+          category={category}
+        />
+        <NavButtons products={products} />
+      </Suspense>
     </>
   );
 };

@@ -1,12 +1,12 @@
 "use client";
 
-import MobileHeader from "./mobile-header";
 import DesktopHeader from "./desktop-header";
 import Image from "next/image";
 import headerImage from "@/public/header.png";
 import Toolbar from "@/components/layout/header/home/toolbar";
 import useScrollThreshold from "@/lib/hooks/useScrollThreshold";
 import { usePathname } from "next/navigation";
+import MobileHeaderWrapper from "./mobile-header-wrapper";
 
 const Header = () => {
   const scrolled = useScrollThreshold({
@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <>
       {advertisementHeader}
-      <MobileHeader />
+      <MobileHeaderWrapper />
       <DesktopHeader scrolled={scrolled} />
       <Toolbar
         className={` transition-transform

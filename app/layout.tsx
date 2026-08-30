@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SearchOverlay from "@/components/layout/header/search-overlay";
 import { SessionProvider } from "next-auth/react";
+import SearchOverlayWrapper from "@/components/layout/header/search-overlay-wrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -49,7 +49,7 @@ export default function RootLayout({
     <html lang="en" className={` h-full antialiased hide-scrollbar`}>
       <body className="min-h-full flex flex-col gap-y-4">
         <SessionProvider>
-          {children} <SearchOverlay />
+          {children} <SearchOverlayWrapper />
         </SessionProvider>
       </body>
     </html>
