@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ResponsiveImageSlider from "@/components/responsive-image-slider";
 import Image from "next/image";
 import headerAd from "@/public/header.png";
