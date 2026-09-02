@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getFilteredProducts } from "@/lib/queries";
 import React, { Suspense } from "react";
 

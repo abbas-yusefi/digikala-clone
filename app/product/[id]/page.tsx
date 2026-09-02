@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getProduct, getImage } from "@/lib/queries";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
