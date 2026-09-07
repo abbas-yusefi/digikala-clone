@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import pool from "../db";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { signIn } from "@/auth";
 
 const signup = async (formData: FormData) => {
