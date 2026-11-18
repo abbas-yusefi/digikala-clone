@@ -4,28 +4,25 @@ import { Icons } from "@/lib/icons";
 import { ProductCard, WithImage } from "@/lib/types/product";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
 
 const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
   const searchParams = useSearchParams();
-  const pageNumber = searchParams.get("page");
-
-  const [page, setPage] = useState(1 || pageNumber);
+  const page = Number(searchParams.get("page")) || 1;
 
   if (!products || products.length === 0) return null;
 
   const lastProductId = products[products.length - 1].product_id;
   const firstProductId = products[0].product_id;
 
-  const createHref = (cursor: number, dir: string, page: string) => {
+  const createHref = (cursor: number, dir: string, page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("cursor", cursor.toString());
     params.set("dir", dir);
-    params.set("page", page);
+    params.set("page", page.toString());
     return `/search?${params.toString()}`;
   };
 
-  const noPrevPage = firstProductId === 1;
+  const noPrevPage = page <= 1;
   const noNextPage = products.length < 8;
 
   return (
@@ -37,8 +34,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
         </span>
       ) : (
         <Link
-          onClick={() => setPage((prev) => (prev -= 1))}
-          href={createHref(firstProductId, "prev", page.toString())}
+          href={createHref(firstProductId, "prev", page - 1)}
           className="flex items-center bg-brand-discount text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-[#f02a4f]"
         >
           <Icons.Left />
@@ -57,8 +53,7 @@ const NavButtons = ({ products }: { products: WithImage<ProductCard>[] }) => {
         </span>
       ) : (
         <Link
-          onClick={() => setPage((prev) => (prev += 1))}
-          href={createHref(lastProductId, "next", page.toString())}
+          href={createHref(lastProductId, "next", page + 1)}
           className="flex items-center bg-brand-discount text-surface-primary text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-[#f02a4f]"
         >
           صفحه بعد

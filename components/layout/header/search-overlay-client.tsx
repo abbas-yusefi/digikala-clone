@@ -28,20 +28,17 @@ const SearchOverlayClient = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  // Track the hash changes cleanly
   useEffect(() => {
     const handleHashChange = () => {
       setIsOpen(window.location.hash === "#search");
     };
 
-    // Sync state on mount
     handleHashChange();
 
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // Separate effect for fetching recent searches when open & userId is available
   useEffect(() => {
     if (userId && isOpen) {
       const getRecentSearches = async () => {
@@ -53,9 +50,7 @@ const SearchOverlayClient = () => {
   }, [userId, isOpen]);
 
   const updateSearch = async (searchQuery: string) => {
-    if (!searchQuery.trim()) return;
-
-    if (userId) {
+    if (userId && searchQuery.trim()) {
       await addRecenetlySearchedAction(searchQuery, userId);
     }
 
@@ -71,6 +66,7 @@ const SearchOverlayClient = () => {
 
     const params = new URLSearchParams();
     params.set("q", searchQuery);
+    params.set("page", "1");
     router.push(`/search?${params.toString()}`);
   };
 
@@ -132,7 +128,7 @@ const SearchOverlayClient = () => {
                 onClick={() => {
                   setIsOpen(false);
                   router.push(
-                    `/search?q=${encodeURIComponent(search.search_term)}`,
+                    `/search?q=${encodeURIComponent(search.search_term)}&page=1`,
                   );
                 }}
                 key={search.id}
