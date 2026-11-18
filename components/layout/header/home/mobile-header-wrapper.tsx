@@ -4,7 +4,7 @@ import MobileHeader from "./mobile-header";
 
 const MobileHeaderWrapper = () => {
   return (
-    <Suspense fallback={<LoadingDots />}>
+    <Suspense fallback={<LoadingDots className="h-20 w-full" />}>
       <MobileHeader />
     </Suspense>
   );

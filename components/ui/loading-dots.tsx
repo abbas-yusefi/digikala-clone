@@ -1,31 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const LoadingDots = ({ className }: { className?: string }) => {
-  const [firstAnimate, setFirstAnimate] = useState(false);
-  const [secondAnimate, setSecondAnimate] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setFirstAnimate(true);
-    }, 200);
-    setTimeout(() => {
-      setSecondAnimate(true);
-    }, 400);
-  }, []);
-
   return (
     <div
-      className={`${className} flex justify-center items-center bg-surface-secondary`}
+      className={`${className} flex justify-center items-center gap-1 bg-surface-secondary`}
     >
-      <div className="bg-gray-500 rounded-full p-1 animate-pulse"></div>
-      <div
-        className={`bg-gray-500 rounded-full p-1 ${firstAnimate ? "animate-pulse" : ""} mx-1`}
-      ></div>
-      <div
-        className={`bg-gray-500 rounded-full p-1 ${secondAnimate ? "animate-pulse" : ""}`}
-      ></div>
+      {[0, 0.2, 0.4].map((delay) => (
+        <div
+          key={delay}
+          className="bg-gray-500 rounded-full p-1 animate-pulse"
+          style={{ animationDelay: `${delay}s` }}
+        />
+      ))}
     </div>
   );
 };

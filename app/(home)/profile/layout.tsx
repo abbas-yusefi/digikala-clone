@@ -9,7 +9,13 @@ export default function RootLayout({
 }>) {
   return (
     <div className="flex w-full justify-center lg:gap-4 lg:mt-14 text-sm max-xs:text-xs text-text-primary lg:px-7">
-      <Suspense fallback={<LoadingDots />}>{children}</Suspense>
+      <Suspense
+        fallback={
+          <LoadingDots className="min-h-screen w-full flex justify-center items-center" />
+        }
+      >
+        {children}
+      </Suspense>
       <div className="max-lg:hidden w-80">
         <DesktopProfileDashboard />
       </div>
