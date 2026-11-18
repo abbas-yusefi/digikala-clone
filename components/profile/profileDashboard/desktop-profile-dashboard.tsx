@@ -6,39 +6,68 @@ import { Icons } from "@/lib/icons";
 import SignoutButton from "@/components/ui/signout-button";
 import PersonalInfo from "../personal-info";
 import { useSession } from "next-auth/react";
-import { redirect, usePathname } from "next/navigation";
+import { redirect } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const DesktopProfileDashboard = () => {
+  const path = usePathname();
   const { data: session } = useSession();
   if (!session) redirect("/");
-  const path = usePathname();
+  const section = path.split("/")[2] || "profile";
+
+  const sections = {
+    profile: {
+      title: "خلاصه فعالیت ها",
+      href: "/profile",
+      activeName: "profile",
+      icon: Icons.HomeOutline,
+    },
+    orders: {
+      title: "سفارش ها",
+      href: "/profile/orders?activeTab=in_progress",
+      activeName: "orders",
+      icon: Icons.Bag,
+    },
+    lists: {
+      title: "لیست های من",
+      href: "/profile/lists",
+      activeName: "lists",
+      icon: Icons.Heart,
+    },
+    addresses: {
+      title: "آدرس ها",
+      href: "/profile/addresses",
+      activeName: "addresses",
+      icon: Icons.Address,
+    },
+    userHistory: {
+      title: "بازدید های اخیر",
+      href: "/profile/user-history",
+      activeName: "user-history",
+      icon: Icons.Clock,
+    },
+    personalInfo: {
+      title: "اطلاعات حساب",
+      href: "/profile/personal-info",
+      activeName: "personal-info",
+      icon: Icons.UserOutline,
+    },
+  };
+
   return (
     <section className="max-lg:hidden bg-surface-primary border rounded-2xl border-black/10 w-full">
       <PersonalInfo session={session} />
-      <SectionsRow href="/profile" path={path}>
-        خلاصه فعالیت ها
-        <Icons.HomeOutline className="text-2xl max-xs:text-xl" />
-      </SectionsRow>
-      <SectionsRow href="/profile/orders" path={path}>
-        سفارش ها
-        <Icons.Bag className="text-2xl max-xs:text-xl" />
-      </SectionsRow>
-      <SectionsRow href="/profile/lists" path={path}>
-        لیست های من
-        <Icons.Heart className="text-2xl max-xs:text-xl" />
-      </SectionsRow>
-      <SectionsRow href="/profile/addresses" path={path}>
-        آدرس ها
-        <Icons.Address className="text-2xl max-xs:text-xl" />
-      </SectionsRow>
-      <SectionsRow href="/profile/user-history" path={path}>
-        بازدید های اخیر
-        <Icons.Clock className="text-2xl max-xs:text-xl" />
-      </SectionsRow>
-      <SectionsRow href="/profile/personal-info" path={path}>
-        اطلاعات حساب
-        <Icons.UserOutline className="text-2xl max-xs:text-xl" />
-      </SectionsRow>
+      {Object.values(sections).map((item) => (
+        <SectionsRow
+          key={item.activeName}
+          section={section}
+          activeTab={item.activeName}
+          href={item.href}
+          icon={item.icon}
+        >
+          {item.title}
+        </SectionsRow>
+      ))}
       <SignoutButton />
     </section>
   );
