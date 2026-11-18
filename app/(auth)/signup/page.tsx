@@ -11,8 +11,12 @@ import { SignupSchema, signupSchema } from "@/lib/schemas/signup-schema";
 import { useState } from "react";
 import BackButton from "@/components/ui/back-button";
 import logo from "@/public/other/brand.svg";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const SignupPage = () => {
+  const { data: session } = useSession();
+  if (session) redirect("/profile");
   const {
     register,
     handleSubmit,
