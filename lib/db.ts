@@ -12,11 +12,21 @@
 
 import { Pool } from "pg";
 
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false, // needed for Neon
+//   },
+// });
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false, // needed for Neon
-  },
+  connectionString: process.env.DATABASE_URL, // use the "-pooler" URL from Neon
+  ssl: { rejectUnauthorized: false },
+  max: 5,
+  connectionTimeoutMillis: 10_000,
+  idleTimeoutMillis: 30_000,
 });
+
+pool.on("error", (err) => console.error("pg pool error", err));
 
 export default pool;
