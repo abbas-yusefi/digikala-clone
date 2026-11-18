@@ -3,6 +3,7 @@ import Nav from "@/components/nav/nav";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 import Header from "@/components/layout/header/home/header";
+import { CartProvider } from "@/lib/providers/cart-providers";
 
 export const metadata: Metadata = {
   title: "فروشگاه اینترنتی دیجی کالا",
@@ -15,9 +16,11 @@ export default function Layout({
   return (
     <>
       <SessionProvider>
-        <Header />
-        {children}
-        <Nav />
+        <CartProvider>
+          <Header />
+          {children}
+          <Nav />
+        </CartProvider>
       </SessionProvider>
     </>
   );

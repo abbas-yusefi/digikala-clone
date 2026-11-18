@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import EmptyCart from "@/components/checkout/empty-cart";
 import { getCartProductsAction } from "@/lib/actions/cart";
 import ProductCard from "@/components/ui/product-card";
-import { CartProvider, useCart } from "@/lib/providers/cart-providers";
+import { useCart } from "@/lib/providers/cart-providers";
 import CartHeader from "@/components/checkout/cart-header";
 
 type parsedData = { id: number; quantity: number };
@@ -75,7 +75,7 @@ const Page = () => {
               variant="checkout"
               data={product}
               key={product.product_id}
-            /> //make checkout and lists product into usecontext so when the user removes a product you can remove it from their screen without prop drilling(normally when you remove something from the cart of favorite they have to refresh to get the fresh data)
+            />
           ))}
         </main>
       </>
@@ -86,11 +86,7 @@ const Page = () => {
 };
 
 const CheckoutPage = () => {
-  return (
-    <CartProvider>
-      <Page />
-    </CartProvider>
-  );
+  return <Page />;
 };
 
 export default CheckoutPage;
