@@ -113,7 +113,10 @@ const ProductCard = ({
             <div className="flex justify-end">
               <div className="flex flex-col mr-4 w-full justify-center">
                 <div className="flex justify-end">
-                  <h2 className="font-semibold text-sm max-[375px]:text-xs">
+                  <h2
+                    dir="rtl"
+                    className="font-semibold text-sm max-[375px]:text-xs"
+                  >
                     {data.title}
                   </h2>
                 </div>

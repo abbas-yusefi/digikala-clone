@@ -60,6 +60,7 @@ const MobileHeader = ({ shrinkNavs }: { shrinkNavs?: boolean }) => {
               searchIcon={<Icons.Search />}
               iconxPosition="right-10"
               childrenxPosition="right-28"
+              readOnly
             >
               <Image
                 src={digikalatext}

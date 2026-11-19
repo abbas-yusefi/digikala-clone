@@ -17,6 +17,7 @@ type SearchBar = {
   onKeyDown?: KeyboardEventHandler<HTMLInputElement> | undefined;
   autoFocus?: boolean;
   value?: string;
+  readOnly?: boolean;
 };
 
 const SearchBar = ({
@@ -33,6 +34,7 @@ const SearchBar = ({
   onKeyDown,
   autoFocus,
   value,
+  readOnly,
 }: SearchBar) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -46,6 +48,7 @@ const SearchBar = ({
         type="search"
         aria-label={ariaLabel || placeholder}
         role="searchbox"
+        readOnly={readOnly || false}
         onChange={(e) => onChange && onChange(e.target.value)}
         placeholder={isFocused ? "" : placeholder}
         autoFocus={autoFocus ? true : false}
