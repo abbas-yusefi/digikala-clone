@@ -67,8 +67,10 @@ import {
   CiDiscount1,
 } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
+import { LuMapPinPlus } from "react-icons/lu";
 
 export const Icons = {
+  AddMap: LuMapPinPlus,
   More: FiMoreVertical,
   Discount: CiDiscount1,
   Check: FiCheck,

@@ -11,10 +11,11 @@ import {
   Response,
   WithImage,
 } from "./types/product";
+import { Address } from "./types/address";
 
 const getHomeDiscountProducts = unstable_cache(
   async (changeSet?: boolean): Promise<WithImage<ProductCard>[]> => {
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const changeProductSet = changeSet
       ? "ORDER BY p.product_id DESC LIMIT 14"
@@ -446,6 +447,132 @@ ${limit ? `LIMIT ${limit}` : ""}
   return rows;
 };
 
+const getAddresses = async (
+  user_id: string | undefined,
+): Promise<
+  Pick<
+    Address,
+    | "street_address"
+    | "postal_code"
+    | "recipient_name"
+    | "phone"
+    | "id"
+    | "city"
+    | "state"
+    | "street_address_2"
+  >[]
+> => {
+  const { rows } = await pool.query(
+    `
+    SELECT city , state, street_address ,postal_code ,recipient_name ,phone , id, street_address_2 FROM address WHERE user_id = $1
+    `,
+    [user_id],
+  );
+  return rows;
+};
+
+const getAddress = async (
+  user_id: string | undefined,
+  id: string,
+): Promise<
+  Pick<
+    Address,
+    | "street_address"
+    | "postal_code"
+    | "recipient_name"
+    | "phone"
+    | "id"
+    | "city"
+    | "state"
+    | "street_address_2"
+  >
+> => {
+  const { rows } = await pool.query(
+    `
+    SELECT city , state, street_address ,postal_code ,recipient_name ,phone , id, street_address_2 FROM address WHERE user_id = $1 AND id = $2
+    `,
+    [user_id, id],
+  );
+  return rows[0];
+};
+
+const deleteAddress = async (
+  id: number,
+  user_id: string | undefined,
+): Promise<void> => {
+  await pool.query(
+    `
+    DELETE FROM address WHERE id = $1 AND user_id = $2
+    `,
+    [id, user_id],
+  );
+};
+
+const addAddress = async (
+  user_id: string | undefined,
+  city: string,
+  state: string,
+  street_address: string,
+  postal_code: string,
+  recipient_name: string,
+  phone: string,
+  street_address_2: string,
+): Promise<void> => {
+  await pool.query(
+    `
+       INSERT INTO address(user_id,city,state,street_address,postal_code,recipient_name,phone,street_address_2)
+    VALUES($1,$2,$3,$4,$5,$6,$7,$8)
+    `,
+    [
+      user_id,
+      city,
+      state,
+      street_address,
+      postal_code,
+      recipient_name,
+      phone,
+      street_address_2,
+    ],
+  );
+};
+
+const updateAddress = async (
+  user_id: string | undefined,
+  city: string,
+  state: string,
+  street_address: string,
+  postal_code: string,
+  recipient_name: string,
+  phone: string,
+  street_address_2: string,
+  id: string,
+): Promise<void> => {
+  await pool.query(
+    `
+       UPDATE address 
+       SET city = $2,
+       state = $3,
+       street_address = $4,
+       postal_code = $5,
+       recipient_name = $6,
+       phone = $7,
+       street_address_2 = $8
+       WHERE user_id = $1 AND id = $9
+    `,
+    [
+      user_id,
+      city,
+      state,
+      street_address,
+      postal_code,
+      recipient_name,
+      phone,
+      street_address_2,
+      id,
+    ],
+  );
+};
+
 export {
   getHomeDiscountProducts,
   getProduct,
@@ -467,4 +594,9 @@ export {
   getFavorite,
   deleteFavorite,
   getAllFavorites,
+  getAddresses,
+  getAddress,
+  deleteAddress,
+  addAddress,
+  updateAddress,
 };
