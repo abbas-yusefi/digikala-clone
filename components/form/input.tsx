@@ -38,6 +38,7 @@ type InputProps<T extends FieldValues> = {
   isPasswordHidden?: boolean;
   autoComplete?: string;
   onTogglePassword?: Dispatch<SetStateAction<boolean>>;
+  value?: string;
 };
 
 const Input = <T extends FieldValues>({
@@ -50,6 +51,7 @@ const Input = <T extends FieldValues>({
   isPasswordHidden,
   onTogglePassword,
   autoComplete,
+  value,
 }: InputProps<T>) => {
   const serverFieldError =
     serverError?.field === registerName || serverError?.field === "general"
@@ -70,6 +72,7 @@ const Input = <T extends FieldValues>({
     <>
       <div className="w-full relative flex items-center justify-center mt-4">
         <input
+          value={value}
           type={inputTypeWithPassword}
           placeholder=""
           id={registerName}
